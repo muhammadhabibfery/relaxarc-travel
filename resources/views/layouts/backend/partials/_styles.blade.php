@@ -9,3 +9,6 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ asset('assets/backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+<!-- Toastr CSS-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">

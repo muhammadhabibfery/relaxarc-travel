@@ -28,6 +28,10 @@ body .btn-dark-blue:hover {
   color: #ffffff;
 }
 
+body .btn-resend-verification:hover {
+  color: #4d70b9;
+}
+
 .navbar-brand img {
   max-height: 45px;
 }
@@ -404,6 +408,14 @@ header .bg-text-md .btn-started:hover {
 
 .section-detail-content .join-container .btn-join-now:hover {
   background-color: #ffb57c;
+}
+
+.section-detail-content.section-email-verify {
+  min-height: 45vh !important;
+}
+
+.section-detail-content.section-front-profile p {
+  color: #000;
 }
 
 .attende .btn-remove {

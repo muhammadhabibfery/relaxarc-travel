@@ -13,8 +13,17 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
+    'failed' => 'Incorrect username or password.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'registered' => [
+        'title' => 'Registration successfully!',
+        'paragraph' => 'Please check your email for email verification.',
+    ],
+    'verified' => [
+        'title' => 'Email verification successfully!',
+        'paragraph-login' => 'Please login to start the journey.',
+        'paragraph-authenticated' => 'Enjoy your trip.',
+    ],
 
 ];

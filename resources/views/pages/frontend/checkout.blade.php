@@ -45,9 +45,6 @@
                                     <tr>
                                         <th>User</th>
                                         <th>Nama</th>
-                                        <th>Negara</th>
-                                        <th>Visa</th>
-                                        <th>Passport</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -58,9 +55,6 @@
                                                 height="60" class="rounded-circle">
                                         </td>
                                         <td class="align-middle">Fery Leonardo</td>
-                                        <td class="align-middle">CN</td>
-                                        <td class="align-middle">N/A</td>
-                                        <td class="align-middle">Active</td>
                                         <td class="align-middle">
                                             <a href="#" class="btn-remove">
                                                 <i class="fas fa-times fa-2x"></i>
@@ -73,9 +67,6 @@
                                                 height="60" class="rounded-circle">
                                         </td>
                                         <td class="align-middle">Neymar Jr</td>
-                                        <td class="align-middle">SG</td>
-                                        <td class="align-middle">30 Hari</td>
-                                        <td class="align-middle">Active</td>
                                         <td class="align-middle">
                                             <a href="#" class="btn-remove">
                                                 <i class="fas fa-times fa-2x"></i>
@@ -87,43 +78,15 @@
                         </div>
 
                         <div class="member mt-3">
-                            <h2>Tambah Member</h2>
+                            <h2 class="my-3">Tambah Member</h2>
                             <div class="row">
                                 <div class="col-md-10">
-                                    <form action="" id="myfr">
-                                        <div class="form-group">
-                                            <label for="username" class="sr-only">Username</label>
-                                            <input type="text" name="" class="form-control" id="username"
-                                                placeholder="Username">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="visa" class="sr-only">Visa</label>
-                                            <select name="" class="form-control select2" id="visa">
-                                                <option></option>
-                                                <option value="30 Hari">30 Hari</option>
-                                                <option value="N/A">N/A</option>
-                                            </select>
-                                        </div>
-                                        <div class="flatpickr input-group mb-3">
-                                            <input type="date" class="form-control" placeholder="DOE" data-input>
-                                            <div class="input-group-append">
-                                                <a class="btn btn-outline-secondary" title="toggle" data-toggle>
-                                                    <i class="fas fa-calendar"></i>
-                                                </a>
-                                                <a class="btn btn-outline-secondary" title="clear" data-clear>
-                                                    <i class="fas fa-times"></i>
-                                                </a>
-                                            </div>
-                                        </div>
+                                    <form action="" method="POST" class="form-inline" id="myfr">
+                                        <label class="sr-only" for="username">Username</label>
+                                        <input type="text" name="username" class="form-control mb-2 mr-sm-3"
+                                            id="username" placeholder="Username">
 
-
-                                        <!-- Desktop Button -->
-                                        <button type="submit"
-                                            class="btn btn-block  btn-add-now mb-2 mt-1 px-4 d-none d-md-block"
-                                            id="btnfr">Tambah</button>
-                                        <!-- Mobile Button -->
-                                        <button type="submit"
-                                            class="btn btn-block btn-add-now mb-2 px-4 d-sm-block d-md-none d-lg-none"
+                                        <button type="submit" class="btn btn-add-now px-3 mb-2"
                                             id="btnfr">Tambah</button>
                                     </form>
                                 </div>
@@ -146,10 +109,6 @@
                             <tr>
                                 <th width="50%">Jumlah Member</th>
                                 <td width="50%" class="text-right">2 Orang</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">VISA (opsional)</th>
-                                <td width="50%" class="text-right">Rp 2.672.693</td>
                             </tr>
                             <tr>
                                 <th width="50%">Harga Perjalanan</th>
@@ -227,36 +186,3 @@
 </main>
 <!-- End Content -->
 @endsection
-
-@push('addon_links')
-<!-- Select2 CSS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-<!-- Flatpickr CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-@endpush
-
-@push('addon_scripts')
-<!-- Select2 library -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-<!-- Flatpickr library -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<script>
-    $(document).ready(function () {
-                $('.select2').select2({
-                    placeholder: 'VISA',
-                    allowClear: true
-                });
-            });
-
-            flatpickr('.flatpickr', {
-                minDate: "today",
-                altInput: true,
-                altFormat: "F j, Y",
-                wrap: true,
-                disableMobile: true
-            });
-</script>
-@endpush

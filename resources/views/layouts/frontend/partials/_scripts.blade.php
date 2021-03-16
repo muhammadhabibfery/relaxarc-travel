@@ -10,18 +10,35 @@
 
 <!-- Font Awesome library -->
 <script src="https://kit.fontawesome.com/efd43ec33f.js" crossorigin="anonymous"></script>
+
+<!-- Toastr JS Library-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 <script>
-    document.addEventListener('click', function(e){
-        if(e.target.id = 'btnfr'){
-            const form = document.querySelector('#myfr');
-            form.addEventListener('submit', function(ev){
-                const btn = document.querySelector('#btnfr');
-                btn.innerHTML = 'Please Wait ...';
-                btn.style.fontWeight = 'bold';
-                btn.style.color = 'black';
-                btn.setAttribute('disable', 'disable');
-                return true;
-            });
-        }
-    });
+    @if(session('verifiedStatus'))
+    toastr.closeButton = true,
+    toastr.options.positionClass = "toast-top-center";
+    toastr.options.progressBar = true;
+    toastr.options.showDuration = 500;
+    toastr.success("{!!  session('verifiedStatus')  !!}", 'Sukses');
+    @endif
+
+    @if(session('status'))
+    toastr.closeButton = true,
+    toastr.options.positionClass = "toast-top-center";
+    toastr.options.progressBar = true;
+    toastr.options.showDuration = 500;
+    toastr.success("{!! session('status') !!}", 'Sukses');
+    @endif
+
+    const submitted = (form) => {
+        form.btnfr.innerHTML = "{{ __('Please Wait ...') }}";
+        form.btnfr.style.fontWeight = 'bold';
+        form.btnfr.style.color = 'black';
+        form.btnfr.style.backgroundColor = '#b1b1b1';
+        form.btnfr.style.cursor = 'not-allowed';
+        form.btnfr.setAttribute('disable', 'disable');
+        return true;
+    }
+
 </script>

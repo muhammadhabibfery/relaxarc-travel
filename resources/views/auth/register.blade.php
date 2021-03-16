@@ -36,7 +36,7 @@
         }
 
         .card {
-            height: 440px;
+            height: 520px;
             margin-top: auto;
             margin-bottom: auto;
             width: 400px;
@@ -81,7 +81,7 @@
             color: black;
             font-weight: bold;
             background-color: #FFC312;
-            width: 100px;
+            width: 155px;
         }
 
         .login_btn:hover {
@@ -125,9 +125,14 @@
             cursor: pointer;
             font-style: italic;
         }
+
+        .error-background {
+            background-color: #fff;
+            padding: 2px;
+        }
     </style>
 
-    <title>RelaxArc Register</title>
+    <title>{{ __('RelaxArc Register') }}</title>
 </head>
 
 <body>
@@ -135,23 +140,24 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ __('Daftar') }}</h3>
+                    <h3>{{ __('Register') }}</h3>
                     <div class="d-flex justify-content-end social_icon">
                         <span><i class="fab fa-facebook-square"></i></span>
                         <span><i class="fab fa-google-plus-square"></i></span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('register') }}" method="POST">
+                    <form action="{{ route('register') }}" method="POST" id="myfr">
                         @csrf
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="name"><i class="fas fa-user"></i></label>
                             </div>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                placeholder="{{ __('Nama') }}" id="name">
+                            <input type="text" name="name" value="{{ old('name') }}"
+                                class="form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}"
+                                id="name">
                             @error('name')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback error-background" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -160,10 +166,11 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="email"><i class="fas fa-envelope"></i></label>
                             </div>
-                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                class="form-control @error('email') is-invalid @enderror"
                                 placeholder="{{ __('Email') }}" id="email">
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback error-background" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -176,7 +183,7 @@
                                 class="form-control @error('password') is-invalid @enderror"
                                 placeholder="{{ __('Password') }}" id="password">
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback error-background" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -188,7 +195,7 @@
                             </div>
                             <input type="password" name="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
-                                placeholder="{{ __('Konfirmasi Password') }}" id="password_confirmation">
+                                placeholder="{{ __('Password Confimation') }}" id="password_confirmation">
                             @error('password_confrimation')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -196,20 +203,19 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn float-right login_btn">{{ __('Daftar') }}</button>
+                            <button type="submit" class="btn float-right login_btn"
+                                id="btnfr">{{ __('Register') }}</button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center links">
-                        Sudah punya akun?<a href="{{ route('login') }}">{{ __('Masuk') }}</a>
+                        {{ __('Already have an account?') }}<a href="{{ route('login') }}">{{ __('Login') }}</a>
                     </div>
                     <div class="d-flex justify-content-center text-center links-terms">
                         <!-- Dengan mendaftar anda setuju dengan syarat dan ketentuan kami -->
-                        <a href="{{ route('terms-conditions') }}">Dengan mendaftar anda setuju dengan <span
-                                class="terms-text">syarat dan
-                                ketentuan</span>
-                            kami</a>
+                        <a href="{{ route('terms-conditions') }}">{{ __('By registering you agree with') }} &nbsp;<span
+                                class="terms-text">{{ __('our terms and conditions') }}</span></a>
                     </div>
                 </div>
             </div>
@@ -228,6 +234,23 @@
 
     <!-- Font Awesome library -->
     <script src="https://kit.fontawesome.com/efd43ec33f.js" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('click', function(e){
+            if(e.target.id == 'btnfr'){
+                const form = document.querySelector('#myfr');
+                form.addEventListener('submit', function(ev){
+                    const btn = document.querySelector('#btnfr');
+                    btn.innerHTML = "{{ __('Please Wait ...') }}";
+                    btn.style.fontWeight = 'bold';
+                    btn.style.color = 'black';
+                    btn.style.cursor = 'not-allowed';
+                    btn.setAttribute('disable', 'disable');
+                    return true;
+                });
+            }
+        });
+    </script>
 
 </body>
 

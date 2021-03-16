@@ -29,20 +29,49 @@
                 </li>
             </ul>
 
+            @guest
             <!-- Mobile Button -->
-            <form action="{{ route('login') }}" class="form-inline d-sm-block d-md-none" id="myfr">
-                <button class="btn btn-login my-2 my-sm-0" id="btnfr">Masuk</button>
+            <form class="form-inline d-sm-block d-md-none">
+                <button class="btn btn-login my-2 my-sm-0" type="button"
+                    onclick="event.preventDefault(); location.href='{{ route('login') }}'">Masuk</button>
             </form>
 
             <!-- Tablet Button -->
-            <form action="{{ route('login') }}" class="form-inline my-lg-0 d-none d-md-block d-lg-none" id="myfr">
-                <button class="btn btn-login btn-navbar-right-tablet my-2 my-sm-0 px-4" id="btnfr">Masuk</button>
+            <form class="form-inline my-lg-0 d-none d-md-block d-lg-none">
+                <button class="btn btn-login btn-navbar-right-tablet my-2 my-sm-0 px-4" type="button"
+                    onclick="event.preventDefault(); location.href='{{ route('login') }}'">Masuk</button>
             </form>
 
             <!-- Desktop Button -->
-            <form action="{{ route('login') }}" class="form-inline my-2 my-lg-0 d-none d-lg-block" id="myfr" id="btnfr">
-                <button class="btn btn-login btn-navbar-right-desktop my-2 my-sm-0 px-4">Masuk</button>
+            <form class="form-inline my-2 my-lg-0 d-none d-lg-block">
+                <button class="btn btn-login btn-navbar-right-desktop my-2 my-sm-0 px-4" type="button"
+                    onclick="event.preventDefault(); location.href='{{ route('login') }}'">Masuk</button>
             </form>
+            @endguest
+
+            @auth
+            <!-- Mobile Button -->
+            <form action="{{ route('logout') }}" method="POST" class="form-inline d-sm-block d-md-none" id="myfr">
+                @csrf
+                <button class="btn btn-login my-2 my-sm-0" id="btnfr" type="submit">{{ __('Keluar') }}</button>
+            </form>
+
+            <!-- Tablet Button -->
+            <form action="{{ route('logout') }}" method="POST" class="form-inline my-lg-0 d-none d-md-block d-lg-none"
+                id="myfr">
+                @csrf
+                <button class="btn btn-login btn-navbar-right-tablet my-2 my-sm-0 px-4" id="btnfr"
+                    type="submit">{{ __('Keluar') }}</button>
+            </form>
+
+            <!-- Desktop Button -->
+            <form action="{{ route('logout') }}" method="POST" class="form-inline my-2 my-lg-0 d-none d-lg-block"
+                id="myfr" id="btnfr">
+                @csrf
+                <button class="btn btn-login btn-navbar-right-desktop my-2 my-sm-0 px-4"
+                    type="submit">{{ __('Keluar') }}</button>
+            </form>
+            @endauth
         </div>
     </nav>
 </div>

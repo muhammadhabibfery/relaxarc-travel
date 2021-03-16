@@ -36,7 +36,7 @@
         }
 
         .card {
-            height: 370px;
+            height: 520px;
             margin-top: auto;
             margin-bottom: auto;
             width: 400px;
@@ -92,7 +92,7 @@
             color: black;
             font-weight: bold;
             background-color: #FFC312;
-            width: 100px;
+            width: 155px;
         }
 
         .login_btn:hover {
@@ -119,9 +119,14 @@
         .remember:hover {
             cursor: pointer;
         }
+
+        .error-background {
+            background-color: #fff;
+            padding: 2px;
+        }
     </style>
 
-    <title>RelaxArc Login</title>
+    <title>{{ __('RelaxArc Login') }}</title>
 </head>
 
 <body>
@@ -129,23 +134,41 @@
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ __('Masuk') }}</h3>
+                    <h3>{{ __('Login') }}</h3>
                     <div class="d-flex justify-content-end social_icon">
                         <span><i class="fab fa-facebook-square"></i></span>
                         <span><i class="fab fa-google-plus-square"></i></span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('login') }}" method="POST">
+                    @if (session('status'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {!! session('status') !!}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    @if (session('verifiedStatus'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {!! session('verifiedStatus') !!}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+
+                    <form action="{{ route('login') }}" method="POST" id="myfr">
+                        @csrf
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="username"><i class="fas fa-user"></i></label>
                             </div>
-                            <input type="text" name="username"
+                            <input type="text" name="username" value="{{ old('username') }}"
                                 class="form-control @error('username') is-invalid @enderror"
                                 placeholder="{{ __('Username / Email') }}" id="username">
                             @error('username')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback error-background" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -158,27 +181,28 @@
                                 class="form-control @error('password') is-invalid @enderror"
                                 placeholder="{{ __('Password') }}" id="password">
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback error-background" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
                         <div class="row align-items-center remember">
                             <input type="checkbox" name="remember" id="remember"
-                                {{ old('remember') ? 'checked' : '' }}><label class="pt-2 pl-1 remember" for="remember">{{ __('Remember
-                                Me') }}</label>
+                                {{ old('remember') ? 'checked' : '' }}><label class="pt-2 pl-1 remember"
+                                for="remember">{{ __('Remember Me') }}</label>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn float-right login_btn">{{ __('Masuk') }}</button>
+                            <button type="submit" class="btn float-right login_btn"
+                                id="btnfr">{{ __('Login') }}</button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center links">
-                        Belum punya akun?<a href="#{{ route('register') }}">{{ __('Daftar') }}</a>
+                        {{ __("Don't have an account?") }}<a href="{{ route('register') }}">{{ __('Register') }}</a>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <a href="{{ route('password.request') }}">{{ __('Lupa password?') }}</a>
+                        <a href="{{ route('password.request') }}">{{ __('Forgot Password?') }}</a>
                     </div>
                 </div>
             </div>
@@ -198,6 +222,22 @@
     <!-- Font Awesome library -->
     <script src="https://kit.fontawesome.com/efd43ec33f.js" crossorigin="anonymous"></script>
 
+    <script>
+        document.addEventListener('click', function(e){
+                if(e.target.id == 'btnfr'){
+                    const form = document.querySelector('#myfr');
+                    form.addEventListener('submit', function(ev){
+                        const btn = document.querySelector('#btnfr');
+                        btn.innerHTML = "{{ __('Please Wait ...') }}";
+                        btn.style.fontWeight = 'bold';
+                        btn.style.color = 'black';
+                        btn.style.cursor = 'not-allowed';
+                        btn.setAttribute('disable', 'disable');
+                        return true;
+                    });
+                }
+            });
+    </script>
 </body>
 
 </html>

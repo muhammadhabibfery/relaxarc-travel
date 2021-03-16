@@ -26,7 +26,17 @@
     <section class="text-center">
         <p style="font-size:150px">@yield('code')</p>
         <p><strong>Whoops</strong> <span class="d-block">@yield('message')</span></p>
-        <a href="{{ route('home') }}" class="btn btn-secondary btn-outline-light mt-3">Back to home page</a>
+        @auth
+        @if (count(array_intersect(["ADMIN"], json_decode(auth()->user()->roles))) > 0)
+        <a href="{{ route('dashboard') }}"
+            class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to dashoard') }}</a>
+        @else
+        <a href="{{ route('home') }}" class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to home') }}</a>
+        @endif
+        @endauth
+        @guest
+        <a href="{{ route('login') }}" class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to login') }}</a>
+        @endguest
     </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
