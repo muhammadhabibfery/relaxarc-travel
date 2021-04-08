@@ -18,17 +18,12 @@ class ProfileController extends Controller
 
     public function frontProfile()
     {
-        return view('pages.frontend.front-profile', ['user' => $this->user]);
+        return view('pages.frontend.profiles.edit-profile', ['user' => $this->user]);
     }
 
     public function backProfile()
     {
-        return view('pages.backend.back-profile');
-    }
-
-    public function completeProfileFirst()
-    {
-        return preventUserWhoHaveCompletedTheProfile();
+        return view('pages.backend.profiles.edit-profile', ['user' => $this->user]);
     }
 
     public function updateProfile(ProfileRequest $request)
@@ -38,8 +33,12 @@ class ProfileController extends Controller
         $this->user
             ->update($data);
 
-        return redirect()->intended(route('home'))
-            ->with('status', trans('status.update_profile'));
+        return isAdmin() ? $this->redirectAfterUpdated('dashboard', 'profile') : $this->redirectAfterUpdated('home', 'profile');
+    }
+
+    public function completeProfileFirst()
+    {
+        return preventUserWhoHaveCompletedTheProfile();
     }
 
     public function deleteAvatar()
@@ -51,5 +50,34 @@ class ProfileController extends Controller
             ->update(['avatar' => null]);
 
         return back()->with('status', trans('status.delete_avatar'));
+    }
+
+    public function frontChangePassword()
+    {
+        return view('pages.frontend.profiles.password.edit-password');
+    }
+
+    public function backChangePassword()
+    {
+        return view('pages.backend.profiles.password.edit-password');
+    }
+
+    public function updatePassword(ProfileRequest $request)
+    {
+        $data = ['password' => bcrypt($request->validated()['new_password'])];
+
+        $this->user
+            ->update($data);
+
+        return isAdmin() ? $this->redirectAfterUpdated('dashboard') : $this->redirectAfterUpdated('home');
+    }
+
+    public function redirectAfterUpdated($routeName, $action = null)
+    {
+        return $action === 'profile'
+            ? redirect()->intended(route($routeName))
+            ->with('status', trans('status.update_profile'))
+            : redirect()->intended(route($routeName))
+            ->with('status', trans('status.update_password'));
     }
 }

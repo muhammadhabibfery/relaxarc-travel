@@ -24,9 +24,43 @@
                         <a href="#" class="dropdown-item">Link 3</a>
                     </div>
                 </li>
-                <li class="nav-item mx-md-2">
+                {{-- <li class="nav-item mx-md-2">
                     <a href="#" class="nav-link">Testimonial</a>
+                </li> --}}
+                <!-- Nav Item - User Information -->
+                @auth
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ __('Account') }}
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                            <img class="img-profile rounded-circle" src="{{ auth()->user()->getAvatar() }}">
+                        </a>
+                        @if (isSuperAdmin())
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('dashboard') }}">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            {{ __('Dashboard') }}
+                        </a>
+                        @endif
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('front-profile') }}">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            {{ __('Profile') }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{ route('front-change-password') }}">
+                            <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
+                            {{ __('Change password') }}
+                        </a>
+                    </div>
                 </li>
+                @endauth
             </ul>
 
             @guest

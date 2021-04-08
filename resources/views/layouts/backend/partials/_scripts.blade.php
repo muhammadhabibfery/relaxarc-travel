@@ -13,18 +13,21 @@
 
 
 <script>
-    document.addEventListener('click', function(e){
-        if(e.target.id == 'btnfr'){
-            const form = document.querySelector('#myfr');
-            form.addEventListener('submit', function(ev){
-                const btn = document.querySelector('#btnfr');
-                btn.innerHTML = {{ __('Please Wait ...') }};
-                btn.style.fontWeight = 'bold';
-                btn.style.color = 'black';
-                btn.setAttribute('disable', 'disable');
-                console.log('hmm');
-                return true;
-            });
-        }
-    });
+    @if(session('status'))
+        toastr.closeButton = true,
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.progressBar = true;
+        toastr.options.showDuration = 500;
+        toastr.success("{!! session('status') !!}", 'Sukses');
+    @endif
+
+    const submitted = (form) => {
+        form.btnfr.innerHTML = "{{ __('Please Wait ...') }}";
+        form.btnfr.style.fontWeight = 'bold';
+        form.btnfr.style.color = 'black';
+        form.btnfr.style.backgroundColor = '#b1b1b1';
+        form.btnfr.style.cursor = 'not-allowed';
+        form.btnfr.setAttribute('disable', 'disable');
+        return true;
+    };
 </script>

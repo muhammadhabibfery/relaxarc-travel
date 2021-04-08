@@ -1,14 +1,11 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetaiController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +20,8 @@ use Illuminate\Support\Facades\Http;
 
 Route::middleware('preventBack')
     ->group(function () {
-        Route::group(['middleware' => ['auth']], function () {
 
+        Route::group(['middleware' => ['auth']], function () {
             Route::group(['middleware' => ['verified', 'hasFullProfile']], function () {
                 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
                 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout-success');
@@ -35,6 +32,8 @@ Route::middleware('preventBack')
             Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
             Route::get("/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])->name("complete-profile");
             Route::post("/profile/delete-avatar", [ProfileController::class, "deleteAvatar"])->name("delete-avatar");
+            Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
+            Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");
         });
 
         Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -49,3 +48,7 @@ Route::middleware('preventBack')
 
         Auth::routes(['verify' => true]);
     });
+
+// NOTE:
+// - Merge branch travelPackage to Main, then push to github
+// - Ikuti tahap/step selanjutnya pada materi video

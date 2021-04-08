@@ -18,7 +18,9 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'username', 'roles', 'phone', 'address', 'avatar', 'status'];
+    protected $fillable = [
+        'name', 'email', 'password', 'username', 'roles', 'phone', 'address', 'avatar', 'status', 'email_verified_at', 'remember_token'
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -46,11 +48,21 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function setNameAttribute($value)
     {
-        return $this->attributes['name'] = Str::title($value);
+        $this->attributes['name'] = Str::title($value);
     }
 
     public function setUsernameAttribute($value)
     {
-        return $this->attributes['username'] = strtolower($value);
+        $this->attributes['username'] = strtolower($value);
+    }
+
+    public function getRolesAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }

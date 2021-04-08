@@ -30,6 +30,14 @@ body {
     .btn-resend-verification:hover {
         color: #4d70b9;
     }
+
+    .text-orange {
+        color: #ff9e53;
+    }
+
+    .text-dark-blue {
+        color: #071c4d;
+    }
 }
 
 // Navbar
@@ -45,11 +53,19 @@ body {
             color: #071c4d;
             font-weight: inherit;
 
+            .rounded-circle {
+                border-radius: 50% !important;
+            }
+
             &.active {
                 font-weight: bold;
                 color: #071c4d !important;
             }
         }
+    }
+    .img-profile {
+        height: 2rem;
+        height: 2rem;
     }
 }
 

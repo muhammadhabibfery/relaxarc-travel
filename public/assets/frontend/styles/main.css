@@ -32,6 +32,14 @@ body .btn-resend-verification:hover {
   color: #4d70b9;
 }
 
+body .text-orange {
+  color: #ff9e53;
+}
+
+body .text-dark-blue {
+  color: #071c4d;
+}
+
 .navbar-brand img {
   max-height: 45px;
 }
@@ -41,9 +49,18 @@ body .btn-resend-verification:hover {
   font-weight: inherit;
 }
 
+.navbar-light .navbar-nav .nav-link .rounded-circle {
+  border-radius: 50% !important;
+}
+
 .navbar-light .navbar-nav .nav-link.active {
   font-weight: bold;
   color: #071c4d !important;
+}
+
+.navbar-light .img-profile {
+  height: 2rem;
+  height: 2rem;
 }
 
 .navbar-mobile span {

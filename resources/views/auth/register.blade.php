@@ -196,11 +196,6 @@
                             <input type="password" name="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                 placeholder="{{ __('Password Confimation') }}" id="password_confirmation">
-                            @error('password_confrimation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn float-right login_btn"

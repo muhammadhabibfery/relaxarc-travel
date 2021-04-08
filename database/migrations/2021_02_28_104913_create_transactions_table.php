@@ -19,6 +19,9 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->bigInteger('total');
             $table->enum('status', ['IN_CART', 'PENDING', 'SUCCESS', 'CANCEL', 'FAILED'])->index();
+            $table->integer('created_by');
+            $table->integer('updated_by')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

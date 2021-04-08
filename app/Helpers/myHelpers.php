@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
 function uploadImage($request, $directoryName, $fieldImage = null)
@@ -18,9 +19,18 @@ function uploadImage($request, $directoryName, $fieldImage = null)
     return $file;
 }
 
-function isAdmin()
+function isAdmin($roles = null)
 {
-    return (count(array_intersect(["ADMIN"], json_decode(auth()->user()->roles))) > 0);
+    if ($roles) return (count(array_intersect(["ADMIN"], $roles)) > 0);
+
+    return (count(array_intersect(["ADMIN"], auth()->user()->roles)) > 0);
+}
+
+function isSuperAdmin($roles = null)
+{
+    if ($roles) return (count(array_intersect(["ADMIN", "SUPERADMIN"], $roles)) > 1);
+
+    return (count(array_intersect(["ADMIN", "SUPERADMIN"], auth()->user()->roles)) > 1);
 }
 
 function preventUserWhoHaveCompletedTheProfile()
@@ -31,4 +41,14 @@ function preventUserWhoHaveCompletedTheProfile()
 function checkCompletenessTheProfile()
 {
     return (auth()->user()->phone && auth()->user()->address);
+}
+
+function createdUpdatedDeletedBy($id)
+{
+    return User::select('id', 'username')->find($id);
+}
+
+function displayEditTravelPackageDuration($value)
+{
+    return str_replace(' Hari', 'D', $value);
 }

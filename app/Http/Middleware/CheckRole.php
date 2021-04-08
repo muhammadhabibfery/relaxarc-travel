@@ -16,7 +16,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
-        if (count(array_intersect($roles, json_decode($request->user()->roles))) > 0) return $next($request);
+        if (count(array_intersect($roles, $request->user()->roles)) > 0) return $next($request);
 
         return abort(403, "Unathorized", ['actionLink' => route('home'), 'actionTitle' => "Back To Home"]);
     }

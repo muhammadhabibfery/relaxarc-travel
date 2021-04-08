@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
         <div class="sidebar-brand-icon">
             <i class="fas fa-map-marker-alt"></i>
         </div>
@@ -12,7 +12,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
+    <li class="nav-item{{ request()->is('admin/dashboard') ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
@@ -20,33 +20,35 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-    {{-- <hr class="sidebar-divider"> --}}
 
     <!-- Nav Item - Admin Menu -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    @if (isSuperAdmin())
+    <li class="nav-item{{ request()->is('admin/users*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-user-tag"></i>
-            <span>Menu Admin</span></a>
+            <span>{{ __('Admin Menu') }}</span>
+        </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
+    @endif
 
     <!-- Nav Item - Travel Package -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item{{ request()->is('admin/travel-packages*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('travel-packages.index') }}">
             <i class="fas fa-hotel"></i>
-            <span>Paket Travel</span></a>
+            <span>{{ __('Travel Packages') }}</span></a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Travel Gallery -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item{{ request()->is('admin/travel-galleries*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('travel-galleries.index') }}">
             <i class="fas fa-images"></i>
-            <span>Galeri Travel</span></a>
+            <span>{{ __('Travel Galleries') }}</span></a>
     </li>
 
     <!-- Divider -->
@@ -56,7 +58,7 @@
     <li class="nav-item">
         <a class="nav-link" href="index.html">
             <i class="fas fa-cash-register"></i>
-            <span>Transaksi</span></a>
+            <span>{{ __('Transaction') }}</span></a>
     </li>
 
     <!-- Divider -->
@@ -66,7 +68,7 @@
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt"></i>
-            <span>Keluar</span></a>
+            <span>{{ __('Logout') }}</span></a>
     </li>
 
     <!-- Divider -->

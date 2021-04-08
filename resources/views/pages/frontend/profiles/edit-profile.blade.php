@@ -36,7 +36,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <section class="section-travel-list pl-lg-0 mb-3 mb-lg-0">
-                        <div class="card card-travels card-terms-conditions">
+                        <div class="card card-travels card-terms-conditions p-3">
                             @if (!checkCompletenessTheProfile())
                             <small
                                 class="mb-4 font-italic text-danger">*{{ __('complete your profile information before continuing the journey') }}
@@ -144,7 +144,7 @@
                     </section>
                 </div>
             </div>
-            <!-- End terms & conditions -->
+            <!-- End profile forms -->
         </div>
     </section>
     <!-- EndDetail Content -->

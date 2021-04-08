@@ -30,7 +30,9 @@ class UserFactory extends Factory
             'password' => Hash::make('aaaaa'), // password
             'remember_token' => Str::random(10),
             'username' => 'admin',
-            'roles' => '["ADMIN", "MEMBER"]',
+            'roles' => '["ADMIN", "SUPERADMIN"]',
+            'phone' => '0897654321',
+            'address' => 'jl.in ajaa',
             'status' => 'ACTIVE',
         ];
     }
@@ -40,12 +42,12 @@ class UserFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+    // public function unverified()
+    // {
+    //     return $this->state(function (array $attributes) {
+    //         return [
+    //             'email_verified_at' => null,
+    //         ];
+    //     });
+    // }
 }

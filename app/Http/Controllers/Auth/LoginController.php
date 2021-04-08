@@ -79,7 +79,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (count(array_intersect(['ADMIN'], json_decode($user->roles))) > 0) return redirect()->intended(route('dashboard'));
+        if (count(array_intersect(['ADMIN'], $user->roles)) > 0) return redirect()->intended(route('dashboard'));
 
         if (is_null($user->phone) || is_null($user->address)) return redirect()->route('front-profile');
 

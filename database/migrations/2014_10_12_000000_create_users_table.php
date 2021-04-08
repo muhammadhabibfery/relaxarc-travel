@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('phone', 30)->nullable();
             $table->longText('address')->nullable();
             $table->string('avatar')->nullable();
-            $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE')->index();
+            $table->enum('status', ['ACTIVE', 'NONE'])->default('ACTIVE')->index();
         });
     }
 

@@ -16,19 +16,19 @@
 
 <script>
     @if(session('verifiedStatus'))
-    toastr.closeButton = true,
-    toastr.options.positionClass = "toast-top-center";
-    toastr.options.progressBar = true;
-    toastr.options.showDuration = 500;
-    toastr.success("{!!  session('verifiedStatus')  !!}", 'Sukses');
+        toastr.closeButton = true,
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.progressBar = true;
+        toastr.options.showDuration = 500;
+        toastr.success("{!!  session('verifiedStatus')  !!}", 'Sukses');
     @endif
 
     @if(session('status'))
-    toastr.closeButton = true,
-    toastr.options.positionClass = "toast-top-center";
-    toastr.options.progressBar = true;
-    toastr.options.showDuration = 500;
-    toastr.success("{!! session('status') !!}", 'Sukses');
+        toastr.closeButton = true,
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.progressBar = true;
+        toastr.options.showDuration = 500;
+        toastr.success("{!! session('status') !!}", 'Sukses');
     @endif
 
     const submitted = (form) => {
@@ -39,6 +39,6 @@
         form.btnfr.style.cursor = 'not-allowed';
         form.btnfr.setAttribute('disable', 'disable');
         return true;
-    }
+    };
 
 </script>

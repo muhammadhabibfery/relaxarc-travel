@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                if (count(array_intersect(["ADMIN"], json_decode(Auth::guard($guard)->user()->roles))) > 0)
+                if (count(array_intersect(["ADMIN"], Auth::guard($guard)->user()->roles)) > 0)
                     return redirect()->intended(route('dashboard'));
 
                 if (is_null(Auth::guard($guard)->user()->phone) || is_null(Auth::guard($guard)->user()->address)) return redirect()->route('front-profile');

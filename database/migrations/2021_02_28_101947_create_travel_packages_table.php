@@ -23,8 +23,8 @@ class CreateTravelPackagesTable extends Migration
             $table->string('language', 75);
             $table->string('foods', 150);
             $table->dateTime('date_departure');
-            $table->string('duration', 75);
-            $table->string('type', 100);
+            $table->string('duration', 2);
+            $table->enum('type', ['Open Trip', 'Private Group']);
             $table->bigInteger('price');
             $table->integer('created_by');
             $table->integer('updated_by')->nullable();

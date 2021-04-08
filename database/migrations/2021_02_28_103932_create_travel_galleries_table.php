@@ -18,9 +18,7 @@ class CreateTravelGalleriesTable extends Migration
             $table->foreignId('travel_package_id')->constrained()->onDelete('cascade');
             $table->string('name', 100)->index();
             $table->integer('uploaded_by');
-            $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

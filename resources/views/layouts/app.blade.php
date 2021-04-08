@@ -83,6 +83,18 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        const submitted = (form) => {
+            form.btnfr.innerHTML = "{{ __('Please Wait ...') }}";
+            form.btnfr.style.fontWeight = 'bold';
+            form.btnfr.style.color = 'black';
+            form.btnfr.style.backgroundColor = '#b1b1b1';
+            form.btnfr.style.cursor = 'not-allowed';
+            form.btnfr.setAttribute('disable', 'disable');
+            return true;
+        };
+    </script>
 </body>
 
 </html>
