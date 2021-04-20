@@ -55,10 +55,10 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Transactions -->
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item{{ request()->is('admin/transactions*') ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('transactions.index') }}">
             <i class="fas fa-cash-register"></i>
-            <span>{{ __('Transaction') }}</span></a>
+            <span>{{ __('Transactions') }}</span></a>
     </li>
 
     <!-- Divider -->

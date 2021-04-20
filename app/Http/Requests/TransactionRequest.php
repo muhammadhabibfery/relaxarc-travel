@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TransactionRequest extends FormRequest
 {
@@ -23,8 +24,39 @@ class TransactionRequest extends FormRequest
      */
     public function rules()
     {
+        if (request()->routeIs('transactions.update')) {
+            return [
+                'status' => ['required', 'string', 'in:IN_CART,PENDING,SUCCESS,CANCEL,FAILED'],
+            ];
+        }
+
         return [
-            //
+            'travel_package_id' => ['required', 'integer', 'exists:travel_packages,id'],
+            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'invoice_number' => ['required', 'string', 'size:30', Rule::unique('transactions', 'invoice_number')->ignore($this->transaction)],
+            'total' => ['required', 'min:0', 'regex:/^[0-9]+./'],
+            'status' => ['required', 'string', 'in:IN_CART,PENDING,SUCCESS,CANCEL,FAILED'],
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+
+        if (app()->getLocale() === 'id') return [
+            'travel_package_id' => 'paket travel',
+            'user_id' => 'pengguna',
+            'invoice_number' => 'nomor invoice'
+        ];
+
+        return [
+            'travel_package_id' => 'travel package',
+            'user_id' => 'user',
+            'invoice_number' => 'invoice number'
         ];
     }
 }

@@ -50,5 +50,6 @@ Route::middleware('preventBack')
     });
 
 // NOTE:
-// - Merge branch travelPackage to Main, then push to github
+// - Fitur transaction trash beres. Lanjut fitur transaction restore,forceDelete, dll)
+// - Cek query pada view trash (data ada 2 query 9, coba restore 1 maka trash menjadi 1 data dan cek query apakah tetap 9 atau berkurang)
 // - Ikuti tahap/step selanjutnya pada materi video

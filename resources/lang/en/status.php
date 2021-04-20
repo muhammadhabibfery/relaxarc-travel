@@ -18,4 +18,8 @@ return [
     "delete_permanent_travel_package" => "The travel package :TravelPackage has been deleted permanently",
     "create_new_travel_gallery" => "New travel gallery was created successfully",
     "delete_travel_gallery" => "The travel gallery :TravelGallery has been deleted",
+    "update_transaction" => "The transaction has been updated",
+    "delete_transaction" => "The transaction has been deleted",
+    "restore_transaction" => "The transaction :transaction has been restored",
+    "delete_permanent_transaction" => "The transaction :transaction has been deleted permanently",
 ];

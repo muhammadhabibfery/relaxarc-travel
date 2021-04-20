@@ -18,5 +18,9 @@ return [
     "delete_permanent_travel_package" => "Paket travel :TravelPackage telah dihapus secara permanen",
     "create_new_travel_gallery" => "Galeri travel baru berhasil dibuat",
     "delete_travel_gallery" => "Galeri travel :TravelGallery telah dihapus",
+    "update_transaction" => "Transaksi telah diperbarui",
+    "delete_transaction" => "Transaksi telah dihapus",
+    "restore_transaction" => "Transaksi :transaction telah dikembalikan",
+    "delete_permanent_transaction" => "Transaksi :transaction telah dihapus secara permanen",
 
 ];

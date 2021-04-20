@@ -11,7 +11,7 @@ class TransactionDetail extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        //
+        'transaction_id', 'username', 'created_by', 'updated_by', 'deleted_by'
     ];
 
     public function transaction()

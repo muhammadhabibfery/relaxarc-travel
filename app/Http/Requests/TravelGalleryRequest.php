@@ -36,16 +36,15 @@ class TravelGalleryRequest extends FormRequest
      */
     public function attributes()
     {
-        $attributes = [
-            'travel_package' => 'travel package',
-            'image' => 'image',
-        ];
 
         if (app()->getlocale() === 'id') return [
             'travel_package' => 'paket travel',
             'image' => 'gambar'
         ];
 
-        return $attributes;
+        return [
+            'travel_package' => 'travel package',
+            'image' => 'image',
+        ];
     }
 }

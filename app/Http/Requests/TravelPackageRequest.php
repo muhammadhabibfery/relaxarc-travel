@@ -46,10 +46,6 @@ class TravelPackageRequest extends FormRequest
      */
     public function attributes()
     {
-        $attributes = [
-            'featured_event' => 'featured event',
-            'date_departure' => 'date of departure'
-        ];
 
         if (app()->getLocale() === 'id') return [
             'title' => 'nama',
@@ -64,7 +60,10 @@ class TravelPackageRequest extends FormRequest
             'price' => 'harga'
         ];
 
-        return $attributes;
+        return [
+            'featured_event' => 'featured event',
+            'date_departure' => 'date of departure'
+        ];
     }
 
     /**

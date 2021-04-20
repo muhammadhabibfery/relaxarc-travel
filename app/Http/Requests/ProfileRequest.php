@@ -51,11 +51,6 @@ class ProfileRequest extends FormRequest
      */
     public function attributes()
     {
-        $attributes = [
-            'current_password' => 'current password',
-            'new_password' => 'new password',
-            'new_password_confirmation' => 'password confirmation'
-        ];
 
         if (app()->getlocale() === 'id') return [
             'name' => 'nama',
@@ -67,6 +62,10 @@ class ProfileRequest extends FormRequest
             'new_password_confirmation' => 'konfirmasi password'
         ];
 
-        return $attributes;
+        return [
+            'current_password' => 'current password',
+            'new_password' => 'new password',
+            'new_password_confirmation' => 'password confirmation'
+        ];
     }
 }
