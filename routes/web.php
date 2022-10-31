@@ -50,6 +50,5 @@ Route::middleware('preventBack')
     });
 
 // NOTE:
-// - Fitur transaction trash beres. Lanjut fitur transaction restore,forceDelete, dll)
-// - Cek query pada view trash (data ada 2 query 9, coba restore 1 maka trash menjadi 1 data dan cek query apakah tetap 9 atau berkurang)
+// - Integrasi Halaman Utama (Munculkan data2 pada halaman frontend) buat sebaik mungkin. Contoh buat lazy load pada halaman daftar travel package, munculkan 4 data travel package pada halaman home berdasarkan sorting/jumlah pemesanan terbanyak pada travel package, pertimbangkan fitur testimonial, terkahir cek pada halaman checkout apakah ada perlu ditambah/diperbaiki atau tidak.
 // - Ikuti tahap/step selanjutnya pada materi video

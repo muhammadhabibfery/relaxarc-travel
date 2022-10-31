@@ -135,5 +135,6 @@
     "Are you sure want to restore transaction :invoice_number ?": "Anda yakin ingin mengembalikan transaksi :invoice_number ?",
     "Transactions not available": "Transaksi tidak tersedia",
     "Transactions deleted not available": "Transaksi terhapus tidak tersedia",
-    ":count person": ":count orang"
+    ":count person": ":count orang",
+    "Checkout Success": "Checkout Sukses"
 }

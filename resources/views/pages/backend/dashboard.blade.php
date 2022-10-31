@@ -20,8 +20,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                Paket Travel</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                                {{ __('Travel packages') }}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ numberOfTravelPackages() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-hotel fa-3x"></i>
@@ -38,8 +39,9 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Transaksi</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">15</div>
+                                {{ __('Transactions') }}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ numberOfTransactions() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-cash-register fa-3x"></i>
@@ -55,11 +57,13 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Checkout Pending
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Checkout Pending
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">8</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                        {{ numberOfPendingTransactions() }}</div>
                                 </div>
                             </div>
                         </div>
@@ -78,8 +82,10 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Checkout Sukses</div>
-                            <div class="h5 mb-0 font-weight-bold fa-3x text-gray-800">20</div>
+                                {{ __('Checkout Success') }}
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold fa-3x text-gray-800">
+                                {{ numberOfSuccessfulTransactions() }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check fa-3x"></i>

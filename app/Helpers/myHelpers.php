@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Transaction;
+use App\Models\TravelPackage;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,4 +53,26 @@ function createdUpdatedDeletedBy($id)
 function displayEditTravelPackageDuration($value)
 {
     return str_replace(' Hari', 'D', $value);
+}
+
+function numberOFTravelPackages()
+{
+    return TravelPackage::count();
+}
+
+function numberOfTransactions()
+{
+    return Transaction::count();
+}
+
+function numberOfSuccessfulTransactions()
+{
+    return Transaction::where('status', 'SUCCESS')
+        ->count();
+}
+
+function numberOfPendingTransactions()
+{
+    return Transaction::where('status', 'PENDING')
+        ->count();
 }
