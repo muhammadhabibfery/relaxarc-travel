@@ -41,7 +41,7 @@
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
                             <img class="img-profile rounded-circle" src="{{ auth()->user()->getAvatar() }}">
                         </a>
-                        @if (isSuperAdmin())
+                        @if (checkRoles(["ADMIN",1], auth()->user()->roles))
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('dashboard') }}">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -94,16 +94,16 @@
             <form action="{{ route('logout') }}" method="POST" class="form-inline my-lg-0 d-none d-md-block d-lg-none"
                 id="myfr">
                 @csrf
-                <button class="btn btn-login btn-navbar-right-tablet my-2 my-sm-0 px-4" id="btnfr"
-                    type="submit">{{ __('Keluar') }}</button>
+                <button class="btn btn-login btn-navbar-right-tablet my-2 my-sm-0 px-4" id="btnfr" type="submit">{{
+                    __('Keluar') }}</button>
             </form>
 
             <!-- Desktop Button -->
             <form action="{{ route('logout') }}" method="POST" class="form-inline my-2 my-lg-0 d-none d-lg-block"
                 id="myfr" id="btnfr">
                 @csrf
-                <button class="btn btn-login btn-navbar-right-desktop my-2 my-sm-0 px-4"
-                    type="submit">{{ __('Keluar') }}</button>
+                <button class="btn btn-login btn-navbar-right-desktop my-2 my-sm-0 px-4" type="submit">{{ __('Keluar')
+                    }}</button>
             </form>
             @endauth
         </div>

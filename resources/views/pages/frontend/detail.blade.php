@@ -10,7 +10,7 @@
     <!-- End Header -->
 
     <!-- Detail Content -->
-    <section class="section-detail-content">
+    <section class="section-detail-content mb-5">
         <div class="container">
             <!-- Breadcrumb -->
             <div class="row">

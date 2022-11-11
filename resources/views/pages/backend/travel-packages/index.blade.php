@@ -22,20 +22,20 @@
                         placeholder="{{ __('Search by title / location') }}" value="{{ request()->keyword }}">
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" name="status" class="form-check-input" id="active" value=">"
-                        {{ request()->status == '>' ? 'checked' : '' }}>
+                    <input type="radio" name="status" class="form-check-input" id="active" value=">" {{
+                        request()->status == '>' ? 'checked' : '' }}>
                     <label for="active" class="form-check-label">{{ __('AVAILABLE') }}</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" name="status" class="form-check-input" id="inactive" value="<"
-                        {{ request()->status == '<' ? 'checked' : '' }}>
-                    <label for="inactive" class="form-check-label">{{ __('EXPIRED') }}</label>
+                    <input type="radio" name="status" class="form-check-input" id="inactive" value="<" {{
+                        request()->status == '<' ? 'checked' : '' }}>
+                        <label for="inactive" class="form-check-label">{{ __('EXPIRED') }}</label>
                 </div>
                 <div class="form-group mt-3">
                     <div class="row justify-content-center">
                         <div class="col-6">
-                            <button class="btn btn-primary btn-block mx-2" type="submit"
-                                id="button-addon2">{{ __('Search') }}</button>
+                            <button class="btn btn-primary btn-block mx-2" type="submit" id="button-addon2">{{
+                                __('Search') }}</button>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('travel-packages.index') }}" class="btn btn-dark btn-block d-inline-block"
@@ -53,14 +53,14 @@
                 <input type="text" name="keyword" class="form-control w-50" id="keyword"
                     placeholder="{{ __('Search by title or location') }}" value="{{ request()->keyword }}">
                 <div class="form-check form-check-inline ml-4">
-                    <input type="radio" name="status" class="form-check-input" id="available" value=">"
-                        {{ request()->status == '>' ? 'checked' : '' }}>
+                    <input type="radio" name="status" class="form-check-input" id="available" value=">" {{
+                        request()->status == '>' ? 'checked' : '' }}>
                     <label for="available" class="form-check-label">{{ __('AVAILABLE') }}</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input type="radio" name="status" class="form-check-input" id="expired" value="<"
-                        {{ request()->status == '<' ? 'checked' : '' }}>
-                    <label for="expired" class="form-check-label">{{ __('EXPIRED') }}</label>
+                    <input type="radio" name="status" class="form-check-input" id="expired" value="<" {{
+                        request()->status == '<' ? 'checked' : '' }}>
+                        <label for="expired" class="form-check-label">{{ __('EXPIRED') }}</label>
                 </div>
                 <button class="btn btn-primary mx-2" type="submit" id="button-addon2">{{ __('Search') }}</button>
                 <a href="{{ route('travel-packages.index') }}" class="btn btn-dark d-inline-block"
@@ -69,11 +69,11 @@
         </div>
 
         <div class="col-md-11 my-4">
-            <a href="{{ route('travel-packages.create') }}"
-                class="btn btn-dark-blue btn-block">{{ __('Add new travel packages') }}</a>
-            @if (isSuperAdmin())
-            <a href="{{ route('travel-packages.trash') }}"
-                class="btn btn-orange btn-block mt-3">{{ __('Travel packages deleted') }}</a>
+            <a href="{{ route('travel-packages.create') }}" class="btn btn-dark-blue btn-block">{{ __('Add new travel
+                packages') }}</a>
+            @if (checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles))
+            <a href="{{ route('travel-packages.trash') }}" class="btn btn-orange btn-block mt-3">{{ __('Travel packages
+                deleted') }}</a>
             @endif
         </div>
 
@@ -111,7 +111,8 @@
                                     <td>
                                         <p
                                             class="text-bold {{ $travelPackage->date_departure > now() ? ' text-primary' : ' text-danger' }}">
-                                            {{ $travelPackage->date_departure > now() ? __('AVAILABLE') : __('EXPIRED') }}
+                                            {{ $travelPackage->date_departure > now() ? __('AVAILABLE') : __('EXPIRED')
+                                            }}
                                         </p>
                                     </td>
                                     <td>
@@ -120,7 +121,8 @@
                                         <a href="{{ route('travel-packages.edit', $travelPackage) }}"
                                             class="btn btn-warning btn-sm my-1">Edit</a>
                                         <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
-                                            data-target="#deletetravelpackage{{ $travelPackage->slug }}Modal">{{ __('Delete') }}</a>
+                                            data-target="#deletetravelpackage{{ $travelPackage->slug }}Modal">{{
+                                            __('Delete') }}</a>
                                     </td>
 
                                     {{-- Delete Travel Package Modal --}}
@@ -138,7 +140,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{ __('Are you sure want to delete ?', ['data' => 'paket travel', 'name' => $travelPackage->title]) }}
+                                                    <p>{{ __('Are you sure want to delete ?', ['data' => 'paket travel',
+                                                        'name' => $travelPackage->title]) }}
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -149,8 +152,8 @@
                                                         method="POST" onsubmit="return submitted(this)" id="myfr">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-primary"
-                                                            id="btnfr">{{ __('Delete') }}</button>
+                                                        <button type="submit" class="btn btn-primary" id="btnfr">{{
+                                                            __('Delete') }}</button>
                                                     </form>
                                                 </div>
                                             </div>

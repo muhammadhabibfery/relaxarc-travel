@@ -10,6 +10,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 class TransactionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            return checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles) ? $next($request) : abort(403);
+        })->only('trash', 'restore', 'forceDelete');
+    }
+
     /**
      * Display a listing of the resource.
      *

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -18,17 +19,17 @@
 }
 
 .fa-lg {
-  font-size: 1.33333em;
+  font-size: 1.3333333333em;
   line-height: 0.75em;
-  vertical-align: -.0667em;
+  vertical-align: -0.0667em;
 }
 
 .fa-xs {
-  font-size: .75em;
+  font-size: 0.75em;
 }
 
 .fa-sm {
-  font-size: .875em;
+  font-size: 0.875em;
 }
 
 .fa-1x {
@@ -81,7 +82,6 @@
   margin-left: 2.5em;
   padding-left: 0;
 }
-
 .fa-ul > li {
   position: relative;
 }
@@ -96,8 +96,8 @@
 
 .fa-border {
   border: solid 0.08em #eee;
-  border-radius: .1em;
-  padding: .2em .25em .15em;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
 }
 
 .fa-pull-left {
@@ -113,15 +113,14 @@
 .far.fa-pull-left,
 .fal.fa-pull-left,
 .fab.fa-pull-left {
-  margin-right: .3em;
+  margin-right: 0.3em;
 }
-
 .fa.fa-pull-right,
 .fas.fa-pull-right,
 .far.fa-pull-right,
 .fal.fa-pull-right,
 .fab.fa-pull-right {
-  margin-left: .3em;
+  margin-left: 0.3em;
 }
 
 .fa-spin {
@@ -136,60 +135,49 @@
 
 @-webkit-keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes fa-spin {
   0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
-
 .fa-rotate-90 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .fa-rotate-180 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .fa-rotate-270 {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-  -webkit-transform: rotate(270deg);
-          transform: rotate(270deg);
+  transform: rotate(270deg);
 }
 
 .fa-flip-horizontal {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-  -webkit-transform: scale(-1, 1);
-          transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 .fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(1, -1);
-          transform: scale(1, -1);
+  transform: scale(1, -1);
 }
 
 .fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
   -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-  -webkit-transform: scale(-1, -1);
-          transform: scale(-1, -1);
+  transform: scale(-1, -1);
 }
 
 :root .fa-rotate-90,
@@ -198,8 +186,7 @@
 :root .fa-flip-horizontal,
 :root .fa-flip-vertical,
 :root .fa-flip-both {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
 }
 
 .fa-stack {
@@ -570,11 +557,11 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-bacteria:before {
-  content: "\f959";
+  content: "陵";
 }
 
 .fa-bacterium:before {
-  content: "\f95a";
+  content: "讀";
 }
 
 .fa-bahai:before {
@@ -830,7 +817,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-box-tissue:before {
-  content: "\f95b";
+  content: "拏";
 }
 
 .fa-boxes:before {
@@ -1598,7 +1585,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-dailymotion:before {
-  content: "\f952";
+  content: "勒";
 }
 
 .fa-dashcube:before {
@@ -1614,7 +1601,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-deezer:before {
-  content: "\f977";
+  content: "亮";
 }
 
 .fa-delicious:before {
@@ -1862,7 +1849,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-edge-legacy:before {
-  content: "\f978";
+  content: "兩";
 }
 
 .fa-edit:before {
@@ -2038,7 +2025,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-faucet:before {
-  content: "\f905";
+  content: "串";
 }
 
 .fa-fax:before {
@@ -2202,7 +2189,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-firefox-browser:before {
-  content: "\f907";
+  content: "龜";
 }
 
 .fa-first-aid:before {
@@ -2522,7 +2509,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-google-pay:before {
-  content: "\f979";
+  content: "凉";
 }
 
 .fa-google-play:before {
@@ -2694,7 +2681,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-hand-holding-medical:before {
-  content: "\f95c";
+  content: "樂";
 }
 
 .fa-hand-holding-usd:before {
@@ -2750,7 +2737,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-hand-sparkles:before {
-  content: "\f95d";
+  content: "諾";
 }
 
 .fa-hand-spock:before {
@@ -2766,7 +2753,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-hands-wash:before {
-  content: "\f95e";
+  content: "丹";
 }
 
 .fa-handshake:before {
@@ -2774,11 +2761,11 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-handshake-alt-slash:before {
-  content: "\f95f";
+  content: "寧";
 }
 
 .fa-handshake-slash:before {
-  content: "\f960";
+  content: "怒";
 }
 
 .fa-hanukiah:before {
@@ -2810,19 +2797,19 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-head-side-cough:before {
-  content: "\f961";
+  content: "率";
 }
 
 .fa-head-side-cough-slash:before {
-  content: "\f962";
+  content: "異";
 }
 
 .fa-head-side-mask:before {
-  content: "\f963";
+  content: "北";
 }
 
 .fa-head-side-virus:before {
-  content: "\f964";
+  content: "磻";
 }
 
 .fa-heading:before {
@@ -2962,7 +2949,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-house-user:before {
-  content: "\f965";
+  content: "便";
 }
 
 .fa-houzz:before {
@@ -3010,7 +2997,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-ideal:before {
-  content: "\f913";
+  content: "邏";
 }
 
 .fa-igloo:before {
@@ -3058,7 +3045,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-instagram-square:before {
-  content: "\f955";
+  content: "凌";
 }
 
 .fa-intercom:before {
@@ -3214,7 +3201,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-laptop-house:before {
-  content: "\f966";
+  content: "復";
 }
 
 .fa-laptop-medical:before {
@@ -3378,7 +3365,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-lungs-virus:before {
-  content: "\f967";
+  content: "不";
 }
 
 .fa-lyft:before {
@@ -3550,7 +3537,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-microblog:before {
-  content: "\f91a";
+  content: "駱";
 }
 
 .fa-microchip:before {
@@ -3606,7 +3593,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-mixer:before {
-  content: "\f956";
+  content: "稜";
 }
 
 .fa-mizuni:before {
@@ -3926,7 +3913,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-people-arrows:before {
-  content: "\f968";
+  content: "泌";
 }
 
 .fa-people-carry:before {
@@ -4014,7 +4001,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-pied-piper-square:before {
-  content: "\f91e";
+  content: "爛";
 }
 
 .fa-piggy-bank:before {
@@ -4058,7 +4045,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-plane-slash:before {
-  content: "\f969";
+  content: "數";
 }
 
 .fa-play:before {
@@ -4162,11 +4149,11 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-pump-medical:before {
-  content: "\f96a";
+  content: "索";
 }
 
 .fa-pump-soap:before {
-  content: "\f96b";
+  content: "參";
 }
 
 .fa-pushed:before {
@@ -4422,7 +4409,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-rust:before {
-  content: "\f97a";
+  content: "梁";
 }
 
 .fa-sad-cry:before {
@@ -4554,7 +4541,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-shield-virus:before {
-  content: "\f96c";
+  content: "塞";
 }
 
 .fa-ship:before {
@@ -4574,7 +4561,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-shopify:before {
-  content: "\f957";
+  content: "綾";
 }
 
 .fa-shopping-bag:before {
@@ -4634,7 +4621,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-sink:before {
-  content: "\f96d";
+  content: "省";
 }
 
 .fa-sistrix:before {
@@ -4762,7 +4749,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-soap:before {
-  content: "\f96e";
+  content: "葉";
 }
 
 .fa-socks:before {
@@ -4986,7 +4973,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-stopwatch-20:before {
-  content: "\f96f";
+  content: "說";
 }
 
 .fa-store:before {
@@ -4998,11 +4985,11 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-store-alt-slash:before {
-  content: "\f970";
+  content: "殺";
 }
 
 .fa-store-slash:before {
-  content: "\f971";
+  content: "辰";
 }
 
 .fa-strava:before {
@@ -5286,7 +5273,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-tiktok:before {
-  content: "\f97b";
+  content: "糧";
 }
 
 .fa-times:before {
@@ -5326,7 +5313,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-toilet-paper-slash:before {
-  content: "\f972";
+  content: "沈";
 }
 
 .fa-toolbox:before {
@@ -5366,7 +5353,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-trailer:before {
-  content: "\f941";
+  content: "論";
 }
 
 .fa-train:before {
@@ -5514,7 +5501,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-unity:before {
-  content: "\f949";
+  content: "雷";
 }
 
 .fa-universal-access:before {
@@ -5538,7 +5525,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-unsplash:before {
-  content: "\f97c";
+  content: "良";
 }
 
 .fa-untappd:before {
@@ -5662,7 +5649,7 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-users-slash:before {
-  content: "\f973";
+  content: "拾";
 }
 
 .fa-usps:before {
@@ -5754,15 +5741,15 @@ readers do not read off random characters that represent icons */
 }
 
 .fa-virus:before {
-  content: "\f974";
+  content: "若";
 }
 
 .fa-virus-slash:before {
-  content: "\f975";
+  content: "掠";
 }
 
 .fa-viruses:before {
-  content: "\f976";
+  content: "略";
 }
 
 .fa-vk:before {
@@ -6043,5 +6030,4 @@ readers do not read off random characters that represent icons */
   overflow: visible;
   position: static;
   width: auto;
-}
-/*# sourceMappingURL=fontawesome.css.map */
+}/*# sourceMappingURL=fontawesome.css.map */

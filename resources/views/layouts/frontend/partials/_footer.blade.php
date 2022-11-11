@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="section-footer mt-5 border-top">
+<footer class="section-footer">
     <div class="container py-4 content-footer">
         <div class="row justify-content-center text-center">
             <div class="col-12">
@@ -44,7 +44,7 @@
     </div>
 
     <div class="container-fluid copyright-footer">
-        <div class="row border-top justify-content-center align-items-center py-4">
+        <div class="row justify-content-center align-items-center py-4">
             <div class="col-auto text-gray-500 font-weight-bold text-center">
                 {{ date('Y') }} <i class="fas fa-copyright"></i> Copyright relaxarc
                 <br>

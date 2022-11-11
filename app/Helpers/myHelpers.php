@@ -21,19 +21,19 @@ function uploadImage($request, $directoryName, $fieldImage = null)
     return $file;
 }
 
-function isAdmin($roles = null)
+/**
+ * Identify the user roles
+ *
+ * @param  array $availableRoles
+ * @param  array $userRoles
+ * @return boolean
+ */
+function checkRoles(array $availableRoles, array $userRoles)
 {
-    if ($roles) return (count(array_intersect(["ADMIN"], $roles)) > 0);
+    $totalRoles = array_pop($availableRoles);
 
-    return (count(array_intersect(["ADMIN"], auth()->user()->roles)) > 0);
-}
-
-function isSuperAdmin($roles = null)
-{
-    if ($roles) return (count(array_intersect(["ADMIN", "SUPERADMIN"], $roles)) > 1);
-
-    return (count(array_intersect(["ADMIN", "SUPERADMIN"], auth()->user()->roles)) > 1);
-}
+    return (count(array_intersect($availableRoles, $userRoles)) >= $totalRoles);
+};
 
 function preventUserWhoHaveCompletedTheProfile()
 {

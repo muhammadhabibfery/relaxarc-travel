@@ -33,7 +33,9 @@ class ProfileController extends Controller
         $this->user
             ->update($data);
 
-        return isAdmin() ? $this->redirectAfterUpdated('dashboard', 'profile') : $this->redirectAfterUpdated('home', 'profile');
+        return checkRoles(["ADMIN", 1], $this->user->roles)
+            ? $this->redirectAfterUpdated('dashboard', 'profile')
+            : $this->redirectAfterUpdated('home', 'profile');
     }
 
     public function completeProfileFirst()
@@ -69,7 +71,9 @@ class ProfileController extends Controller
         $this->user
             ->update($data);
 
-        return isAdmin() ? $this->redirectAfterUpdated('dashboard') : $this->redirectAfterUpdated('home');
+        return checkRoles(["ADMIN", 1], $this->user->roles)
+            ? $this->redirectAfterUpdated('dashboard')
+            : $this->redirectAfterUpdated('home');
     }
 
     public function redirectAfterUpdated($routeName, $action = null)

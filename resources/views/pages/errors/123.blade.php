@@ -29,14 +29,16 @@
 <body>
     <section class="text-center">
         <p style="font-size:150px">401</p>
-        <h6><strong>Whoops</strong> <span
-                class="d-block mt-2">{{ trans('status.has_complete_profile.paragraph') }}</span></h6>
-        @if (isAdmin())
-        <a href="{{ route('dashboard') }}"
-            class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to dashoard') }}</a>
+        <h6>
+            <strong>Whoops</strong>
+            <span class="d-block mt-2">{{ trans('status.has_complete_profile.paragraph') }}</span>
+        </h6>
+        @if (checkRoles(["ADMIN",1], auth()->user()->roles))
+        <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to dashoard')
+            }}</a>
         @else
-        <a href="{{ route('front-profile') }}"
-            class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to profile') }}</a>
+        <a href="{{ route('front-profile') }}" class="btn btn-secondary btn-outline-light mt-3">{{ __('Back to profile')
+            }}</a>
         @endif
     </section>
 

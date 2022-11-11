@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class TravelPackageController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            return isSuperAdmin() ? $next($request) : abort(403);
+            return checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles) ? $next($request) : abort(403);
         })->only('trash', 'restore', 'forceDelete');
     }
 

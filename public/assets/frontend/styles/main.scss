@@ -103,15 +103,15 @@ body {
     }
 }
 
-// Header [index.html]
+// Header [frontend -> home.blade.php]
 header {
     padding-top: 180px;
     padding-bottom: 165px;
-    margin-top: -85px;
-    background-image: url("http://getwallpapers.com/wallpaper/full/0/8/3/162603.jpg#.YDdUZjjbAtc.link");
+    background-image: url("https://source.unsplash.com/1600x900/?beach");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: -85px;
     color: #ffffff;
 
     .bg-text-md {
@@ -122,7 +122,8 @@ header {
         padding: 20px;
         margin: auto;
 
-        h1 {
+        h1,
+        p {
             font-family: "Playfair Display", serif;
             font-weight: bold;
             font-size: 50px;
@@ -144,7 +145,7 @@ header {
     }
 }
 
-//  Statistics [index.html]
+//  Statistics [frontend -> home.blade.php]
 .section-stats {
     margin-top: -50px;
 
@@ -166,7 +167,7 @@ header {
     }
 }
 
-// Popular [index.html]
+// Popular [frontend -> home.blade.php]
 .section-popular {
     min-height: 540px;
     background-color: #051334;
@@ -245,7 +246,7 @@ header {
     }
 }
 
-// Testimonial [index.html]
+// Testimonial [frontend -> home.blade.php]
 .section-testimonial-heading {
     background: linear-gradient(#fff 0%, #f7f9ff 100%);
     padding-top: 50px;
@@ -322,7 +323,7 @@ header {
     }
 }
 
-// Footer
+// Footer [frontend -> home.blade.php]
 .section-footer {
     background-color: #e4e6eb;
 
@@ -337,14 +338,14 @@ header {
     }
 }
 
-// header [detail.html]
+// header [frontend -> detail.blade.php]
 .section-detail-header {
     min-height: 310px;
     background-color: #e4e6eb;
-    margin-top: -68px;
+    margin-top: -70px;
 }
 
-// Detail Gallery [detail.html]
+// Detail Gallery [frontend -> detail.blade.php]
 .section-detail-content {
     margin-top: -210px;
     min-height: 100vh;
@@ -462,7 +463,7 @@ header {
     }
 }
 
-//  Checkout Kiri [checkout.html]
+//  Checkout Kiri [frontend -> checkout.blade.php]
 .attende {
     .btn-remove {
         color: #071c4d;
@@ -494,7 +495,7 @@ header {
     }
 }
 
-//  Checkout Kanan [checkout.html]
+//  Checkout Kanan [frontend -> checkout.blade.php]
 .checkout-information {
     .text-total {
         font-weight: bold;
@@ -539,7 +540,7 @@ header {
     }
 }
 
-// Success Page [success.html]
+// Success Page [frontend -> checkout-success.blade.php]
 .section-success {
     height: 90vh;
 

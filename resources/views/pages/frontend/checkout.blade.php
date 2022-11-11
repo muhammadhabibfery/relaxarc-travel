@@ -10,7 +10,7 @@
     <!-- End Header -->
 
     <!-- Detail Content -->
-    <section class="section-detail-content">
+    <section class="section-detail-content mb-5">
         <div class="container">
             <!-- Breadcrumb -->
             <div class="row">
@@ -96,7 +96,7 @@
                                 <small class="text-danger disclaimer">
                                     Anda hanya dapat mengundang member yang telah terdaftar
                                 </small>
-                                <p>
+                            <p>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="clearix"></div>
                             </div>
                             <div class="bank-item pb-3">
                                 <div class="row">
@@ -165,12 +164,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="clearix"></div>
                             </div>
                         </div>
                     </div>
                     <div class="join-container">
-                        <a href="{{ route('checkout-success') }}" class="btn btn-block btn-join-now mt-3 py-2">
+                        <a href="{{ route('checkout.success') }}" class="btn btn-block btn-join-now mt-3 py-2">
                             Konfirmasi Pembayaran
                         </a>
                     </div>

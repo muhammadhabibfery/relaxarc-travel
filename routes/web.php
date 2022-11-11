@@ -18,23 +18,8 @@ use App\Http\Controllers\CheckoutController;
 |
 */
 
-Route::middleware('preventBack')
+Route::middleware(['preventBack'])
     ->group(function () {
-
-        Route::group(['middleware' => ['auth']], function () {
-            Route::group(['middleware' => ['verified', 'hasFullProfile']], function () {
-                Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-                Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout-success');
-                require __DIR__ . '/adminRoutes.php';
-            });
-
-            Route::get('/profile', [ProfileController::class, 'frontProfile'])->name('front-profile');
-            Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
-            Route::get("/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])->name("complete-profile");
-            Route::post("/profile/delete-avatar", [ProfileController::class, "deleteAvatar"])->name("delete-avatar");
-            Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
-            Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");
-        });
 
         Route::get('/', [HomeController::class, 'index'])->name('home');
         Route::get('/travels', function () {
@@ -47,6 +32,43 @@ Route::middleware('preventBack')
         Route::get('/detail', [DetaiController::class, 'index'])->name('detail');
 
         Auth::routes(['verify' => true]);
+
+        Route::middleware(['auth'])
+            ->group(function () {
+
+                Route::get('/test-member', function () {
+                    return "Berhasil masuk halaman member";
+                });
+
+                Route::middleware(["authRoles:ADMIN,1"])
+                    ->prefix('admins')
+                    ->group(function () {
+                        Route::get('/test-admin', function () {
+                            return "berhasil masuk Halaman admin";
+                        });
+
+                        Route::middleware(["authRoles:ADMIN,SUPERADMIN,2"])
+                            ->group(function () {
+                                Route::get('/test-superadmin', function () {
+                                    return "berhasil masuk Halaman superadmin";
+                                });
+                            });
+                    });
+
+                Route::middleware(['verified', 'hasFullProfile'])
+                    ->group(function () {
+                        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+                        Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+                        require __DIR__ . '/adminRoutes.php';
+                    });
+
+                Route::get('/profile', [ProfileController::class, 'frontProfile'])->name('front-profile');
+                Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
+                Route::get("/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])->name("complete-profile");
+                Route::post("/profile/delete-avatar", [ProfileController::class, "deleteAvatar"])->name("delete-avatar");
+                Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
+                Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");
+            });
     });
 
 // NOTE:

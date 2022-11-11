@@ -71,21 +71,21 @@
                             </span>
                             @enderror
                         </div>
-                        @if (isAdmin($user->roles))
+                        @if (checkRoles(["ADMIN",1], $user->roles))
                         <div class="form-group">
                             <label for="rolesLabel" class="d-block">{{ __('Roles') }}</label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input @error('roles') is-invalid @enderror" type="checkbox"
-                                    name="roles[]" id="admin" value="admin"
-                                    {{ in_array('ADMIN', $user->roles) ? 'checked' : '' }}>
+                                    name="roles[]" id="admin" value="admin" {{ in_array('ADMIN', $user->roles) ?
+                                'checked' : '' }}>
                                 <label class="form-check-label" for="admin">
                                     Admin
                                 </label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input @error('roles') is-invalid @enderror" type="checkbox"
-                                    name="roles[]" id="superadmin" value="superadmin"
-                                    {{ in_array('SUPERADMIN', $user->roles) ? 'checked' : '' }}>
+                                    name="roles[]" id="superadmin" value="superadmin" {{ in_array('SUPERADMIN',
+                                    $user->roles) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="superadmin">
                                     SuperAdmin
                                 </label>
@@ -101,14 +101,14 @@
                             <label for="statusLabel" class="d-block">Status</label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input @error('status') is-invalid @enderror" type="radio"
-                                    name="status" id="active" value="ACTIVE"
-                                    {{ $user->status === 'ACTIVE' ? 'checked' : '' }}>
+                                    name="status" id="active" value="ACTIVE" {{ $user->status === 'ACTIVE' ? 'checked' :
+                                '' }}>
                                 <label class="form-check-label" for="active">ACTIVE</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input @error('status') is-invalid @enderror" type="radio"
-                                    name="status" id="none" value="NONE"
-                                    {{ $user->status === 'NONE' ? 'checked' : '' }}>
+                                    name="status" id="none" value="NONE" {{ $user->status === 'NONE' ? 'checked' : ''
+                                }}>
                                 <label class="form-check-label" for="none">{{ __('NONE') }}</label>
                             </div>
                             @error('status')

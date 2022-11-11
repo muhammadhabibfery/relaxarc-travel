@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'preventBack' => \App\Http\Middleware\PreventBackButton::class,
         'hasFullProfile' => \App\Http\Middleware\HasFullProfile::class,
         'isSuperAdmin' => \App\Http\Middleware\IsSuperAdmin::class,
+        'authRoles' => \App\Http\Middleware\AuthenticatedRoles::class,
     ];
 }

@@ -32,7 +32,7 @@
             </div>
             <div class="col-sm-3 col-md-2 stats-detail">
                 <h2>72</h2>
-                <p>Members</p>
+                <p>Partners</p>
             </div>
         </section>
     </div>

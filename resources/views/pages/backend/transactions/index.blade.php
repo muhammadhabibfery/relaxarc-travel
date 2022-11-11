@@ -24,8 +24,8 @@
                 <div class="form-group mt-3">
                     <div class="row justify-content-center">
                         <div class="col-6">
-                            <button class="btn btn-primary btn-block mx-2" type="submit"
-                                id="button-addon2">{{ __('Search') }}</button>
+                            <button class="btn btn-primary btn-block mx-2" type="submit" id="button-addon2">{{
+                                __('Search') }}</button>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('transactions.index') }}" class="btn btn-dark btn-block d-inline-block"
@@ -49,9 +49,9 @@
         </div>
 
         <div class="col-md-11 my-4">
-            @if (isSuperAdmin())
-            <a href="{{ route('transactions.trash') }}"
-                class="btn btn-orange btn-block mt-3">{{ __('Transactions deleted') }}</a>
+            @if (checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles))
+            <a href="{{ route('transactions.trash') }}" class="btn btn-orange btn-block mt-3">{{
+                __('Transactions deleted') }}</a>
             @endif
         </div>
 
@@ -104,7 +104,8 @@
                                         <a href="{{ route('transactions.edit', $transaction) }}"
                                             class="btn btn-warning btn-sm my-1">Edit</a>
                                         <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
-                                            data-target="#deletetransaction{{ $transaction->invoice_number }}Modal">{{ __('Delete') }}</a>
+                                            data-target="#deletetransaction{{ $transaction->invoice_number }}Modal">{{
+                                            __('Delete') }}</a>
                                     </td>
 
                                     {{-- Delete Travel Package Modal --}}
@@ -122,7 +123,10 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{ __('Are you sure want to delete :Data :TravelPackage :Name ?', ['data' => 'transaksi', 'travelPackage' => $transaction->travelPackage->title, 'user' => $transaction->user->name]) }}
+                                                    <p>{{ __('Are you sure want to delete :Data :TravelPackage :Name ?',
+                                                        ['data' => 'transaksi', 'travelPackage' =>
+                                                        $transaction->travelPackage->title, 'user' =>
+                                                        $transaction->user->name]) }}
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -132,8 +136,8 @@
                                                         method="POST" onsubmit="return submitted(this)" id="myfr">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-primary"
-                                                            id="btnfr">{{ __('Delete') }}</button>
+                                                        <button type="submit" class="btn btn-primary" id="btnfr">{{
+                                                            __('Delete') }}</button>
                                                     </form>
                                                 </div>
                                             </div>

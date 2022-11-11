@@ -22,7 +22,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Admin Menu -->
-    @if (isSuperAdmin())
+    @if (checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles))
     <li class="nav-item{{ request()->is('admin/users*') ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('users.index') }}">
             <i class="fas fa-user-tag"></i>
