@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(["checkRole:ADMIN"])
+Route::middleware(["authRoles:ADMIN,1"])
     ->prefix('admin')
     ->group(function () {
 
@@ -39,7 +39,7 @@ Route::middleware(["checkRole:ADMIN"])
             ->except(["edit"]);
 
         // User who have ADMIIN & SUPERADMIN roles can be access these routes
-        Route::middleware(["isSuperAdmin:ADMIN,SUPERADMIN"])
+        Route::middleware(["authRoles:ADMIN,SUPERADMIN,2"])
             ->group(function () {
                 Route::post("/users/generate-username", [UserController::class, "generateUsername"])->name("users.generate-username");
                 Route::get("/users/edit/{user:username}", [UserController::class, "edit"])->name("users.edit");

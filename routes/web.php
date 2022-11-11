@@ -36,25 +36,6 @@ Route::middleware(['preventBack'])
         Route::middleware(['auth'])
             ->group(function () {
 
-                Route::get('/test-member', function () {
-                    return "Berhasil masuk halaman member";
-                });
-
-                Route::middleware(["authRoles:ADMIN,1"])
-                    ->prefix('admins')
-                    ->group(function () {
-                        Route::get('/test-admin', function () {
-                            return "berhasil masuk Halaman admin";
-                        });
-
-                        Route::middleware(["authRoles:ADMIN,SUPERADMIN,2"])
-                            ->group(function () {
-                                Route::get('/test-superadmin', function () {
-                                    return "berhasil masuk Halaman superadmin";
-                                });
-                            });
-                    });
-
                 Route::middleware(['verified', 'hasFullProfile'])
                     ->group(function () {
                         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');

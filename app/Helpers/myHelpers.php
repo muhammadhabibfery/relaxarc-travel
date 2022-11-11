@@ -30,7 +30,7 @@ function uploadImage($request, $directoryName, $fieldImage = null)
  */
 function checkRoles(array $availableRoles, array $userRoles)
 {
-    $totalRoles = array_pop($availableRoles);
+    $totalRoles = (int) array_pop($availableRoles);
 
     return (count(array_intersect($availableRoles, $userRoles)) >= $totalRoles);
 };
