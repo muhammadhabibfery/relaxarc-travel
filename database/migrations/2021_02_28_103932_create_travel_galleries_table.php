@@ -16,7 +16,8 @@ class CreateTravelGalleriesTable extends Migration
         Schema::create('travel_galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('travel_package_id')->constrained()->onDelete('cascade');
-            $table->string('name', 100)->index();
+            $table->string('name', 100)->unique()->index();
+            $table->string('slug');
             $table->integer('uploaded_by');
             $table->timestamps();
         });

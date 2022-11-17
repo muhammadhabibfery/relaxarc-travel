@@ -3,6 +3,7 @@
 @section('title', 'RelaxArc')
 
 @section('content')
+
 <!-- Header -->
 <header class="text-center">
     <div class="bg-text-md">

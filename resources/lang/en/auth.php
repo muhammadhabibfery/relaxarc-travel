@@ -23,7 +23,8 @@ return [
     'verified' => [
         'title' => 'Email verification successfully!',
         'paragraph-login' => 'Please login to start the journey.',
-        'paragraph-authenticated' => 'Enjoy your trip.',
+        'paragraph-authenticated-complete-profile' => 'Enjoy your trip.',
+        'paragraph-authenticated-not-complete-profile' => 'please complete your profile below.',
     ],
 
 ];

@@ -12,9 +12,7 @@ class TravelPackageController extends Controller
 
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            return checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles) ? $next($request) : abort(403);
-        })->only('trash', 'restore', 'forceDelete');
+        $this->middleware('authRoles:ADMIN,SUPERADMIN,2')->only('trash', 'restore', 'forceDelete');
     }
 
     /**
@@ -50,6 +48,7 @@ class TravelPackageController extends Controller
     public function store(TravelPackageRequest $request)
     {
         $data = array_merge($request->validated(), [
+            // 'slug' => Str::of($request->title)->lower()->slug(),
             'created_by' => auth()->id(),
             'price' => $this->convertPriceToInteger($request->validated()['price'])
         ]);

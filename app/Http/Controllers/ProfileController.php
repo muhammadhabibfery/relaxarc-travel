@@ -13,6 +13,7 @@ class ProfileController extends Controller
 
     public function __construct()
     {
+        $this->middleware('verified')->only('frontProfile');
         $this->user = auth()->user();
     }
 
@@ -33,9 +34,14 @@ class ProfileController extends Controller
         $this->user
             ->update($data);
 
-        return checkRoles(["ADMIN", 1], $this->user->roles)
-            ? $this->redirectAfterUpdated('dashboard', 'profile')
+        if (checkRoles(["ADMIN", 1], $this->user->roles)) return $this->redirectAfterUpdated('dashboard', 'profile');
+
+        return ($request->session()->has('guest-route'))
+            ? redirect($request->session()->pull('guest-route'))
             : $this->redirectAfterUpdated('home', 'profile');
+        // return checkRoles(["ADMIN", 1], $this->user->roles)
+        //     ? $this->redirectAfterUpdated('dashboard', 'profile')
+        //     : $this->redirectAfterUpdated('home', 'profile');
     }
 
     public function completeProfileFirst()

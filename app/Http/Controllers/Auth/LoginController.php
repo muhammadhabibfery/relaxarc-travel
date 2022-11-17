@@ -79,11 +79,13 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (count(array_intersect(['ADMIN'], $user->roles)) > 0) return redirect()->intended(route('dashboard'));
+        if (checkRoles(["ADMIN", 1], $user->roles)) return redirect()->intended(route('dashboard'));
 
-        if (is_null($user->phone) || is_null($user->address)) return redirect()->route('front-profile');
+        if (!checkCompletenessTheProfile()) return redirect()->route('front-profile');
 
-        return redirect()->intended(route('home'));
+        return ($request->session()->has('guest-route'))
+            ? redirect($request->session()->pull('guest-route'))
+            : redirect()->intended(route('home'));
     }
 
     /**

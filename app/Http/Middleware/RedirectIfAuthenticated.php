@@ -19,20 +19,6 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
-
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                if (count(array_intersect(["ADMIN"], Auth::guard($guard)->user()->roles)) > 0)
-                    return redirect()->intended(route('dashboard'));
-
-                if (is_null(Auth::guard($guard)->user()->phone) || is_null(Auth::guard($guard)->user()->address)) return redirect()->route('front-profile');
-
-
-                return redirect()->intended(route('home'));
-            }
-        }
-
-        return $next($request);
+        return (Auth::guard($guards)->check()) ? abort('404') : $next($request);
     }
 }

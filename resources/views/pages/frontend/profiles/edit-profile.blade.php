@@ -32,20 +32,29 @@
             <!-- </div> -->
             <!-- End Breadcrumb -->
 
+            @if (session('verifiedStatus'))
+            <div class="alert alert-success alert-dismissible fade shown py-3" role="alert">
+                {!! session('verifiedStatus') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+
             <!-- Profile Forms -->
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <section class="section-travel-list pl-lg-0 mb-3 mb-lg-0">
                         <div class="card card-travels card-terms-conditions p-3">
                             @if (!checkCompletenessTheProfile())
-                            <small
-                                class="mb-4 font-italic text-danger">*{{ __('complete your profile information before continuing the journey') }}
+                            <small class="mb-4 font-italic text-danger">*{{ __('complete your profile information before
+                                continuing the journey') }}
                             </small>
                             @else
                             <div class="row justify-content-end">
                                 <div class="col-8 col-md-4 col-lg-4 col-xl-4">
-                                    <a href="#"
-                                        class="btn btn-secondary float-right d-none d-md-block">{{ __('Back to home') }}</a>
+                                    <a href="#" class="btn btn-secondary float-right d-none d-md-block">{{ __('Back to
+                                        home') }}</a>
                                     <a href="#" class="btn btn-secondary float-right d-sm-block d-md-none"><i
                                             class="fas fa-recycle"></i><span class="pl-2">Home</span></a>
                                 </div>
@@ -119,8 +128,8 @@
                                                 class="img-thumbnail img-fluid rounded-circle w-50 mb-2 profile-image">
                                             @if ($user->avatar)
                                             <a href="#" class="btn btn-orange mb-4 mb-md-0 mb-lg-0 mb-xl-0 d-block"
-                                                data-toggle="modal"
-                                                data-target="#deleteAvatarModal">{{ __('Delete avatar') }}</a>
+                                                data-toggle="modal" data-target="#deleteAvatarModal">{{ __('Delete
+                                                avatar') }}</a>
                                             @endif
                                         </div>
                                         <div class="col-sm-8 my-auto">

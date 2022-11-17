@@ -96,8 +96,8 @@ class VerificationController extends Controller
     {
         if (Auth::check()) {
             return (checkCompletenessTheProfile()) ?
-                $this->redirectAfterVerified($this->redirectPath(), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated') :
-                $this->redirectAfterVerified(route('front-profile'), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated');
+                $this->redirectAfterVerified($this->redirectPath(), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated-complete-profile') :
+                $this->redirectAfterVerified(route('front-profile'), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated-not-complete-profile');
         }
 
         return redirect()->route('login')

@@ -23,7 +23,8 @@ return [
     'verified' => [
         'title' => 'Verifikasi email berhasil!',
         'paragraph-login' => 'Silahkan Masuk untuk memulai perjalanan.',
-        'paragraph-authenticated' => 'Nikmati perjalanan anda.',
+        'paragraph-authenticated-complete-profile' => 'Nikmati perjalanan anda.',
+        'paragraph-authenticated-not-complete-profile' => 'silahkan lengkapi profil anda di bawah ini.',
     ],
 
 ];

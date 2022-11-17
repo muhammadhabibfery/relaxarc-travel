@@ -45,7 +45,8 @@ Route::middleware(['preventBack'])
 
                 Route::get('/profile', [ProfileController::class, 'frontProfile'])->name('front-profile');
                 Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
-                Route::get("/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])->name("complete-profile");
+                Route::get("/profile/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])
+                    ->name("complete-profile");
                 Route::post("/profile/delete-avatar", [ProfileController::class, "deleteAvatar"])->name("delete-avatar");
                 Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
                 Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");

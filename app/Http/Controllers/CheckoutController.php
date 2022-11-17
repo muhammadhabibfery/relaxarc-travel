@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
+
+    public function __construct()
+    {
+        if (request()->session()->has('guest-route')) request()->session()->forget('guest-route');
+    }
+
     /**
      * Show the checkout
      *

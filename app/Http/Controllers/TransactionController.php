@@ -13,9 +13,7 @@ class TransactionController extends Controller
 
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            return checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles) ? $next($request) : abort(403);
-        })->only('trash', 'restore', 'forceDelete');
+        $this->middleware('authRoles:ADMIN,SUPERADMIN,2')->only('trash', 'restore', 'forceDelete');
     }
 
     /**
