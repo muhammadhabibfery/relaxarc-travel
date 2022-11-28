@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TravelPackage;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
@@ -46,5 +47,7 @@ class DatabaseSeeder extends Seeder
                 'status' => 'ACTIVE',
             ]
         );
+
+        TravelPackage::factory(800)->create();
     }
 }

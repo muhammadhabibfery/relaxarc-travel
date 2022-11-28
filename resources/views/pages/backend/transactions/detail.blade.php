@@ -8,8 +8,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ __('Detail transaction') }}</h1>
-        <a href="{{ route('transactions.index') }}"
-            class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back') }}</a>
+        <a href="{{ route('transactions.index') }}" class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back')
+            }}</a>
     </div>
 
     <!-- Content Row -->
@@ -18,7 +18,8 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="modal-title" id="DetailtravelpackageModalLabel">
-                        {{ __('Detail Transaction (:TravelPackage, :Name)', ['travelPackage' => $transaction->travelPackage->title, 'name' => $transaction->user->name]) }}
+                        {{ __('Detail Transaction (:TravelPackage, :Name)', ['travelPackage' =>
+                        $transaction->travelPackage->title, 'name' => $transaction->user->name]) }}
                     </h5>
                 </div>
                 <div class="card-body">
@@ -77,13 +78,17 @@
                 </div>
                 <div class="card-footer text-muted">
                     <small class="text-muted">
-                        {{ __('Created by :Username', ['username' => createdUpdatedDeletedBy($transaction->created_by)->username ?? '-']) }}
+                        {{ __('Created by :Name', ['Name' => createdUpdatedDeletedBy($transaction->created_by)->name
+                        ?? '-']) }}
                     </small>
                     <small class="text-muted float-md-right d-block d-md-inline-block d-lg-inline-block">
                         @if ($transaction->updated_by)
-                        {{ __('Last updated by :Name (:Date)', ['name' => createdUpdatedDeletedBy($transaction->updated_by)->username, 'date' => $transaction->updated_at ? $transaction->updated_at->diffForHumans() : now()]) }}
+                        {{ __('Last updated by :Name (:Date)', ['name' =>
+                        createdUpdatedDeletedBy($transaction->updated_by)->name, 'date' => $transaction->updated_at
+                        ? $transaction->updated_at->diffForHumans() : now()]) }}
                         @else
-                        {{ __('Last updated :Date', ['date' => $transaction->updated_at ? $transaction->updated_at->diffForHumans() : now()]) }}
+                        {{ __('Last updated :Date', ['date' => $transaction->updated_at ?
+                        $transaction->updated_at->diffForHumans() : now()]) }}
                         @endif
                     </small>
                 </div>

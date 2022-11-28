@@ -24,8 +24,8 @@
                 <div class="form-group mt-3">
                     <div class="row justify-content-center">
                         <div class="col-6">
-                            <button class="btn btn-primary btn-block mx-2" type="submit"
-                                id="button-addon2">{{ __('Search') }}</button>
+                            <button class="btn btn-primary btn-block mx-2" type="submit" id="button-addon2">{{
+                                __('Search') }}</button>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('travel-packages.trash') }}" class="btn btn-dark btn-block d-inline-block"
@@ -45,8 +45,8 @@
                         <label for="keyword" class="sr-only"></label>
                         <input type="text" name="keyword" class="form-control w-50" id="keyword"
                             placeholder="{{ __('Search by title or location') }}" value="{{ request()->keyword }}">
-                        <button class="btn btn-primary mx-2" type="submit"
-                            id="button-addon2">{{ __('Search') }}</button>
+                        <button class="btn btn-primary mx-2" type="submit" id="button-addon2">{{ __('Search')
+                            }}</button>
                         <a href="{{ route('travel-packages.trash') }}" class="btn btn-dark d-inline-block"
                             id="button-addon2">Reset</a>
                     </form>
@@ -87,9 +87,11 @@
                                             data-target="#detailtravelpackage{{ $deletedTravelPackage->slug }}Modal">Detail</a>
                                         <a href="{{ route('travel-packages.restore', $deletedTravelPackage->slug) }}"
                                             class="btn btn-warning btn-sm my-1"
-                                            onclick="return confirm('{{ __('Are you sure want to restore travel package :Title ?', ['title' => $deletedTravelPackage->title]) }}')">{{ __('Restore') }}</a>
+                                            onclick="return confirm('{{ __('Are you sure want to restore travel package :Title ?', ['title' => $deletedTravelPackage->title]) }}')">{{
+                                            __('Restore') }}</a>
                                         <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
-                                            data-target="#deletetravelpackage{{ $deletedTravelPackage->slug }}Modal">{{ __('Delete permanently') }}</a>
+                                            data-target="#deletetravelpackage{{ $deletedTravelPackage->slug }}Modal">{{
+                                            __('Delete permanently') }}</a>
                                     </td>
 
                                     {{-- Delete Travel Package Modal --}}
@@ -108,7 +110,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{ __('Are you sure want to delete permanently ?', ['data' => 'paket travel', 'name' => $deletedTravelPackage->title]) }}
+                                                    <p>{{ __('Are you sure want to delete permanently ?', ['data' =>
+                                                        'paket travel', 'name' => $deletedTravelPackage->title]) }}
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -119,8 +122,8 @@
                                                         method="POST" onsubmit="return submitted(this)" id="myfr">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-primary"
-                                                            id="btnfr">{{ __('Delete permanently') }}</button>
+                                                        <button type="submit" class="btn btn-primary" id="btnfr">{{
+                                                            __('Delete permanently') }}</button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -136,7 +139,8 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="DetailtravelpackageModalLabel">
-                                                        {{ __('Detail Travel Package', ['name' => $deletedTravelPackage->title]) }}
+                                                        {{ __('Detail Travel Package', ['name' =>
+                                                        $deletedTravelPackage->title]) }}
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -173,31 +177,34 @@
                                                                             </h5>
                                                                             <p class="card-text">
                                                                                 @if(is_array($deletedTravelPackage->featured_event))
-                                                                                <ul>
-                                                                                    @foreach($deletedTravelPackage->featured_event
-                                                                                    as $featured_event)
-                                                                                    <li>{{ trim(ucfirst($featured_event)) }}
-                                                                                    </li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                                @else
-                                                                                {{ ucfirst($deletedTravelPackage->featured_event) }}
-                                                                                @endif
+                                                                            <ul>
+                                                                                @foreach($deletedTravelPackage->featured_event
+                                                                                as $featured_event)
+                                                                                <li>{{ trim(ucfirst($featured_event)) }}
+                                                                                </li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                            @else
+                                                                            {{
+                                                                            ucfirst($deletedTravelPackage->featured_event)
+                                                                            }}
+                                                                            @endif
                                                                             </p>
                                                                             <h5 class="card-title">{{ __('Language') }}
                                                                             </h5>
                                                                             <p class="card-text">
                                                                                 @if(is_array($deletedTravelPackage->language))
-                                                                                <ul>
-                                                                                    @foreach($deletedTravelPackage->language
-                                                                                    as
-                                                                                    $l)
-                                                                                    <li>{{ trim(ucfirst($l)) }}</li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                                @else
-                                                                                {{ ucfirst($deletedTravelPackage->language) }}
-                                                                                @endif
+                                                                            <ul>
+                                                                                @foreach($deletedTravelPackage->language
+                                                                                as
+                                                                                $l)
+                                                                                <li>{{ trim(ucfirst($l)) }}</li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                            @else
+                                                                            {{ ucfirst($deletedTravelPackage->language)
+                                                                            }}
+                                                                            @endif
                                                                             </p>
                                                                         </div>
                                                                         <div class="col-md-6">
@@ -205,22 +212,24 @@
                                                                             </h5>
                                                                             <p class="card-text">
                                                                                 @if(is_array($deletedTravelPackage->foods))
-                                                                                <ul>
-                                                                                    @foreach($deletedTravelPackage->foods
-                                                                                    as
-                                                                                    $food)
-                                                                                    <li>{{ trim(ucfirst($food)) }}</li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                                @else
-                                                                                {{ ucfirst($deletedTravelPackage->foods) }}
-                                                                                @endif
+                                                                            <ul>
+                                                                                @foreach($deletedTravelPackage->foods
+                                                                                as
+                                                                                $food)
+                                                                                <li>{{ trim(ucfirst($food)) }}</li>
+                                                                                @endforeach
+                                                                            </ul>
+                                                                            @else
+                                                                            {{ ucfirst($deletedTravelPackage->foods) }}
+                                                                            @endif
                                                                             </p>
                                                                             <h5 class="card-title">
                                                                                 {{ __('Date of departure') }}
                                                                             </h5>
                                                                             <p class="card-text">
-                                                                                {{ $deletedTravelPackage->date_departure_with_day }}
+                                                                                {{
+                                                                                $deletedTravelPackage->date_departure_with_day
+                                                                                }}
                                                                             </p>
                                                                             <h5 class="card-title">{{ __('Duration') }}
                                                                             </h5>
@@ -240,14 +249,25 @@
                                                                     </div>
                                                                     <p class="card-text mt-3">
                                                                         <small class="text-muted">
-                                                                            {{ __('Created by :Username', ['username' => createdUpdatedDeletedBy($deletedTravelPackage->created_by)->username ?? '-']) }}
+                                                                            {{ __('Created by :name', ['name' =>
+                                                                            createdUpdatedDeletedBy($deletedTravelPackage->created_by)->name
+                                                                            ?? '-']) }}
                                                                         </small>
                                                                         <small
                                                                             class="text-muted float-md-right d-block d-md-inline-block d-lg-inline-block">
                                                                             @if ($deletedTravelPackage->updated_by)
-                                                                            {{ __('Last updated by :Name (:Date)', ['name' => createdUpdatedDeletedBy($deletedTravelPackage->updated_by)->username, 'date' => $deletedTravelPackage->updated_at ? $deletedTravelPackage->updated_at->diffForHumans() : now()]) }}
+                                                                            {{ __('Last updated by :Name (:Date)',
+                                                                            ['name' =>
+                                                                            createdUpdatedDeletedBy($deletedTravelPackage->updated_by)->username,
+                                                                            'date' => $deletedTravelPackage->updated_at
+                                                                            ?
+                                                                            $deletedTravelPackage->updated_at->diffForHumans()
+                                                                            : now()]) }}
                                                                             @else
-                                                                            {{ __('Last updated :Date', ['date' => $deletedTravelPackage->updated_at ? $deletedTravelPackage->updated_at->diffForHumans() : now()]) }}
+                                                                            {{ __('Last updated :Date', ['date' =>
+                                                                            $deletedTravelPackage->updated_at ?
+                                                                            $deletedTravelPackage->updated_at->diffForHumans()
+                                                                            : now()]) }}
                                                                             @endif
                                                                         </small>
                                                                     </p>
@@ -258,7 +278,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">{{ __('Close')  }}</button>
+                                                        data-dismiss="modal">{{ __('Close') }}</button>
                                                 </div>
                                             </div>
                                         </div>

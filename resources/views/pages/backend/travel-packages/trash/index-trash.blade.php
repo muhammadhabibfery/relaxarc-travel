@@ -1,31 +1,46 @@
 @extends('layouts.backend.master-backend')
 
-@section('title', trans('Manage travel packages'))
+@section('title', 'Travel packages deleted')
 
 @section('content')
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">{{ __('Manage travel packages') }}</h1>
+    <!-- Desktop Heading -->
+    <div class="d-sm-flex d-lg-flex d-xl-flex d-md-none align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">{{ __('Travel packages deleted') }}</h1>
+    </div>
+
+    <!-- Mobile Heading -->
+    <div class="row d-none d-md-flex d-lg-none mb-4">
+        <div class="col-md-8">
+            <h1 class="h3 mb-0 text-gray-800">{{ __('Travel packages deleted') }}</h1>
+        </div>
+        <div class="col-md-4">
+            <div class="float-md-right">
+                <a href="{{ route('travel-packages.index') }}" class="btn btn-secondary">{{ __('Back') }}</a>
+            </div>
+        </div>
     </div>
 
     <!-- Content Row -->
     <div class="row justify-content-center">
 
         <!-- Mobile or Desktop Searchbar -->
-        <x-travel-packages.search-bar :route="route('travel-packages.index')" file='index' />
+        <x-travel-packages.search-bar :route="route('travel-packages.trash')" file='trash' />
 
-        <div class="col-md-11 my-4">
-            <a href="{{ route('travel-packages.create') }}" class="btn btn-dark-blue btn-block">
-                {{ __('Add new travel packages') }}</a>
-            @if (checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles))
-            <a href="{{ route('travel-packages.trash') }}" class="btn btn-orange btn-block mt-3">
-                {{ __('Travel packages deleted / expired') }}</a>
-            @endif
+        @isset($error)
+        <div class="col-md-8">
+            <div class="alert alert-danger alert-dismissible fade show mt-4 text-center" role="alert">
+                {!! $error !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         </div>
+        @endisset
 
-        <div class="col-md-11">
+        <div class="col-md-11 mt-md-4">
             <div class="card mt-0">
                 <div class="card-body">
                     <div class="table-responsive-sm">
@@ -35,49 +50,44 @@
                                     <th scope="col">No.</th>
                                     <th scope="col">{{ __('Name') }}</th>
                                     <th scope="col">{{ __('Location') }}</th>
-                                    <th scope="col">{{ __('Date of departure') }}</th>
-                                    <th scope="col">{{ __('Duration') }}</th>
-                                    <th scope="col">{{ __('Price') }}</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($travelPackages as $travelPackage)
+                                @forelse ($deletedTravelPackages as $deletedTravelPackage)
                                 <tr>
-                                    <th scope="row">{{ $travelPackages->currentPage() * 10 - 10 + $loop->iteration }}
+                                    <th scope="row">
+                                        {{ $deletedTravelPackages->currentPage() * 10 - 10 + $loop->iteration }}
                                     </th>
-                                    <td>{{ $travelPackage->title }}</td>
-                                    <td>{{ $travelPackage->location }}</td>
-                                    <td>{{ $travelPackage->date_departure_with_day }}</td>
-                                    <td>
-                                        {{ $travelPackage->duration }}
-                                    </td>
-                                    <td>
-                                        @convertCurrency($travelPackage->price)
-                                    </td>
+                                    <td>{{ $deletedTravelPackage->title }}</td>
+                                    <td>{{ $deletedTravelPackage->location }}</td>
                                     <td>
                                         <p
-                                            class="text-bold {{ $travelPackage->date_departure_available ? ' text-primary' : ' text-danger' }}">
-                                            {{ $travelPackage->date_departure_available ? __('AVAILABLE') :
+                                            class="text-bold {{ $deletedTravelPackage->date_departure_available ? ' text-primary' : ' text-danger' }}">
+                                            {{ $deletedTravelPackage->date_departure_available ? __('AVAILABLE') :
                                             __('EXPIRED')
                                             }}
                                         </p>
                                     </td>
                                     <td>
-                                        <a href="{{ route('travel-packages.show', $travelPackage) }}"
+                                        <a href="{{ route('travel-packages.trash.show', $deletedTravelPackage->slug) }}"
                                             class="btn btn-success btn-sm my-1">Detail</a>
-                                        @can('update', $travelPackage)
-                                        <a href="{{ route('travel-packages.edit', $travelPackage) }}"
-                                            class="btn btn-warning btn-sm my-1">Edit</a>
+                                        @can('restore', $deletedTravelPackage)
+                                        <a href="{{ route('travel-packages.restore', $deletedTravelPackage->slug) }}"
+                                            class="btn btn-warning btn-sm my-1"
+                                            onclick="return confirm('{{ __('Are you sure want to restore travel package :Title ?', ['title' => $deletedTravelPackage->title]) }}')">{{
+                                            __('Restore') }}</a>
                                         @endcan
                                         <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
-                                            data-target="#deletetravelpackage{{ $travelPackage->slug }}Modal">{{
-                                            __('Delete') }}</a>
+                                            data-target="#deletetravelpackage{{ $deletedTravelPackage->slug }}Modal">{{
+                                            __('Delete permanently') }}</a>
                                     </td>
 
-                                    <div class="modal fade" id="deletetravelpackage{{ $travelPackage->slug }}Modal"
-                                        tabindex="-1" role="dialog" aria-labelledby="deletetravelpackageModalLabel"
+                                    <!-- Delete Travel Package Modal -->
+                                    <div class="modal fade"
+                                        id="deletetravelpackage{{ $deletedTravelPackage->slug }}Modal" tabindex="-1"
+                                        role="dialog" aria-labelledby="deletetravelpackageModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -90,31 +100,32 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>{{ __('Are you sure want to delete ?', ['data' => 'paket travel',
-                                                        'name' => $travelPackage->title]) }}
+                                                    <p>{{ __('Are you sure want to delete permanently ?', ['data' =>
+                                                        'paket travel', 'name' => $deletedTravelPackage->title]) }}
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">{{ __('Cancel') }}</button>
                                                     <form
-                                                        action="{{ route('travel-packages.destroy', $travelPackage) }}"
+                                                        action="{{ route('travel-packages.force-delete', $deletedTravelPackage->slug) }}"
                                                         method="POST" onsubmit="return submitted(this)" id="myfr">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-primary" id="btnfr">{{
-                                                            __('Delete') }}</button>
+                                                            __('Delete permanently') }}</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="8">
+                                    <td colspan="6">
                                         <p class="font-weight-bold text-center text-monospace">
-                                            {{ __('Travel packages not available') }}</p>
+                                            {{ __('Travel packages deleted not available') }}</p>
                                     </td>
                                 </tr>
                                 @endforelse
@@ -123,7 +134,7 @@
                     </div>
 
                     <div class="mt-4">
-                        {{ $travelPackages->withQueryString()->onEachSide(2)->links() }}
+                        {{ $deletedTravelPackages->withQueryString()->onEachSide(2)->links() }}
                     </div>
 
                 </div>

@@ -8,8 +8,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ __('Detail travel gallery') }}</h1>
-        <a href="{{ route('travel-galleries.index') }}"
-            class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back') }}</a>
+        <a href="{{ route('travel-galleries.index') }}" class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back')
+            }}</a>
     </div>
 
     <!-- Content Row -->
@@ -45,10 +45,12 @@
                 </div>
                 <div class="card-footer text-muted">
                     <small class="text-muted">
-                        {{ __('Created by :Username', ['username' => createdUpdatedDeletedBy($travelGallery->uploaded_by)->username ?? '-']) }}
+                        {{ __('Created by :Name', ['Name' =>
+                        createdUpdatedDeletedBy($travelGallery->uploaded_by)->username ?? '-']) }}
                     </small>
                     <small class="text-muted float-md-right d-block d-md-inline-block d-lg-inline-block">
-                        {{ __('Last updated :Date', ['date' => $travelGallery->updated_at ? $travelGallery->updated_at->diffForHumans() : now()]) }}
+                        {{ __('Last updated :Date', ['date' => $travelGallery->updated_at ?
+                        $travelGallery->updated_at->diffForHumans() : now()]) }}
                     </small>
                 </div>
             </div>

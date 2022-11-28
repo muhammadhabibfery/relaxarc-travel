@@ -3,6 +3,7 @@
 use App\Models\Transaction;
 use App\Models\TravelPackage;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 function uploadImage($request, $directoryName, $fieldImage = null)
@@ -47,12 +48,12 @@ function checkCompletenessTheProfile()
 
 function createdUpdatedDeletedBy($id)
 {
-    return User::select('id', 'username')->find($id);
+    return User::select('id', 'name')->find($id);
 }
 
-function displayEditTravelPackageDuration($value)
+function formatTravelPackageDuration($value)
 {
-    return str_replace(' Hari', 'D', $value);
+    return (Str::contains($value, 'D')) ? str_replace('D', ' Hari', $value) : $value;
 }
 
 function numberOFTravelPackages()
@@ -75,4 +76,28 @@ function numberOfPendingTransactions()
 {
     return Transaction::where('status', 'PENDING')
         ->count();
+}
+
+/**
+ * transform Date Format
+ *
+ * @param  string $format
+ * @param  string $data
+ * @return string
+ */
+function transformDateFormat(string $data, string $format)
+{
+    return Carbon::parse($data)->translatedFormat($format);
+}
+
+/**
+ * transform String To Array
+ *
+ * @param  string $data
+ * @param  string $separator
+ * @return array|string
+ */
+function transformStringToArray(string $data, string $separator)
+{
+    return Str::contains($data, $separator) ? explode($separator, $data) : $data;
 }

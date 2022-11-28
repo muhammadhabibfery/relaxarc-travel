@@ -65,7 +65,8 @@
                             <div class="travel-location">DERATAN, BALI</div>
                         </div>
                         <div class="travel-button mt-auto">
-                            <a href="{{ route('detail') }}" class="btn btn-travel-detail px-4">Detail</a>
+                            <a href="{{ route('travel-packages.detail') }}"
+                                class="btn btn-travel-detail px-4">Detail</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +78,8 @@
                             <div class="travel-location">BROMO, MALANG</div>
                         </div>
                         <div class="travel-button mt-auto">
-                            <a href="{{ route('detail') }}" class="btn btn-travel-detail px-4">Detail</a>
+                            <a href="{{ route('travel-packages.detail') }}"
+                                class="btn btn-travel-detail px-4">Detail</a>
                         </div>
                     </div>
                 </div>
@@ -89,7 +91,8 @@
                             <div class="travel-location">NUSA PENIDA</div>
                         </div>
                         <div class="travel-button mt-auto">
-                            <a href="{{ route('detail') }}" class="btn btn-travel-detail px-4">Detail</a>
+                            <a href="{{ route('travel-packages.detail') }}"
+                                class="btn btn-travel-detail px-4">Detail</a>
                         </div>
                     </div>
                 </div>
@@ -101,13 +104,14 @@
                             <div class="travel-location">GILI TRAWANGAN, NUSA TENGGARA BARAT</div>
                         </div>
                         <div class="travel-button mt-auto">
-                            <a href="{{ route('detail') }}" class="btn btn-travel-detail px-4">Detail</a>
+                            <a href="{{ route('travel-packages.detail') }}"
+                                class="btn btn-travel-detail px-4">Detail</a>
                         </div>
                     </div>
                 </div>
 
-                <a href="{{ route('travels') }}" class="btn btn-block btn-travel-list py-2 my-3 mx-3"><span
-                        class="text-list">Lihat
+                <a href="{{ route('travel-packages.travels') }}"
+                    class="btn btn-block btn-travel-list py-2 my-3 mx-3"><span class="text-list">Lihat
                         Selengkapnya</span></a>
             </div>
         </div>

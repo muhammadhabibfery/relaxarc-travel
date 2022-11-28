@@ -3,11 +3,31 @@
 namespace App\Http\Requests;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
+use App\Repositories\TravelPackage\TravelPackageRepository;
+use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 
 class TravelPackageRequest extends FormRequest
 {
+
+    /**
+     * The name of model instance
+     *
+     * @var Illuminate\Database\Eloquent\Model
+     */
+    private $model;
+
+    /**
+     * Create a new Eloquent model instance.
+     *
+     * @param App\Repositories\TravelPackage\TravelPackageRepositoryInterface $travelPackageRepositoryInterface
+     * @return   Illuminate\Database\Eloquent\Model
+     */
+    public function __construct(TravelPackageRepositoryInterface $travelPackageRepositoryInterface)
+    {
+        $this->model = $travelPackageRepositoryInterface;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -25,8 +45,9 @@ class TravelPackageRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => ['required', 'string', 'max:55', Rule::unique('travel_packages', 'title')->ignore($this->travel_package)],
+
+        $rules = [
+            'title' => ['required', 'string', 'max:55', Rule::unique('travel_packages', 'title')],
             'location' => ['required', 'string', 'max:75'],
             'about' => ['required', 'string'],
             'featured_event' => ['required', 'string', 'max:150'],
@@ -37,6 +58,13 @@ class TravelPackageRequest extends FormRequest
             'type' => ['required', 'string', 'min:9', 'max:13', 'in:Open Trip,Private Group'],
             'price' => ['required', 'min:0', 'regex:/^[0-9]+./']
         ];
+
+
+        if (request()->routeIs('travel-packages.update')) {
+            $rules = array_merge($rules, ['title' => ['required', 'string', 'max:55', Rule::unique('travel_packages', 'title')->ignore($this->model->findOneTravelPackageByslug($this->travel_package)->firstOrNotFound())]]);
+        }
+
+        return $rules;
     }
 
     /**

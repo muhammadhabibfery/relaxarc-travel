@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\TravelPackage\TravelPackageRepository;
+use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;

@@ -2,29 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TravelPackageRequest;
 use Illuminate\Http\Request;
-use App\Models\TravelPackage;
-use Illuminate\Support\Facades\Storage;
+use App\Services\TravelPackageService;
+use App\Http\Requests\TravelPackageRequest;
 
 class TravelPackageController extends Controller
 {
+    /**
+     * The name of service instance
+     *
+     * @var App\Services\TravelPackageService
+     */
+    private $travelPackageService;
 
-    public function __construct()
+    /**
+     * Create a new sevice instance and implement authenticatedRoles middleware.
+     *
+     * @return void
+     */
+    public function __construct(TravelPackageService $travelPackageService)
     {
         $this->middleware('authRoles:ADMIN,SUPERADMIN,2')->only('trash', 'restore', 'forceDelete');
+        $this->travelPackageService = $travelPackageService;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource in member or guest page.
      *
+     * @return \Illuminate\Http\Response
+     */
+    public function frontPage()
+    {
+        return view('pages.frontend.travel-packages-index');
+    }
+
+    /**
+     * Display the specified resource in member or guest page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function frontShow()
+    {
+        return view('pages.frontend.travel-packages-detail');
+    }
+
+    /**
+     * Display a listing of the resource in the admin page.
+     *
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
-        $keyword = $request->keyword;
-        $status = $request->status;
-        $travelPackages = $this->getTravelPackagesWithParams($keyword, $status);
+        $travelPackages = $this->travelPackageService->takeAllTravelPackages($request);
 
         return  view('pages.backend.travel-packages.index', compact('travelPackages'));
     }
@@ -42,163 +72,176 @@ class TravelPackageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\TravelPackageRequest  $request
+     * @return mixed
      */
     public function store(TravelPackageRequest $request)
     {
-        $data = array_merge($request->validated(), [
-            // 'slug' => Str::of($request->title)->lower()->slug(),
-            'created_by' => auth()->id(),
-            'price' => $this->convertPriceToInteger($request->validated()['price'])
-        ]);
-
-        TravelPackage::create($data);
-
-        return redirect()->route('travel-packages.index')
-            ->with('status', trans('status.create_new_travel_package'));
+        return $this->checkTheProccess('travel-packages.index', 'status.create_new_travel_package', function () use ($request) {
+            $this->travelPackageService->storeTravelPackage($request->validated());
+        });
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource in admin page.
      *
-     * @param  \App\Models\TravelPackage  $travelPackage
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(TravelPackage $travelPackage)
+    public function show(?string $slug)
     {
+        $travelPackage = $this->travelPackageService->takeOneTravelPackage($slug);
+
         return view('pages.backend.travel-packages.detail', compact('travelPackage'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TravelPackage  $travelPackage
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit(TravelPackage $travelPackage)
+    public function edit(?string $slug)
     {
+        $travelPackage = $this->travelPackageService->takeOneTravelPackage($slug);
+
+        $this->authorize('update', $travelPackage);
+
         return view('pages.backend.travel-packages.edit', compact('travelPackage'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TravelPackage  $travelPackage
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\TravelPackageRequest  $request
+     * @param  string  $slug
+     * @return mixed
      */
-    public function update(TravelPackageRequest $request, TravelPackage $travelPackage)
+    public function update(TravelPackageRequest $request, ?string $slug)
     {
-        $data = array_merge($request->validated(), [
-            'updated_by' => auth()->id(),
-            'price' => $this->convertPriceToInteger($request->validated()['price'])
-        ]);
+        [$travelPackage, $travelPackageAction] = $this->travelPackageService->takeOneTravelPackage($slug, 'update');
 
-        $travelPackage->update($data);
+        $this->authorize('update', $travelPackage);
 
-        return redirect()->route('travel-packages.index')
-            ->with('status', trans('status.update_travel_package', ['travelPackage' => $travelPackage->title]));
+        return $this->checkTheProccess(
+            'travel-packages.index',
+            'status.update_travel_package',
+            function () use ($travelPackageAction, $request) {
+                $travelPackageAction->updateTravelPackage($request->validated());
+            }
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TravelPackage  $travelPackage
+     * @param  string  $slug
+     * @return mixed
+     */
+    public function destroy(?string $slug)
+    {
+        $travelPackageAction = last($this->travelPackageService->takeOneTravelPackage($slug, 'delete'));
+
+        return $this->checkTheProccess(
+            'travel-packages.index',
+            'status.delete_travel_package',
+            function () use ($travelPackageAction) {
+                $this->travelPackageService->useDBTransaction(function () use ($travelPackageAction) {
+                    $travelPackageAction->updateTravelPackage(['deleted_by' => auth()->id()], false)
+                        ->softDeleteTravelPackage();
+                });
+            }
+        );
+    }
+
+    /**
+     * Display a listing of the deleted resource in the admin page.
+     *
+     * @param \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TravelPackage $travelPackage)
+    public function indexTrash(Request $request)
     {
-        $travelPackage->update(['deleted_by' => auth()->id()]);
+        $deletedTravelPackages = $this->travelPackageService->takeAllDeletedTravelPackages($request);
 
-        $title = $travelPackage->title;
-        $travelPackage->delete();
-
-        return redirect()->route('travel-packages.index')
-            ->with('status', trans('status.delete_travel_package', ['travelPackage' => $title]));
+        return view('pages.backend.travel-packages.trash.index-trash', compact('deletedTravelPackages'));
     }
 
-    public function trash(Request $request)
+    /**
+     * Display the specified deleted resource in admin page.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function showTrash(?string $slug)
     {
-        $keyword = $request->keyword;
-        $deletedTravelPackages = $this->getTravelPackagesWithParams($keyword, null, true);
+        $deletedTravelPackage = $this->travelPackageService->takeOneDeletedTravelPackage($slug);
 
-        return view('pages.backend.travel-packages.trash', compact('deletedTravelPackages'));
+        return view('pages.backend.travel-packages.trash.detail-trash', compact('deletedTravelPackage'));
     }
 
-    public function restore(Request $request)
+    /**
+     * restore the specified deleted resource.
+     *
+     * @param  string  $slug
+     * @return mixed
+     */
+    public function restore(?string $slug)
     {
-        $travelPackageRestore = $this->getTravelPackageTrashedWithSlug($request->slug);
+        [$deletedTravelPackage, $deletedTravelPackageAction] = $this->travelPackageService->takeOneDeletedTravelPackage($slug, 'restore');
 
-        $travelPackageRestore->update(['deleted_by' => null]);
-        $travelPackageRestore->restore();
+        $this->authorize('restore', $deletedTravelPackage);
 
-        return redirect()->route('travel-packages.trash')
-            ->with('status', trans('status.restore_travel_package', ['travelPackage' => $travelPackageRestore->title]));
-    }
-
-    public function forceDelete(Request $request)
-    {
-        $travelPackageDelete = $this->getTravelPackageTrashedWithSlug($request->slug);
-
-        $title = $travelPackageDelete->title;
-        $this->deleteImage($travelPackageDelete);
-        $travelPackageDelete->forceDelete();
-
-        return redirect()->route('travel-packages.trash')
-            ->with('status', trans('status.delete_permanent_travel_package', ['travelPackage' => $title]));
-    }
-
-    private function getTravelPackagesWithParams($keyword, $status = null, $trashed = false)
-    {
-        if ($trashed) {
-            return TravelPackage::onlyTrashed()
-                ->where(function ($query) use ($keyword) {
-                    $query->where('title', 'LIKE', "%$keyword%")
-                        ->orWhere('location', 'LIKE', "%$keyword%");
-                })
-                ->latest()
-                ->paginate(10);
-        }
-
-        if ($status == '>' || $status == '<') {
-            return TravelPackage::where('date_departure', $status, now())
-                ->where(function ($query) use ($keyword) {
-                    $query->where('title', 'LIKE', "%$keyword%")
-                        ->orWhere('location', 'LIKE', "%$keyword%");
-                })
-                ->latest()
-                ->paginate(10);
-        }
-
-        return TravelPackage::where('title', 'LIKE', "%$keyword%")
-            ->orWhere('location', 'LIKE', "%$keyword%")
-            ->latest()
-            ->paginate(10);
-    }
-
-    private function getTravelPackageTrashedWithSlug($slug)
-    {
-        return TravelPackage::onlyTrashed()
-            ->where('slug', $slug)
-            ->firstOrFail();
-    }
-
-    private function convertPriceToInteger($value)
-    {
-        return preg_replace("/[^[0-9]/", "", $value);
-    }
-
-    private function deleteImage($travelPackage)
-    {
-        $galleries = $travelPackage->travelGalleries;
-        if ($galleries->count()) {
-            foreach ($galleries as $gallery) {
-                Storage::disk('public')
-                    ->delete("travel-galleries/{$gallery->name}");
-                Storage::disk('public')
-                    ->delete("travel-galleries/thumbnails/{$gallery->name}");
+        return $this->checkTheProccess(
+            'travel-packages.trash',
+            'status.restore_travel_package',
+            function () use ($deletedTravelPackageAction) {
+                $this->travelPackageService->useDBTransaction(function () use ($deletedTravelPackageAction) {
+                    $deletedTravelPackageAction->updateTravelPackage(['deleted_by' => auth()->id()], false)
+                        ->restoreDeletedTravelPackage();
+                });
             }
+        );
+    }
+
+    /**
+     * remove the specified deleted resource
+     *
+     * @param  string $slug
+     * @return mixed
+     */
+    public function forceDelete(?string $slug)
+    {
+        $deletedTravelPackageAction = last($this->travelPackageService->takeOneDeletedTravelPackage($slug, 'forceDelete'));
+
+        return $this->checkTheProccess(
+            'travel-packages.trash',
+            'status.delete_permanent_travel_package',
+            function () use ($deletedTravelPackageAction) {
+                $deletedTravelPackageAction->deleteTravelPackageImages()
+                    ->removeDeletedTravelPackage();
+            }
+        );
+    }
+
+    /**
+     * Check one or more processes and catch them if fail
+     *
+     * @param  string $redirectRoute
+     * @param  string $successMessage
+     * @param  callable $action
+     * @return \Illuminate\Http\Response
+     */
+    public function checkTheProccess(string $redirectRoute, string $successMessage, callable $action)
+    {
+        try {
+            $action();
+        } catch (\Exception $e) {
+            return redirect()->route($redirectRoute)
+                ->with('failed', $e->getMessage());
         }
+
+        return redirect()->route($redirectRoute)
+            ->with('success', trans($successMessage));
     }
 }

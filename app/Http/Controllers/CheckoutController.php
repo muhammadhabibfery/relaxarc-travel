@@ -9,7 +9,6 @@ class CheckoutController extends Controller
 
     public function __construct()
     {
-        if (request()->session()->has('guest-route')) request()->session()->forget('guest-route');
     }
 
     /**
@@ -29,6 +28,8 @@ class CheckoutController extends Controller
      */
     public function success(Request $request)
     {
+        if (request()->session()->has('guest-route')) request()->session()->forget('guest-route');
+
         return view('pages.frontend.checkout-success');
     }
 }

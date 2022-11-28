@@ -18,7 +18,8 @@ Route::middleware(["authRoles:ADMIN,1"])
         Route::get("/profile", [ProfileController::class, "backProfile"])->name("back-profile");
         Route::get("/profile/change-password", [ProfileController::class, "backChangePassword"])->name("back-change-password");
 
-        Route::get("/travel-packages/trash", [TravelPackageController::class, "trash"])->name("travel-packages.trash");
+        Route::get("/travel-packages/trash", [TravelPackageController::class, "indexTrash"])->name("travel-packages.trash");
+        Route::get("/travel-packages/trash/{slug}", [TravelPackageController::class, "showTrash"])->name("travel-packages.trash.show");
         Route::get("/travel-packages/restore/{slug}", [TravelPackageController::class, "restore"])->name("travel-packages.restore");
         Route::delete("/travel-packages/force-delete/{slug}", [TravelPackageController::class, "forceDelete"])->name("travel-packages.force-delete");
         Route::get("/travel-packages/edit/{travel_package:slug}", [TravelPackageController::class, "edit"])->name("travel-packages.edit");

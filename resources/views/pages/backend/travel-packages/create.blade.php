@@ -1,6 +1,6 @@
 @extends('layouts.backend.master-backend')
 
-@section('title', 'Create Travel Packages')
+@section('title', trans('Create Travel Package'))
 
 @section('content')
 <div class="container-fluid">
@@ -57,8 +57,8 @@
                                     <textarea name="featured_event"
                                         class="form-control @error('featured_event') is-invalid @enderror"
                                         id="featured_event" rows="1">{{ old('featured_event') }}</textarea>
-                                    <small
-                                        class="form-text text-muted">{{ __("*Use komma ',' to input some data", ['data' => 'acara']) }}</small>
+                                    <small class="form-text text-muted">{{ __("*Use komma ',' to input some data",
+                                        ['data' => 'acara']) }}</small>
                                     @error('featured_event')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -70,8 +70,8 @@
                                     <textarea name="language"
                                         class="form-control @error('language') is-invalid @enderror" id="language"
                                         rows="1">{{ old('language') }}</textarea>
-                                    <small
-                                        class="form-text text-muted">{{ __("*Use komma ',' to input some data", ['data' => 'bahasa']) }}</small>
+                                    <small class="form-text text-muted">{{ __("*Use komma ',' to input some data",
+                                        ['data' => 'bahasa']) }}</small>
                                     @error('language')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -84,8 +84,8 @@
                                     <label for="foods">{{ __('Foods') }}</label>
                                     <textarea name="foods" class="form-control @error('foods') is-invalid @enderror"
                                         id="foods" rows="1">{{ old('foods') }}</textarea>
-                                    <small
-                                        class="form-text text-muted">{{ __("*Use komma ',' to input some data", ['data' => 'snack/makanan']) }}</small>
+                                    <small class="form-text text-muted">{{ __("*Use komma ',' to input some data",
+                                        ['data' => 'snack/makanan']) }}</small>
                                     @error('foods')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,7 +98,7 @@
                                         <input type="text" name="date_departure"
                                             class="form-control @error('date_departure') is-invalid @enderror"
                                             id="date_departure" value="{{ old('date_departure') }}"
-                                            placeholder="{{ old('date_departure') ? \Carbon\Carbon::parse(old('date_departure'))->translatedFormat('l, d-F-Y H:i') : __('Select date & time of departure') }}"
+                                            placeholder="{{ old('date_departure') ? transformDateFormat(old('date_departure'), 'l, d-F-Y H:i') : __('Select date & time of departure') }}"
                                             data-input>
                                         <div class="input-group-append" id="button-addon4">
                                             <button class="btn btn-outline-secondary" type="button">
@@ -119,8 +119,8 @@
                                     <input type="text" name="duration"
                                         class="form-control @error('duration') is-invalid @enderror" id="duration"
                                         value="{{ old('duration') }}">
-                                    <small
-                                        class="form-text text-muted">{{ __("*Only input 2 characters. Ex: 5D (meaning 5 days)") }}</small>
+                                    <small class="form-text text-muted">
+                                        {{ __("*Only input 2 characters. Ex: 5D (meaning 5 days)") }}</small>
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -132,10 +132,10 @@
                                     <select name="type" class="form-control @error('type') is-invalid @enderror"
                                         id="type">
                                         <option value="">{{ __('Choose type') }}</option>
-                                        <option value="Open Trip" {{ old('type') == 'Open Trip' ? 'selected' : '' }}>
+                                        <option value="Open Trip" {{ old('type')=='Open Trip' ? 'selected' : '' }}>
                                             Open Trip</option>
-                                        <option value="Private Group"
-                                            {{ old('type') == 'Private Group' ? 'selected' : '' }}>Private Group
+                                        <option value="Private Group" {{ old('type')=='Private Group' ? 'selected' : ''
+                                            }}>Private Group
                                         </option>
                                     </select>
                                     @error('type')
@@ -168,35 +168,9 @@
 @endsection
 
 @push('addon_links')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+@include('pages.backend.travel-packages.includes._flatpickr-jquerymask-styles')
 @endpush
 
 @push('addon_scripts')
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://npmcdn.com/flatpickr/dist/l10n/id.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
-    integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
-    crossorigin="anonymous"></script>
-
-
-<script>
-    flatpickr(".flatpickr", {
-        locale: "id",
-        wrap: true,
-        allowInput: true,
-        enableTime: true,
-        altInput: true,
-        altFormat: "l, d-F-Y H:i",
-        dateFormat: "Y-m-d H:i",
-        minDate: new Date().fp_incr(1),
-        time_24hr: true,
-        defaultDate: "08:00",
-        minTime: "07:00",
-        maxTime: "23:00",
-        disableMobile: "true"
-    });
-
-    $('#price').mask('00.000.000', {reverse: true, placeholder: "Rp. "});
-</script>
+@include('pages.backend.travel-packages.includes._flatpickr-jquerymask-scripts')
 @endpush

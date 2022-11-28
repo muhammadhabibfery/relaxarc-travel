@@ -146,7 +146,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="6">
+                                    <td colspan="7">
                                         <p class="font-weight-bold text-center text-monospace">
                                             {{ __('Transactions not available') }}</p>
                                     </td>

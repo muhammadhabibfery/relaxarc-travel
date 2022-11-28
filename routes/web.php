@@ -6,6 +6,7 @@ use App\Http\Controllers\DetaiController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TravelPackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,16 +21,13 @@ use App\Http\Controllers\CheckoutController;
 
 Route::middleware(['preventBack'])
     ->group(function () {
-
         Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get('/travels', function () {
-            return view('pages.frontend.travels');
-        })->name('travels');
+        Route::get("/travel-packages", [TravelPackageController::class, "frontPage"])->name("travel-packages.travels");
+        Route::get('/travel-packages/detail', [TravelPackageController::class, 'frontShow'])->name('travel-packages.detail');
         Route::get('/terms-conditions', function () {
             return view('pages.frontend.terms-conditions');
         })->name('terms-conditions');
         Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
-        Route::get('/detail', [DetaiController::class, 'index'])->name('detail');
 
         Auth::routes(['verify' => true]);
 
