@@ -40,7 +40,7 @@
         </div>
         @endisset
 
-        <div class="col-md-11 mt-md-4">
+        <div class="col-md-12 mt-md-4">
             <div class="card mt-0">
                 <div class="card-body">
                     <div class="table-responsive-sm">
@@ -64,10 +64,8 @@
                                     <td>{{ $deletedTravelPackage->location }}</td>
                                     <td>
                                         <p
-                                            class="text-bold {{ $deletedTravelPackage->date_departure_available ? ' text-primary' : ' text-danger' }}">
-                                            {{ $deletedTravelPackage->date_departure_available ? __('AVAILABLE') :
-                                            __('EXPIRED')
-                                            }}
+                                            class="text-bold {{ $deletedTravelPackage->date_departure_status == 'AVAILABLE' ? ' text-primary' : ($deletedTravelPackage->date_departure_status == 'ONGOING' ? ' text-warning' : ' text-danger')  }}">
+                                            {{ $deletedTravelPackage->date_departure_status }}
                                         </p>
                                     </td>
                                     <td>
@@ -143,3 +141,11 @@
     </div>
 </div>
 @endsection
+
+@push('addon_links')
+@include('pages.backend.travel-packages.includes._select2-style')
+@endpush
+
+@push('addon_scripts')
+@include('pages.backend.travel-packages.includes._select2-script')
+@endpush

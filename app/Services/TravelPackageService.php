@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -44,6 +45,7 @@ class TravelPackageService
     public function takeAllTravelPackages(Request $request)
     {
         return $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus($request->keyword, $request->status)
+            ->latest()
             ->paginate(10);
     }
 
@@ -56,6 +58,7 @@ class TravelPackageService
     public function takeAllDeletedTravelPackages(Request $request)
     {
         return $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus($request->keyword, $request->status, true)
+            ->latest()
             ->paginate(10);
     }
 
@@ -91,7 +94,8 @@ class TravelPackageService
             $validatedData,
             [
                 'created_by' => auth()->id(),
-                'price' => $this->convertPriceType($validatedData['price'])
+                'price' => $this->convertPriceType($validatedData['price']),
+                'date_completion' => Carbon::parse($validatedData['date_departure'])->addDays($validatedData['duration'])
             ]
         );
 
@@ -114,7 +118,8 @@ class TravelPackageService
                 $validatedData,
                 [
                     'updated_by' => auth()->id(),
-                    'price' => $this->convertPriceType($validatedData['price'])
+                    'price' => $this->convertPriceType($validatedData['price']),
+                    'date_completion' => Carbon::parse($validatedData['date_departure'])->addDays($validatedData['duration'])
                 ]
             )
             : $validatedData;
@@ -232,6 +237,6 @@ class TravelPackageService
      */
     private function convertPriceType(string $value)
     {
-        return (int) preg_replace("/[^[0-9]/", "", $value);
+        return (int) preg_replace("/[^0-9]/", "", $value);
     }
 }

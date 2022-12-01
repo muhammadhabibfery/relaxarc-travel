@@ -120,7 +120,7 @@
                                         class="form-control @error('duration') is-invalid @enderror" id="duration"
                                         value="{{ old('duration') }}">
                                     <small class="form-text text-muted">
-                                        {{ __("*Only input 2 characters. Ex: 5D (meaning 5 days)") }}</small>
+                                        {{ __("*Maximum 14 days") }}</small>
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

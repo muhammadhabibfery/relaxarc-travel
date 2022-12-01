@@ -47,7 +47,7 @@
                                     <h5 class="card-title">{{ __('Duration') }}
                                     </h5>
                                     <p class="card-text">
-                                        {{ formatTravelPackageDuration($travelPackage->duration) }}
+                                        {{ formatTravelPackageDuration($travelPackage->duration, app()->getLocale()) }}
                                     </p>
                                     <h5 class="card-title">{{ __('Type') }}</h5>
                                     <p class="card-text">

@@ -19,6 +19,13 @@ class TravelPackage extends Model
     protected $guarded = ['id'];
 
     /**
+     * The name of current date time with specific timezone
+     *
+     * @var constant
+     */
+    private const TIMEZONE = 'Asia/Jakarta';
+
+    /**
      * Get the travel galleries for the travel package
      *
      *
@@ -73,17 +80,6 @@ class TravelPackage extends Model
     }
 
     /**
-     * set the travel package's duration
-     *
-     * @param  string $value
-     * @return void
-     */
-    public function setDurationAttribute($value)
-    {
-        $this->attributes['duration'] = Str::upper($value);
-    }
-
-    /**
      * set the travel package's type
      *
      * @param  string $value
@@ -112,7 +108,7 @@ class TravelPackage extends Model
      */
     public function getDateDepartureWithDayAttribute()
     {
-        return transformDateFormat($this->date_departure, 'l, d-F-Y H:i');
+        return transformDateFormat($this->date_departure, 'l, j F Y H:i');
     }
 
     /**
@@ -122,7 +118,52 @@ class TravelPackage extends Model
      */
     public function getDateDepartureAvailableAttribute()
     {
-        return $this->date_departure > now();
+        return $this->date_departure > now(self::TIMEZONE);
+    }
+
+    /**
+     * get the travel package's date departure with custom property and date format
+     *
+     * @return boolean
+     */
+    public function getDateDepartureExpiredAttribute()
+    {
+        return $this->date_departure < now(self::TIMEZONE) && $this->date_completion < now(self::TIMEZONE);
+    }
+
+    /**
+     * get the travel package's date departure with custom property and date format
+     *
+     * @return string
+     */
+    public function getDateDepartureStatusAttribute()
+    {
+        return $this->getDateDepartureAvailableAttribute()
+            ? 'AVAILABLE'
+            : ($this->getDateDepartureExpiredAttribute()
+                ? 'EXPIRED'
+                : 'ONGOING'
+            );
+    }
+
+    /**
+     * Scope a query to only include status of travel package's date departure.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  string  $status
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeWithStatus($query, $status)
+    {
+        return ($status == '>')
+            ? $query->where('date_departure', $status, now(self::TIMEZONE))
+            : (
+                ($status == '<')
+                ? $query->where('date_departure', $status, now(self::TIMEZONE))
+                ->where('date_completion', $status, now(self::TIMEZONE))
+                : $query->where('date_departure', '<', now(self::TIMEZONE))
+                ->where('date_completion', '>=', now(self::TIMEZONE))
+            );
     }
 
     /**
@@ -136,19 +177,6 @@ class TravelPackage extends Model
             ? $this->travelGalleries()->first()->getThumbnail()
             : asset('assets/backend/img/no-image.png');
     }
-
-    /**
-     * Scope a query to only include status of travel package's date departure.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @param  string  $status
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeWithStatus($query, $status)
-    {
-        return $query->where('date_departure', $status, now());
-    }
-
 
     /**
      * Get the matching result of travel package's type

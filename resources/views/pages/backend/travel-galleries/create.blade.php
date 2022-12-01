@@ -24,8 +24,8 @@
                                 class="form-control @error('travel_package') is-invalid @enderror" id="travel_package">
                                 <option></option>
                                 @foreach ($travelPackages as $travelPackage)
-                                <option value="{{ $travelPackage->id }}"
-                                    {{ old('travel_package') == $travelPackage->id ? 'selected' : '' }}>
+                                <option value="{{ $travelPackage->id }}" {{ old('travel_package')==$travelPackage->id ?
+                                    'selected' : '' }}>
                                     {{ $travelPackage->title }}</option>
                                 @endforeach
                             </select>

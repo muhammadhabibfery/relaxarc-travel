@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,6 +16,8 @@ class TravelPackageFactory extends Factory
     public function definition()
     {
         $title = "{$this->faker->city()} {$this->faker->numberBetween(1, 100000)}";
+        $date_departure = $this->faker->dateTimeBetween('-1week', '+1 week', 'Asia/Jakarta');
+        $duration = $this->faker->numberBetween(1, 7);
         return [
             'title' => $title,
             'slug' => Str::of($title)->slug(),
@@ -23,8 +26,9 @@ class TravelPackageFactory extends Factory
             'featured_event' => "{$this->faker->randomElement(['makan', 'minum', 'bbq', 'karaoke'])},{$this->faker->randomElement(['makan', 'minum', 'bbq', 'karaoke'])}",
             'language' => $this->faker->randomElement(['indonesia,', 'english', 'arabic']),
             'foods' => "{$this->faker->randomElement(['Nasi Uduk', 'Nasi Goreng', 'gado-gado', 'lontong sayur'])},{$this->faker->randomElement(['Nasi Uduk', 'Nasi Goreng', 'gado-gado', 'lontong sayur'])}",
-            'date_departure' => $this->faker->dateTimeBetween('-1week', '+1 week', 'Asia/Jakarta'),
-            'duration' => "{$this->faker->numberBetween(1, 7)}D",
+            'date_departure' => $date_departure,
+            'date_completion' => Carbon::parse($date_departure)->addDays($duration),
+            'duration' => $duration,
             'type' => $this->faker->randomElement(['Open Trip', 'Private Group']),
             'price' => $this->faker->numberBetween(250000, 750000),
             'created_by' => $this->faker->numberBetween(1, 2)

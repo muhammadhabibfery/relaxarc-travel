@@ -5,7 +5,14 @@ namespace App\Repositories\TravelPackage;
 interface TravelPackageRepositoryInterface
 {
     /**
-     * query all travel packages by keyword for index page
+     * get a travel package by id, if fail or not found then redirect to 404 page
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function findByIdOrNotFound(int $id);
+
+    /**
+     * query all travel packages by keyword
      *
      * @param  string|null $keyword
      * @return \Illuminate\Database\Eloquent\Builder
@@ -14,7 +21,7 @@ interface TravelPackageRepositoryInterface
     public function findAllTravelPackagesByKeyword(?string $keyword);
 
     /**
-     * query all deleted travel packages by keyword for index trash page
+     * query all deleted travel packages by keyword
      *
      * @param  string|null $keyword
      * @return \Illuminate\Database\Eloquent\Builder
@@ -32,7 +39,7 @@ interface TravelPackageRepositoryInterface
     public function getAllTravelPackagesByKeywordOrStatus(?string $keyword, ?string $status, bool $deletedTravelPackages);
 
     /**
-     * query a travel package by keyword for index page
+     * query a travel package by slug
      *
      * @param  string|null $slug
      * @return $this
@@ -40,11 +47,34 @@ interface TravelPackageRepositoryInterface
     public function findOneTravelPackageByslug(?string $slug);
 
     /**
+     * query specified select columns
+     *
+     * @param  array $columns
+     * @return $this
+     */
+    public function select(array $columns);
+
+    /**
+     * query ordering by created_at column descending
+     *
+     * @return $this
+     */
+    public function latest();
+
+    /**
      * query a travel package only deleted
      *
      * @return $this
      */
     public function onlyDeleted();
+
+    /**
+     * counting a travel package's relations
+     *
+     * @param  array $relations
+     * @return $this
+     */
+    public function withCountRelations(array $relations);
 
     /**
      * get all travel packages and transform to collection
@@ -61,7 +91,7 @@ interface TravelPackageRepositoryInterface
     public function firstOrNotFound();
 
     /**
-     * get all travel packages and add paginate with descending order
+     * get all travel packages and add paginate with the limit
      *
      * @param  int $number
      * @return \Illuminate\Pagination\LengthAwarePaginator
@@ -106,7 +136,7 @@ interface TravelPackageRepositoryInterface
     public function forceDelete();
 
     /**
-     * wrap multiple database queries
+     * wrap multiple database queries using database transaction
      *
      * @param  callable $action
      * @return void

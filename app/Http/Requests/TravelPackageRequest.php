@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Repositories\TravelPackage\TravelPackageRepository;
 use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 
 class TravelPackageRequest extends FormRequest
@@ -54,7 +53,7 @@ class TravelPackageRequest extends FormRequest
             'language' => ['required', 'string', 'max:75'],
             'foods' => ['required', 'string', 'max:150'],
             'date_departure' => ['required', 'date_format:"Y-m-d H:i"', 'after:tomorrow'],
-            'duration' => ['required', 'string', 'size:2'],
+            'duration' => ['required', 'integer', 'max:14'],
             'type' => ['required', 'string', 'min:9', 'max:13', 'in:Open Trip,Private Group'],
             'price' => ['required', 'min:0', 'regex:/^[0-9]+./']
         ];
@@ -101,6 +100,10 @@ class TravelPackageRequest extends FormRequest
      */
     public function messages()
     {
-        if (app()->getLocale() === 'id') return ['date_departure.after' => 'Kolom tanggal keberangkatan harus diisi minimal tanggal ' . Carbon::parse(now()->modify('+1 day'))->format('d')];
+        if (app()->getLocale() === 'id')
+            return [
+                'date_departure.after' => 'Kolom tanggal keberangkatan harus diisi minimal tanggal ' . Carbon::parse(now()->modify('+1 day'))->format('d'),
+                'duration.max' => 'Kolom :attribute tidak boleh lebih dari :max hari.'
+            ];
     }
 }

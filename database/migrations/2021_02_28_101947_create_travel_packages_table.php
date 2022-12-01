@@ -15,15 +15,16 @@ class CreateTravelPackagesTable extends Migration
     {
         Schema::create('travel_packages', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 55)->unique()->index();
-            $table->string('slug');
-            $table->string('location', 75)->index();
+            $table->string('title', 55)->unique();
+            $table->string('slug')->index();
+            $table->string('location', 75);
             $table->longText('about');
             $table->string('featured_event', 150);
             $table->string('language', 75);
             $table->string('foods', 150);
-            $table->dateTime('date_departure');
-            $table->string('duration', 2);
+            $table->dateTime('date_departure')->index();
+            $table->integer('duration');
+            $table->dateTime('date_completion')->index();
             $table->enum('type', ['Open Trip', 'Private Group']);
             $table->bigInteger('price');
             $table->integer('created_by');

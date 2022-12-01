@@ -29,7 +29,8 @@ Route::middleware(["authRoles:ADMIN,1"])
 
         Route::resource("travel-galleries", TravelGalleryController::class)
             ->parameters(["travel-galleries" => "travel_gallery:slug"])
-            ->except(["edit", "update"]);
+            ->except(["edit", "update", "show"]);
+        Route::get("travel-galleries/{travel_package:slug}", [TravelGalleryController::class, "show"])->name("travel-galleries.show");
 
         Route::get("/transactions/trash", [TransactionController::class, "trash"])->name("transactions.trash");
         Route::get("/transactions/restore/{invoice_number}", [TransactionController::class, "restore"])->name("transactions.restore");

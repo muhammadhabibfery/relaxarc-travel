@@ -24,8 +24,8 @@
                 <div class="form-group mt-3">
                     <div class="row justify-content-center">
                         <div class="col-6">
-                            <button class="btn btn-primary btn-block mx-2" type="submit"
-                                id="button-addon2">{{ __('Search') }}</button>
+                            <button class="btn btn-primary btn-block mx-2" type="submit" id="button-addon2">{{
+                                __('Search') }}</button>
                         </div>
                         <div class="col-6">
                             <a href="{{ route('travel-galleries.index') }}"
@@ -49,8 +49,8 @@
         </div>
 
         <div class="col-md-11 my-4">
-            <a href="{{ route('travel-galleries.create') }}"
-                class="btn btn-dark-blue btn-block">{{ __('Add new travel galleries') }}</a>
+            <a href="{{ route('travel-galleries.create') }}" class="btn btn-dark-blue btn-block">
+                {{ __('Add new travel galleries') }}</a>
         </div>
 
         <div class="col-md-11">
@@ -62,7 +62,8 @@
                                 <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">{{ __('Travel Packages') }}</th>
-                                    <th scope="col">{{ __('Image') }}</th>
+                                    <th scope="col">{{ __('Total image') }}</th>
+                                    <th scope="col">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -72,60 +73,12 @@
                                     </th>
                                     <td>{{ $travelPackage->title }}</td>
                                     <td>
-                                        <table class="table table-hover text-center">
-                                            @forelse ($travelPackage->travelGalleries as $travelGallery)
-                                            <tr>
-                                                <td width=70%>{{ $travelGallery->name }}</td>
-                                                <td width=30%>
-                                                    <a href="{{ route('travel-galleries.show', $travelGallery) }}"
-                                                        class="btn btn-success btn-sm my-1">Detail</a>
-                                                    <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
-                                                        data-target="#deletetravelgallery{{ $travelGallery->slug }}Modal">{{ __('Delete') }}</a>
-                                                </td>
-                                            </tr>
-                                            {{-- Delete Travel Package Modal --}}
-                                            <div class="modal fade"
-                                                id="deletetravelgallery{{ $travelGallery->slug }}Modal" tabindex="-1"
-                                                role="dialog" aria-labelledby="deletetravelgalleryModalLabel"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">
-                                                                {{ __('Delete Travel Package') }}</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>{{ __('Are you sure want to delete ?', ['data' => 'galeri travel', 'name' => $travelGallery->name]) }}
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">{{ __('Cancel') }}</button>
-                                                            <form
-                                                                action="{{ route('travel-galleries.destroy', $travelGallery) }}"
-                                                                method="POST" onsubmit="return submitted(this)"
-                                                                id="myfr">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button type="submit" class="btn btn-primary"
-                                                                    id="btnfr">{{ __('Delete') }}</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @empty
-                                            <td colspan="6">
-                                                <p class="font-weight-bold text-center text-monospace">
-                                                    {{ __('Travel galleries :TravelPackage not available', ['travelPackage' => $travelPackage->title]) }}
-                                                </p>
-                                            </td>
-                                            @endforelse
-                                        </table>
+                                        {{ $travelPackage->travel_galleries_count > 0 ?
+                                        $travelPackage->travel_galleries_count : '-' }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('travel-galleries.show', $travelPackage) }}"
+                                            class="btn btn-success btn-sm my-1">Detail</a>
                                     </td>
                                 </tr>
                                 @empty

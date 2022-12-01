@@ -51,10 +51,21 @@ function createdUpdatedDeletedBy($id)
     return User::select('id', 'name')->find($id);
 }
 
-function formatTravelPackageDuration($value)
+function formatTravelPackageDuration($value, $locale)
 {
-    return (Str::contains($value, 'D')) ? str_replace('D', ' Hari', $value) : $value;
+    $languageFormat = ($locale == 'id')
+        ? ' Hari'
+        : ' Day(s)';
+
+    return "$value $languageFormat";
 }
+
+// function formatTravelPackageDuration($value, $languageFormat = null)
+// {
+//     if (!$languageFormat) $languageFormat = ' Hari';
+
+//     return (Str::contains($value, 'D')) ? str_replace('D', $languageFormat, $value) : $value;
+// }
 
 function numberOFTravelPackages()
 {

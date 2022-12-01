@@ -197,7 +197,7 @@ class TravelPackageController extends Controller
             'status.restore_travel_package',
             function () use ($deletedTravelPackageAction) {
                 $this->travelPackageService->useDBTransaction(function () use ($deletedTravelPackageAction) {
-                    $deletedTravelPackageAction->updateTravelPackage(['deleted_by' => auth()->id()], false)
+                    $deletedTravelPackageAction->updateTravelPackage(['deleted_by' => null], false)
                         ->restoreDeletedTravelPackage();
                 });
             }
@@ -232,7 +232,7 @@ class TravelPackageController extends Controller
      * @param  callable $action
      * @return \Illuminate\Http\Response
      */
-    public function checkTheProccess(string $redirectRoute, string $successMessage, callable $action)
+    private function checkTheProccess(string $redirectRoute, string $successMessage, callable $action)
     {
         try {
             $action();

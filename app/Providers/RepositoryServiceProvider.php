@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\TravelGallery\TravelGalleryRepository;
+use App\Repositories\TravelGallery\TravelGalleryRepositoryInterface;
 use App\Repositories\TravelPackage\TravelPackageRepository;
 use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 use Illuminate\Contracts\Support\DeferrableProvider;
@@ -17,6 +19,7 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public $bindings = [
         TravelPackageRepositoryInterface::class => TravelPackageRepository::class,
+        TravelGalleryRepositoryInterface::class => TravelGalleryRepository::class
     ];
 
     /**
@@ -46,6 +49,9 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public function provides()
     {
-        return [TravelPackageRepositoryInterface::class];
+        return [
+            TravelPackageRepositoryInterface::class,
+            TravelGalleryRepositoryInterface::class
+        ];
     }
 }

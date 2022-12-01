@@ -16,7 +16,7 @@
         <!-- Mobile or Desktop Searchbar -->
         <x-travel-packages.search-bar :route="route('travel-packages.index')" file='index' />
 
-        <div class="col-md-11 my-4">
+        <div class="col-md-12 my-4">
             <a href="{{ route('travel-packages.create') }}" class="btn btn-dark-blue btn-block">
                 {{ __('Add new travel packages') }}</a>
             @if (checkRoles(["ADMIN", "SUPERADMIN", 2], auth()->user()->roles))
@@ -25,7 +25,7 @@
             @endif
         </div>
 
-        <div class="col-md-11">
+        <div class="col-md-12">
             <div class="card mt-0">
                 <div class="card-body">
                     <div class="table-responsive-sm">
@@ -51,17 +51,15 @@
                                     <td>{{ $travelPackage->location }}</td>
                                     <td>{{ $travelPackage->date_departure_with_day }}</td>
                                     <td>
-                                        {{ $travelPackage->duration }}
+                                        {{ formatTravelPackageDuration($travelPackage->duration, app()->getLocale()) }}
                                     </td>
                                     <td>
                                         @convertCurrency($travelPackage->price)
                                     </td>
                                     <td>
                                         <p
-                                            class="text-bold {{ $travelPackage->date_departure_available ? ' text-primary' : ' text-danger' }}">
-                                            {{ $travelPackage->date_departure_available ? __('AVAILABLE') :
-                                            __('EXPIRED')
-                                            }}
+                                            class="text-bold {{ $travelPackage->date_departure_status == 'AVAILABLE' ? ' text-primary' : ($travelPackage->date_departure_status == 'ONGOING' ? ' text-warning' : ' text-danger')  }}">
+                                            {{ __($travelPackage->date_departure_status) }}
                                         </p>
                                     </td>
                                     <td>
@@ -132,3 +130,11 @@
     </div>
 </div>
 @endsection
+
+@push('addon_links')
+@include('pages.backend.travel-packages.includes._select2-style')
+@endpush
+
+@push('addon_scripts')
+@include('pages.backend.travel-packages.includes._select2-script')
+@endpush

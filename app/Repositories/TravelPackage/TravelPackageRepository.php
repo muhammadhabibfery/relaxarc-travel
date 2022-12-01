@@ -35,7 +35,17 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
-     * query all travel packages by keyword for index page
+     * get a travel package by id, if fail or not found then redirect to 404 page
+     *
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function findByIdOrNotFound(int $id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * query all travel packages by keyword
      *
      * @param  string|null $keyword
      * @return \Illuminate\Database\Eloquent\Builder
@@ -49,7 +59,7 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
-     * query all deleted travel packages by keyword for index trash page
+     * query all deleted travel packages by keyword
      *
      * @param  string|null $keyword
      * @return \Illuminate\Database\Eloquent\Builder
@@ -71,19 +81,19 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
      * @param  bool $deletedTravelPackages Get only deleted travel packages
      * @return $this
      */
-    public function getAllTravelPackagesByKeywordOrStatus(?string $keyword, ?string $status, bool $deletedTravelPackages = false)
+    public function getAllTravelPackagesByKeywordOrStatus(?string $keyword, ?string $status = null, bool $deletedTravelPackages = false)
     {
         $this->modelResult = ($deletedTravelPackages)
             ?  $this->findAllDeletedTravelPackagesByKeyword($keyword)
             : $this->findAllTravelPackagesByKeyword($keyword);
 
-        if (!empty($status) && in_array($status, ['<', '>'])) $this->modelResult = $this->modelResult->withStatus($status);
+        if (!empty($status) && in_array($status, ['<', '>', '!'])) $this->modelResult = $this->modelResult->withStatus($status);
 
         return $this;
     }
 
     /**
-     * query a travel package by keyword for index page
+     * query a travel package by slug
      *
      * @param  string|null $slug
      * @return $this
@@ -96,6 +106,33 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
+     * query specified select columns
+     *
+     * @param  array $columns
+     * @return $this
+     */
+    public function select(array $columns)
+    {
+        if (!$this->modelResult) $this->modelResult = $this->model->query();
+
+        $this->modelResult->select($columns);
+
+        return $this;
+    }
+
+    /**
+     * query ordering by created_at column descending
+     *
+     * @return $this
+     */
+    public function latest()
+    {
+        $this->modelResult->latest();
+
+        return $this;
+    }
+
+    /**
      * query a travel package only deleted
      *
      * @return $this
@@ -103,6 +140,19 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     public function onlyDeleted()
     {
         $this->modelResult->onlyTrashed();
+
+        return $this;
+    }
+
+    /**
+     * counting a travel package's relations
+     *
+     * @param  array $relations
+     * @return $this
+     */
+    public function withCountRelations(array $relations)
+    {
+        $this->modelResult->withCount($relations);
 
         return $this;
     }
@@ -128,15 +178,14 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
-     * get all travel packages and add paginate with descending order
+     * get all travel packages and add paginate with the limit
      *
      * @param int $number
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function paginate(int $number)
     {
-        return $this->modelResult->latest()
-            ->paginate($number);
+        return $this->modelResult->paginate($number);
     }
 
     /**
@@ -192,7 +241,7 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
-     * wrap multiple database queries
+     * wrap multiple database queries using database transaction
      *
      * @param  callable $action
      * @return void
