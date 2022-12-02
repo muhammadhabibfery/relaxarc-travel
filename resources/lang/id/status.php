@@ -26,8 +26,12 @@ return [
     "delete_travel_gallery" => "Galeri travel telah dihapus",
     "failed_delete_travel_gallery" => "Galeri travel gagal dihapus",
     "update_transaction" => "Transaksi telah diperbarui",
+    "failed_update_transaction" => "Transaksi gagal diperbarui",
     "delete_transaction" => "Transaksi telah dihapus",
-    "restore_transaction" => "Transaksi :transaction telah dikembalikan",
-    "delete_permanent_transaction" => "Transaksi :transaction telah dihapus secara permanen",
+    "failed_delete_transaction" => "Transaksi gagal dihapus",
+    "restore_transaction" => "transaksi telah dikembalikan",
+    "failed_restore_transaction" => "transaksi gagal dikembalikan",
+    "delete_permanent_transaction" => "Transaksi telah dihapus secara permanen",
+    "failed_delete_permanent_transaction" => "transaksi gagal dihapus secara permanen",
 
 ];

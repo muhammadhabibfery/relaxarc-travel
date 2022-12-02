@@ -26,16 +26,16 @@ class TransactionRequest extends FormRequest
     {
         if (request()->routeIs('transactions.update')) {
             return [
-                'status' => ['required', 'string', 'in:IN_CART,PENDING,SUCCESS,CANCEL,FAILED'],
+                'status' => ['required', 'string', 'in:IN CART,PENDING,SUCCESS,CANCEL,FAILED'],
             ];
         }
 
         return [
             'travel_package_id' => ['required', 'integer', 'exists:travel_packages,id'],
             'user_id' => ['required', 'integer', 'exists:users,id'],
-            'invoice_number' => ['required', 'string', 'size:30', Rule::unique('transactions', 'invoice_number')->ignore($this->transaction)],
+            'invoice_number' => ['required', 'string', 'size:30', Rule::unique('transactions', 'invoice_number')],
             'total' => ['required', 'min:0', 'regex:/^[0-9]+./'],
-            'status' => ['required', 'string', 'in:IN_CART,PENDING,SUCCESS,CANCEL,FAILED'],
+            'status' => ['required', 'string', 'in:IN CART,PENDING,SUCCESS,CANCEL,FAILED'],
         ];
     }
 

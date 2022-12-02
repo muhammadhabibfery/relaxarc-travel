@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\TravelPackage;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -47,7 +49,25 @@ class DatabaseSeeder extends Seeder
                 'status' => 'ACTIVE',
             ]
         );
+        User::create(
+            [
+                'name' => 'Fery leonardo',
+                'email' => 'feryleonardo@gmails.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('aaaaa'), // password
+                'remember_token' => Str::random(10),
+                'username' => 'feryleonardo',
+                'roles' => '["MEMBER"]',
+                'phone' => '0897654324',
+                'address' => 'jl.in dulu sih',
+                'status' => 'ACTIVE',
+            ]
+        );
 
-        TravelPackage::factory(800)->create();
+        TravelPackage::factory(100)->create();
+
+        Transaction::factory(10)->create();
+
+        TransactionDetail::factory(20)->create();
     }
 }

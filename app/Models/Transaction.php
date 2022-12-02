@@ -10,9 +10,12 @@ class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [
-        'travel_package_id', 'user_id', 'invoice_number', 'total', 'status', 'created_by', 'updated_by', 'deleted_by'
-    ];
+    /**
+     * The attributes that are mass assignable
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     public function travelPackage()
     {

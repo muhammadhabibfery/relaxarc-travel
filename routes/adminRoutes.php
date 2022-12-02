@@ -6,6 +6,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TravelGalleryController;
 use App\Http\Controllers\TravelPackageController;
 use App\Http\Controllers\UserController;
+use App\Models\TransactionDetail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,7 +33,8 @@ Route::middleware(["authRoles:ADMIN,1"])
             ->except(["edit", "update", "show"]);
         Route::get("travel-galleries/{travel_package:slug}", [TravelGalleryController::class, "show"])->name("travel-galleries.show");
 
-        Route::get("/transactions/trash", [TransactionController::class, "trash"])->name("transactions.trash");
+        Route::get("/transactions/trash", [TransactionController::class, "indexTrash"])->name("transactions.trash");
+        Route::get("/transactions/trash/{invoice_number}", [TransactionController::class, "showTrash"])->name("transactions.trash.show");
         Route::get("/transactions/restore/{invoice_number}", [TransactionController::class, "restore"])->name("transactions.restore");
         Route::delete("/transactions/force-delete/{invoice_number}", [TransactionController::class, "forceDelete"])->name("transactions.force-delete");
         Route::get("/transactions/edit/{transaction:invoice_number}", [TransactionController::class, "edit"])->name("transactions.edit");

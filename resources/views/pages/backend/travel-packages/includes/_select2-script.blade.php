@@ -2,9 +2,10 @@
 
 <script>
     $(document).ready(function () {
-        $("#status").select2({
-        placeholder: "{{ __('Choose status') }}",
-        allowClear: true
+        $(".status-select2").select2({
+            placeholder: "{{ __('Choose status') }}",
+            allowClear: true,
+            // width: 'resolve',
         });
     });
 </script>

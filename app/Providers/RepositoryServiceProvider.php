@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Transaction\TransactionRepository;
+use App\Repositories\Transaction\TransactionRepositoryInterface;
 use App\Repositories\TravelGallery\TravelGalleryRepository;
 use App\Repositories\TravelGallery\TravelGalleryRepositoryInterface;
 use App\Repositories\TravelPackage\TravelPackageRepository;
@@ -19,7 +21,8 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
      */
     public $bindings = [
         TravelPackageRepositoryInterface::class => TravelPackageRepository::class,
-        TravelGalleryRepositoryInterface::class => TravelGalleryRepository::class
+        TravelGalleryRepositoryInterface::class => TravelGalleryRepository::class,
+        TransactionRepositoryInterface::class => TransactionRepository::class
     ];
 
     /**
@@ -51,7 +54,8 @@ class RepositoryServiceProvider extends ServiceProvider implements DeferrablePro
     {
         return [
             TravelPackageRepositoryInterface::class,
-            TravelGalleryRepositoryInterface::class
+            TravelGalleryRepositoryInterface::class,
+            TransactionRepositoryInterface::class
         ];
     }
 }

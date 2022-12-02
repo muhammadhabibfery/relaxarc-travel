@@ -6,7 +6,7 @@
 <div class="container-fluid">
 
     <!--Page Heading & Content Detail -->
-    <x-transactions.card-detail :transaction="$transaction" :route="route('transactions.index')" />
+    <x-transactions.card-detail :transaction="$deletedTransaction" :route="route('transactions.trash')" />
 
 </div>
 @endsection

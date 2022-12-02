@@ -19,8 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->bigInteger('total');
             $table->string('invoice_number', 30)->unique();
-            $table->enum('status', ['IN_CART', 'PENDING', 'SUCCESS', 'CANCEL', 'FAILED'])->index();
-            $table->integer('created_by');
+            $table->enum('status', ['IN CART', 'PENDING', 'SUCCESS', 'CANCEL', 'FAILED'])->index();
             $table->integer('updated_by')->nullable();
             $table->integer('deleted_by')->nullable();
             $table->softDeletes();

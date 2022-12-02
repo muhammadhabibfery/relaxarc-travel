@@ -8,8 +8,8 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">{{ __('Edit Transaction') }}</h1>
-        <a href="{{ route('transactions.index') }}"
-            class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back') }}</a>
+        <a href="{{ route('transactions.index') }}" class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back')
+            }}</a>
     </div>
 
     <!-- Content Row -->
@@ -32,22 +32,31 @@
                                 value="{{ $transaction->travelPackage->title }}" disabled>
                         </div>
                         <div class=" form-group">
-                            <label for="user">{{ __('Ordered by') }}</label>
-                            <input type="text" name="user" class="form-control" id="user"
-                                value="{{ $transaction->user->name }}" disabled>
+                            <label for="user">
+                                <a href="#collapseOrder" class="text-decoration-none text-dark"
+                                    data-toggle="collapse">{{
+                                    __('Detail of buyers') }} &#8628;</a>
+                            </label>
+                            <div class="list-group list-group-flush collapse" id="collapseOrder">
+                                @foreach ($transaction->transactionDetails as $detail)
+                                <div class="list-group-item list-group-item-action bg-light text-dark">
+                                    {{ $detail->username }}
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class=" form-group">
                             <label for="total">Total</label>
                             <input type="text" name="total" class="form-control" id="total"
-                                value="{{ $transaction->total }}" disabled>
+                                value="@convertCurrency($transaction->total)" disabled>
                         </div>
                         <div class="form-group">
                             <label for="status">Status</label>
                             <select name="status" class="form-control @error('status') is-invalid @enderror"
                                 id="status">
                                 @foreach ($status as $s)
-                                <option value="{{ $s }}"
-                                    {{ old('status', $transaction->status) === $s ? 'selected' : '' }}>
+                                <option value="{{ $s }}" {{ old('status', $transaction->status) === $s ? 'selected' : ''
+                                    }}>
                                     {{ $s }}
                                 </option>
                                 @endforeach

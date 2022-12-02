@@ -7,7 +7,7 @@
                 <input type="text" name="keyword" class="form-control w-50 mr-3" id="keyword"
                     placeholder="{{ __('Search by title or location') }}" value="{{ request()->keyword }}">
                 <div class="form-group">
-                    <select name="status" class="form-control" id="status">
+                    <select name="status" class="form-control status-select2" style="width: 12em">
                         <option></option>
                         <option value='>' {{ request()->status == '>' ? 'selected' : '' }}>{{ __('AVAILABLE') }}
                         </option>

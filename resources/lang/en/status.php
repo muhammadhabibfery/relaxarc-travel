@@ -26,7 +26,11 @@ return [
     "delete_travel_gallery" => "The travel gallery has been deleted",
     "failed_delete_travel_gallery" => "The travel gallery failed to delete",
     "update_transaction" => "The transaction has been updated",
+    "failed_update_transaction" => "The transaction failed to update",
     "delete_transaction" => "The transaction has been deleted",
-    "restore_transaction" => "The transaction :transaction has been restored",
-    "delete_permanent_transaction" => "The transaction :transaction has been deleted permanently",
+    "failed_delete_transaction" => "The transaction failed to delete",
+    "restore_transaction" => "The transaction  has been restored",
+    "failed_restore_transaction" => "The transaction failed to restore",
+    "delete_permanent_transaction" => "The transaction has been deleted permanently",
+    "failed_delete_permanent_transaction" => "The transction failed deleting permanently",
 ];
