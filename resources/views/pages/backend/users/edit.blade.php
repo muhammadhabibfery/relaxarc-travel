@@ -65,7 +65,7 @@
                             <label for="address">{{ __('Address') }}</label>
                             <textarea name="address" class="form-control @error('address') is-invalid @enderror"
                                 id="address" rows="3" readonly disabled>{{ $user->address }}</textarea>
-                            @error('roles')
+                            @error('address')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -50,6 +50,20 @@ class TravelPackageService
     }
 
     /**
+     * Take all travel packages from database
+     *
+     * @param  Illuminate\Http\Request $request
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function takeAllTravelPackagesWithRelations(array $relations)
+    {
+        return $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus()
+            ->select(['id', 'title', 'slug', 'location'])
+            ->withRelations($relations)
+            ->paginate(10);
+    }
+
+    /**
      * Take all deleted travel packages from database
      *
      * @param  Illuminate\Http\Request $request
@@ -80,6 +94,13 @@ class TravelPackageService
         }
 
         return $model;
+    }
+
+    public function takeOneTravelPackageWithRelations(?string $slug, array $relations)
+    {
+        return $this->travelPackageRepository->findOneTravelPackageByslug($slug)
+            ->firstOrNotFound()
+            ->load($relations);
     }
 
     /**

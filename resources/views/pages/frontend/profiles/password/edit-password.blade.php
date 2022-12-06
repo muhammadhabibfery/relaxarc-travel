@@ -33,15 +33,15 @@
             <!-- End Breadcrumb -->
 
             <!-- Change Password Forms -->
-            <div class="row justify-content-center">
+            {{-- <div class="row justify-content-center">
                 <div class="col-md-10">
                     <section class="section-travel-list pl-lg-0 mb-3 mb-lg-0">
                         <div class="table-responsive-sm">
                             <div class="card card-travels card-terms-conditions p-3">
                                 <div class="row justify-content-end">
                                     <div class="col-8 col-md-4 col-lg-4 col-xl-4">
-                                        <a href="#"
-                                            class="btn btn-secondary float-right d-none d-md-block">{{ __('Back to home') }}</a>
+                                        <a href="#" class="btn btn-secondary float-right d-none d-md-block">{{ __('Back
+                                            to home') }}</a>
                                         <a href="#" class="btn btn-secondary float-right d-sm-block d-md-none"><i
                                                 class="fas fa-recycle"></i><span class="pl-2">Home</span></a>
                                     </div>
@@ -93,7 +93,8 @@
                         </div>
                     </section>
                 </div>
-            </div>
+            </div> --}}
+            <x-profiles.card-edit-password />
             <!-- End change password forms -->
 
         </div>

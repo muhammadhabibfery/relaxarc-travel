@@ -81,7 +81,7 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
      * @param  bool $deletedTravelPackages Get only deleted travel packages
      * @return $this
      */
-    public function getAllTravelPackagesByKeywordOrStatus(?string $keyword, ?string $status = null, bool $deletedTravelPackages = false)
+    public function getAllTravelPackagesByKeywordOrStatus(?string $keyword = '', ?string $status = null, bool $deletedTravelPackages = false)
     {
         $this->modelResult = ($deletedTravelPackages)
             ?  $this->findAllDeletedTravelPackagesByKeyword($keyword)
@@ -113,7 +113,7 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
      */
     public function select(array $columns)
     {
-        if (!$this->modelResult) $this->modelResult = $this->model->query();
+        $this->checkDefineModelResultProperty();
 
         $this->modelResult->select($columns);
 
@@ -145,6 +145,21 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
+     * query the travel packages relations
+     *
+     * @param  array $relations
+     * @return $this
+     */
+    public function withRelations(array $relations)
+    {
+        $this->checkDefineModelResultProperty();
+
+        $this->modelResult->with($relations);
+
+        return $this;
+    }
+
+    /**
      * counting a travel package's relations
      *
      * @param  array $relations
@@ -168,6 +183,18 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
+     * query the travel packages with limit the number of result
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function limit(int $number)
+    {
+        $this->modelResult->limit($number);
+
+        return $this;
+    }
+
+    /**
      * get a travel package, if fail or not found then redirect to 404 page
      *
      * @return \Illuminate\Database\Eloquent\Model
@@ -186,6 +213,18 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     public function paginate(int $number)
     {
         return $this->modelResult->paginate($number);
+    }
+
+    /**
+     * count all travel packages
+     *
+     * @return int
+     */
+    public function count()
+    {
+        $this->checkDefineModelResultProperty();
+
+        return $this->modelResult->count();
     }
 
     /**
@@ -249,5 +288,15 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     public function transaction(callable $action)
     {
         return DB::transaction($action);
+    }
+
+    /**
+     * check and define modelresult property
+     *
+     * @return void
+     */
+    public function checkDefineModelResultProperty()
+    {
+        if (!$this->modelResult) $this->modelResult = $this->model->query();
     }
 }

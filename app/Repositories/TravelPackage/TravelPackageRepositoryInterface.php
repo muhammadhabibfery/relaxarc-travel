@@ -69,6 +69,14 @@ interface TravelPackageRepositoryInterface
     public function onlyDeleted();
 
     /**
+     * query the travel packages relations
+     *
+     * @param  array $relations
+     * @return $this
+     */
+    public function withRelations(array $relations);
+
+    /**
      * counting a travel package's relations
      *
      * @param  array $relations
@@ -84,6 +92,13 @@ interface TravelPackageRepositoryInterface
     public function get();
 
     /**
+     * query the travel packages with limit the number of result
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function limit(int $number);
+
+    /**
      * get a travel package, if fail or not found then redirect to 404 page
      *
      * @return \Illuminate\Database\Eloquent\Model
@@ -97,6 +112,13 @@ interface TravelPackageRepositoryInterface
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
     public function paginate(int $number);
+
+    /**
+     * count all travel packages
+     *
+     * @return int
+     */
+    public function count();
 
     /**
      *  Creating a new travel package
@@ -142,4 +164,11 @@ interface TravelPackageRepositoryInterface
      * @return void
      */
     public function transaction(callable $action);
+
+    /**
+     * check and define modelresult property
+     *
+     * @return void
+     */
+    public function checkDefineModelResultProperty();
 }

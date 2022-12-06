@@ -154,6 +154,30 @@ class TransactionRepository implements TransactionRepositoryInterface
     }
 
     /**
+     * count all transactions
+     *
+     * @return int
+     */
+    public function count()
+    {
+        $this->checkDefineModelResultProperty();
+
+        return $this->modelResult->count();
+    }
+
+    /**
+     * count the transactions with status
+     *
+     * @param string $status
+     * @return int
+     */
+    public function countWithStatus(string $status)
+    {
+        return $this->findAllTransactionsByKeywordOrStatus('', $status)
+            ->count();
+    }
+
+    /**
      *  Updating a transaction selected
      *
      * @param  array $data

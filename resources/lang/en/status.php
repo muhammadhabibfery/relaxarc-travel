@@ -2,15 +2,21 @@
 
 return [
     "update_profile" => "Your profile has been updated",
+    "failed_update_profile" => "Your profile failed to update",
     "has_complete_profile" => [
         "title" => "Your profile information are not completed",
         "paragraph" => "Please complete your profile information first"
     ],
     "delete_avatar" => "Your avatar deleted successfully",
+    "failed_delete_avatar" => "Your avatar failed to delete",
     "update_password" => "Your password has been updated",
+    "failed_update_password" => "Your password failed to update",
     "create_new_admin" => "New admin was created successfully",
-    "update_user" => "The user :Name has been updated",
-    "delete_user" => "The user :Name has been deleted",
+    "failed_create_new_admin" => "New admin failed to create",
+    "update_user" => "The user has been updated",
+    "failed_update_user" => "The user failed to update",
+    "delete_user" => "The user has been deleted",
+    "failed_delete_user" => "The user failed to delete",
     "create_new_travel_package" => "New travel package was created successfully",
     "failed_create_new_travel_package" => "New travel package was failed to create",
     "update_travel_package" => "The travel package has been updated",

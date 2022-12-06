@@ -2,10 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+
+    /**
+     * The name of repository instance
+     *
+     * @var App\Services\TravelPackageService
+     */
+    private $travelPackageRepository;
+
+    /**
+     * Create a new repository instance.
+     *
+     * @return void
+     */
+    public function __construct(TravelPackageRepositoryInterface $travelPackageRepositoryInterface)
+    {
+        $this->travelPackageRepository = $travelPackageRepositoryInterface;
+    }
 
     /**
      * Show the application dashboard.
@@ -14,6 +32,12 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return view('pages.frontend.home');
+        $travelPackages = $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus()
+            ->select(['id', 'title', 'slug', 'location'])
+            ->withRelations(['firstTravelGallery'])
+            ->limit(4)
+            ->get();
+
+        return view('pages.frontend.home', compact('travelPackages'));
     }
 }

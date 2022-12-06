@@ -17,8 +17,8 @@ class HasFullProfile
      */
     public function handle(Request $request, Closure $next)
     {
-        if (checkCompletenessTheProfile()) return $next($request);
-
-        return redirect()->intended(route('complete-profile'));
+        return auth()->user()->IsCompleteProfile
+            ? $next($request)
+            : redirect()->intended(route('front-profile'));
     }
 }

@@ -9,6 +9,14 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.backend.dashboard');
+        $totalTravelPackages = CountOfAllTravelPackages();
+        $totalTransactions = CountOfAllTransactions();
+        $totalInCartTransactions = countOfTransactionStatus('IN CART');
+        $totalPendingTransactions = countOfTransactionStatus('PENDING');
+        $totalSuccessTransactions = countOfTransactionStatus('SUCCESS');
+        $totalCancelTransactions = countOfTransactionStatus('CANCEL');
+        $totalFailedTransactions = countOfTransactionStatus('FAILED');
+
+        return view('pages.backend.dashboard', compact('totalTravelPackages', 'totalTransactions', 'totalInCartTransactions', 'totalPendingTransactions', 'totalSuccessTransactions', 'totalCancelTransactions', 'totalFailedTransactions'));
     }
 }

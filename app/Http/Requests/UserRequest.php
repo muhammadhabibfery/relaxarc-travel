@@ -35,9 +35,9 @@ class UserRequest extends FormRequest
             ];
         }
 
-        if (request()->routeIs('users.update') && request()->roles) {
+        if (request()->routeIs('users.update')) {
             return [
-                'roles' => ['required',  'array', 'min:1', 'in:admin,superadmin'],
+                'roles' => ['required',  'array', 'min:1', 'max:2', 'in:admin,superadmin'],
                 'status' => ['required', 'string', 'min:4', 'max:6', 'in:ACTIVE,NONE']
             ];
         }

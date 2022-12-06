@@ -81,7 +81,7 @@ class LoginController extends Controller
     {
         if (checkRoles(["ADMIN", 1], $user->roles)) return redirect()->intended(route('dashboard'));
 
-        if (!checkCompletenessTheProfile()) return redirect()->route('front-profile');
+        if (!auth()->user()->IsCompleteProfile) return redirect()->route('front-profile');
 
         return ($request->session()->has('guest-route'))
             ? redirect($request->session()->pull('guest-route'))

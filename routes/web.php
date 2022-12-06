@@ -7,6 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\TravelPackageController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,8 @@ use App\Http\Controllers\TravelPackageController;
 Route::middleware(['preventBack'])
     ->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home');
-        Route::get("/travel-packages", [TravelPackageController::class, "frontPage"])->name("travel-packages.travels");
-        Route::get('/travel-packages/detail', [TravelPackageController::class, 'frontShow'])->name('travel-packages.detail');
+        Route::get("/travel-packages/list", [TravelPackageController::class, "frontIndex"])->name("travel-packages.front.index");
+        Route::get('/travel-packages/detail/{slug}', [TravelPackageController::class, 'frontShow'])->name('travel-packages.front.detail');
         Route::get('/terms-conditions', function () {
             return view('pages.frontend.terms-conditions');
         })->name('terms-conditions');
@@ -43,11 +44,13 @@ Route::middleware(['preventBack'])
 
                 Route::get('/profile', [ProfileController::class, 'frontProfile'])->name('front-profile');
                 Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('update-profile');
-                Route::get("/profile/complete-your-profile-first", [ProfileController::class, "completeProfileFirst"])
-                    ->name("complete-profile");
                 Route::post("/profile/delete-avatar", [ProfileController::class, "deleteAvatar"])->name("delete-avatar");
                 Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
                 Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");
+                Route::get("/profile/detail/{user:username}/{invoice_number?}", [UserController::class, "show"])->name("detail-profile");
+                // Route::get("/profile/detail/{username?}/{invoice_number?}", function ($username = 'john', $invoice_number = 'doe') {
+                //     return "$username $invoice_number";
+                // })->name("detail-profile");
             });
     });
 

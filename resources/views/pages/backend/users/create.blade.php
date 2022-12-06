@@ -31,7 +31,7 @@
                             <label for="username">{{ __('Username') }}</label>
                             <input type="text" name="username"
                                 class="form-control @error('username') is-invalid @enderror" id="username"
-                                value="{{ old('username') }}" readonly>
+                                value="{{ old('username') }}">
                             @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -114,9 +114,7 @@
             })
         })
         .then(response => response.json())
-        .then(data => {
-            inputUsernameElement.value = data.username;
-        })
+        .then(data => inputUsernameElement.value = data.username)
         .catch(error => {
             alert("500 internal server error, {{ __('Refresh the page') }}");
             location.reload();

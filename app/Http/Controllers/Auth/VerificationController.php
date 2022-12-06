@@ -95,7 +95,7 @@ class VerificationController extends Controller
     protected function verified(Request $request)
     {
         if (Auth::check()) {
-            return (checkCompletenessTheProfile()) ?
+            return (auth()->user()->IsCompleteProfile) ?
                 $this->redirectAfterVerified($this->redirectPath(), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated-complete-profile') :
                 $this->redirectAfterVerified(route('front-profile'), 'verifiedStatus', 'auth.verified.title', 'auth.verified.paragraph-authenticated-not-complete-profile');
         }

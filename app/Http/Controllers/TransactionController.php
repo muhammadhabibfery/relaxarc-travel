@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TransactionRequest;
-use App\Models\Transaction;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
 
 class TransactionController extends Controller
 {
@@ -22,7 +20,7 @@ class TransactionController extends Controller
     /**
      * The name of repository instance
      *
-     * @var App\Services\TravelPackageService
+     * @var App\Repositories\Transaction\TransactionRepository
      */
     private $transactionRepository;
 
@@ -31,10 +29,10 @@ class TransactionController extends Controller
      *
      * @return void
      */
-    public function __construct(TransactionRepositoryInterface $transactionRepository)
+    public function __construct(TransactionRepositoryInterface $transactionRepositoryInterface)
     {
         $this->middleware('authRoles:ADMIN,SUPERADMIN,2')->only('trash', 'restore', 'forceDelete');
-        $this->transactionRepository = $transactionRepository;
+        $this->transactionRepository = $transactionRepositoryInterface;
     }
 
     /**

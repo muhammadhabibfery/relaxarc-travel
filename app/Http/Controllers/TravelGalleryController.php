@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\TravelGallery;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\TravelGalleryRequest;
-use App\Repositories\TravelGallery\TravelGalleryRepository;
-use App\Repositories\TravelPackage\TravelPackageRepository;
+use App\Repositories\TravelGallery\TravelGalleryRepositoryInterface;
+use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 
 class TravelGalleryController extends Controller
@@ -15,7 +15,7 @@ class TravelGalleryController extends Controller
     /**
      * The name of redirect route path
      *
-     * @var App\Services\TravelPackageService
+     * @var string
      */
     private const REDIRECT_ROUTE = 'travel-galleries.index';
 
@@ -27,10 +27,10 @@ class TravelGalleryController extends Controller
     private const MAXIMUM_AMOUNT_TRAVELGALLERIES = 5;
 
     /**
-     * The name of service instance
+     * The name of repository instance
      *
-     * @var App\Services\TravelPackageRepository
-     * @var App\Services\TravelGalleryRepository
+     * @var App\Repositories\TravelPackage\TravelPackageRepository
+     * @var App\Repositories\TravelGallery\TravelGalleryRepository
      */
     private $travelPackageRepository, $travelGalleryRepository;
 
@@ -39,10 +39,10 @@ class TravelGalleryController extends Controller
      *
      * @return void
      */
-    public function __construct(TravelPackageRepository $travelPackageRepository, TravelGalleryRepository $travelGalleryRepository)
+    public function __construct(TravelPackageRepositoryInterface $travelPackageRepositoryInterface, TravelGalleryRepositoryInterface $travelGalleryRepositoryInterface)
     {
-        $this->travelPackageRepository = $travelPackageRepository;
-        $this->travelGalleryRepository = $travelGalleryRepository;
+        $this->travelPackageRepository = $travelPackageRepositoryInterface;
+        $this->travelGalleryRepository = $travelGalleryRepositoryInterface;
     }
 
     /**

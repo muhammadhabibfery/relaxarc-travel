@@ -53,66 +53,42 @@
             </div>
         </div>
     </section>
-
     <section class="section-popular-travel" id="popular-travel">
         <div class="container">
             <div class="row justify-content-center section-popular-content">
+                @forelse ($travelPackages as $travelPackage)
+                <div class="col-sm-6 col-md-6 col-lg-3">
+                    <div class="card-travel text-center d-flex flex-column"
+                        style="background-image: url('{{ $travelPackage->firstTravelGallery ? $travelPackage->firstTravelGallery->getImage() : asset('assets/frontend/images/travel/default-travel-image.png') }}');">
+                        <div class="travel-text py-2">
+                            <div class="travel-country">{{ $travelPackage->location }}</div>
+                            <div class="travel-location">{{ $travelPackage->title }}</div>
+                        </div>
+                        <div class="travel-button mt-auto">
+                            <a href="{{ route('travel-packages.front.detail', $travelPackage->slug) }}"
+                                class="btn btn-travel-detail px-4">Detail</a>
+                        </div>
+                    </div>
+                </div>
+                @empty
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="card-travel text-center d-flex flex-column"
                         style="background-image: url('{{ asset('assets/frontend/images/travel/original/pop1.jpg') }}');">
                         <div class="travel-text py-2">
-                            <div class="travel-country">INDONESIA</div>
-                            <div class="travel-location">DERATAN, BALI</div>
+                            <div class="travel-country">DEFAULT</div>
+                            <div class="travel-location">DEFAULT</div>
                         </div>
                         <div class="travel-button mt-auto">
-                            <a href="{{ route('travel-packages.detail') }}"
-                                class="btn btn-travel-detail px-4">Detail</a>
+                            <a href="#" class="btn btn-travel-detail px-4">Detail</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="card-travel text-center d-flex flex-column"
-                        style="background-image: url('{{ asset('assets/frontend/images/travel/original/pop2.jpg') }}');">
-                        <div class="travel-text py-2">
-                            <div class="travel-country">INDONESIA</div>
-                            <div class="travel-location">BROMO, MALANG</div>
-                        </div>
-                        <div class="travel-button mt-auto">
-                            <a href="{{ route('travel-packages.detail') }}"
-                                class="btn btn-travel-detail px-4">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="card-travel text-center d-flex flex-column"
-                        style="background-image: url('{{ asset('assets/frontend/images/travel/original/pop3.jpg') }}');">
-                        <div class="travel-text py-2">
-                            <div class="travel-country">INDONESIA</div>
-                            <div class="travel-location">NUSA PENIDA</div>
-                        </div>
-                        <div class="travel-button mt-auto">
-                            <a href="{{ route('travel-packages.detail') }}"
-                                class="btn btn-travel-detail px-4">Detail</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="card-travel text-center d-flex flex-column"
-                        style="background-image: url('{{ asset('assets/frontend/images/travel/original/pop4.jpg') }}');">
-                        <div class="travel-text py-2">
-                            <div class="travel-country">INDONESIA</div>
-                            <div class="travel-location">GILI TRAWANGAN, NUSA TENGGARA BARAT</div>
-                        </div>
-                        <div class="travel-button mt-auto">
-                            <a href="{{ route('travel-packages.detail') }}"
-                                class="btn btn-travel-detail px-4">Detail</a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
 
-                <a href="{{ route('travel-packages.travels') }}"
-                    class="btn btn-block btn-travel-list py-2 my-3 mx-3"><span class="text-list">Lihat
-                        Selengkapnya</span></a>
+                <a href="{{ route('travel-packages.front.index') }}"
+                    class="btn btn-block btn-travel-list py-2 my-3 mx-3">
+                    <span class="text-list">Lihat Selengkapnya</span>
+                </a>
             </div>
         </div>
     </section>

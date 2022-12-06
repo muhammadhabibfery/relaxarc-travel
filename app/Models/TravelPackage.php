@@ -36,6 +36,18 @@ class TravelPackage extends Model
     }
 
     /**
+     * Get the first travel gallery for the travel package
+     *
+     *
+     */
+    public function firstTravelGallery()
+    {
+        return $this->hasOne(TravelGallery::class)
+            ->select('travel_package_id', 'name')
+            ->oldest();
+    }
+
+    /**
      * Get the transactions for the travel package
      *
      *

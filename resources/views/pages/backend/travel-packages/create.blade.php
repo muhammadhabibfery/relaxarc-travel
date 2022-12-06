@@ -116,7 +116,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="duration">{{ __('Duration') }}</label>
-                                    <input type="text" name="duration"
+                                    <input type="number" name="duration"
                                         class="form-control @error('duration') is-invalid @enderror" id="duration"
                                         value="{{ old('duration') }}">
                                     <small class="form-text text-muted">

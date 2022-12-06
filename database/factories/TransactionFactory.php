@@ -22,7 +22,6 @@ class TransactionFactory extends Factory
             'total' => $travelPackage->price * 2,
             'invoice_number' => "RelaxArc-" . date('djy') . Str::random(16),
             'status' => $this->faker->randomElement(['IN CART', 'PENDING', 'SUCCESS', 'FAILED', 'CANCEL']),
-            'created_by' => 3,
         ];
     }
 }

@@ -173,7 +173,8 @@
                         </a>
                     </div>
                     <div class="text-center mt-4">
-                        <a href="{{ route('detail') }}" class="text-muted btn-cancel-payment">Batalkan Pembayaran</a>
+                        <a href="#" class="text-muted btn-cancel-payment">Batalkan
+                            Pembayaran</a>
                     </div>
                 </div>
             </div>

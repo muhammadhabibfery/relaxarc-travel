@@ -11,86 +11,78 @@
     </div>
 
     <!-- Content Row -->
-    <div class="row">
+    <div class="row justify-content-around">
 
-        <!-- Travel Package Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                {{ __('Travel packages') }}
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ numberOfTravelPackages() }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-hotel fa-3x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Transactions Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                {{ __('Transactions') }}
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ numberOfTransactions() }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-cash-register fa-3x"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pending Checkout Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                Checkout Pending
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                        {{ numberOfPendingTransactions() }}</div>
+        <div class="col-xl-4 col-md-4">
+            <div class="row">
+                <!-- Travel Package Card -->
+                <div class="col-12 mb-3 mb-lg-5 mb-md-5">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <a href="{{ route('travel-packages.index') }}" class="text-decoration-none">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            {{ __('Travel packages') }}
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalTravelPackages }}
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-hotel fa-3x"></i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-spinner fa-3x"></i>
-                        </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Transactions Card -->
+                <div class="col-12 mt-lg-4 mt-md-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <a href="{{ route('transactions.index') }}" class="text-decoration-none">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            {{ __('Transactions') }}
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $totalTransactions }}
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-cash-register fa-3x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Success Checkout Card -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
+        <div class="col-xl-6 col-md-6">
+            <!-- Detail of Transaction Status Card -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('Transaction Status') }}</h6>
+                </div>
                 <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                {{ __('Checkout Success') }}
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold fa-3x text-gray-800">
-                                {{ numberOfSuccessfulTransactions() }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-check fa-3x"></i>
-                        </div>
-                    </div>
+                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} IN CART
+                        <span class="float-right">{{ $totalInCartTransactions }}</span>
+                    </h4>
+                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} PENDING
+                        <span class="float-right">{{ $totalPendingTransactions }}</span>
+                    </h4>
+                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} SUCCESS
+                        <span class="float-right">{{ $totalSuccessTransactions }}</span>
+                    </h4>
+                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} CANCEL
+                        <span class="float-right">{{ $totalCancelTransactions }}</span>
+                    </h4>
+                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} FAILED
+                        <span class="float-right">{{ $totalFailedTransactions }}</span>
+                    </h4>
                 </div>
             </div>
         </div>

@@ -49,12 +49,14 @@
                         </a>
                         @endif
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('front-profile') }}">
+                        <a class="dropdown-item" href="{{ checkRoles(['ADMIN',1], auth()->user()->roles) ?
+                            route('back-profile') : route('front-profile') }}">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             {{ __('Profile') }}
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ route('front-change-password') }}">
+                        <a class="dropdown-item" href="{{ checkRoles(['ADMIN',1], auth()->user()->roles) ?
+                            route('back-change-password') : route('front-change-password') }}">
                             <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i>
                             {{ __('Change password') }}
                         </a>

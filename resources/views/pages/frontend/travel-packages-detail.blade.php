@@ -33,54 +33,43 @@
             <div class="row">
                 <div class="col-lg-8 pl-lg-0 mb-3 mb-lg-0">
                     <div class="card card-detail">
-                        <h1>Nusa Penida</h1>
-                        <p>Republik of Indonesia Raya</p>
+                        <h1>{{ $travelPackage->title }}</h1>
+                        <p>{{ $travelPackage->location }}</p>
 
                         <div class="gallery">
+                            @if ($travelPackage->travelGalleries->count())
                             <div class="xzoom-container">
-                                <img src="{{ asset('assets/frontend/images/travel/preview/pop1.jpg') }}"
-                                    alt="destination" class="xzoom img-fluid" id="xzoom-default"
-                                    xoriginal="{{ asset('assets/frontend/images/travel/original/pop1.jpg') }}">
+                                <img src="{{ $travelPackage->travelGalleries->first()->getImage() }}" alt="destination"
+                                    class="xzoom img-fluid" id="xzoom-default"
+                                    xoriginal="{{ $travelPackage->travelGalleries->first()->getThumbnail() }}">
                                 <div class="xzoom-thumbs">
-                                    <a href="{{ asset('assets/frontend/images/travel/original/pop1.jpg') }}">
-                                        <img src="{{ asset('assets/frontend/images/travel/original/pop1.jpg') }}"
-                                            alt="image thumbnails" class="xzoom-gallery" width="128"
-                                            xpreview="{{ asset('assets/frontend/images/travel/preview/pop1.jpg') }}">
+                                    @foreach ($travelPackage->travelGalleries as $travelGallery)
+                                    <a href="{{ $travelGallery->getThumbnail() }}">
+                                        <img src="{{ $travelGallery->getThumbnail() }}" alt="image thumbnails"
+                                            class="xzoom-gallery" width="128"
+                                            xpreview="{{ $travelGallery->getImage() }}">
                                     </a>
-                                    <a href="{{ asset('assets/frontend/images/travel/original/pop1.2.jpg') }}">
-                                        <img src="{{ asset('assets/frontend/images/travel/preview/pop1.2.jpg') }}"
-                                            alt="image thumbnails" class="xzoom-gallery" width="128">
-                                    </a>
-                                    <a href="{{ asset('assets/frontend/images/travel/original/pop1.3.jpg') }}">
-                                        <img src="{{ asset('assets/frontend/images/travel/preview/pop1.3.jpg') }}"
-                                            alt="image thumbnails" class="xzoom-gallery" width="128">
-                                    </a>
-                                    <a href="{{ asset('assets/frontend/images/travel/original/pop1.4.jpg') }}">
-                                        <img src="{{ asset('assets/frontend/images/travel/preview/pop1.4.jpg') }}"
-                                            alt="image thumbnails" class="xzoom-gallery" width="128">
-                                    </a>
+                                    @endforeach
                                 </div>
                             </div>
+                            @else
+                            <img src="{{ asset('assets/frontend/images/travel/default-travel-image.png') }}"
+                                alt="destination" class="img-fluid">
+                            @endif
                         </div>
 
                         <h2>Tentang Wisata</h2>
-                        <p>Nusa Penida is an island southeast of indonesia's island Bali and a district of Klungkung
-                            Regency that includes the neightbouring small island of Nusa Lembongan. The Badung
-                            Straits
-                            separates the island and Bali. The interior of Nusa Penida is hilly with a maximum
-                            altitude of
-                            42 metres. It is dries than nearby island of Bali.</p>
-                        <p>Bali and a district of Klungkung Regency that includes the neightbouring small island of
-                            Nusa
-                            Lembongan. The Badung Straits separates the island and Bali.</p>
-
+                        <p>{!! $travelPackage->about !!}</p>
                         <div class="features row">
                             <div class="col-md-4 py-3">
                                 <div class="description">
                                     <i class="fas fa-ticket-alt fa-2x features-image"></i>
                                     <div class="description">
                                         <h3>Featured Event</h3>
-                                        <p>Tari Kecak</p>
+                                        <p>
+                                            <x-travel-packages.list-data
+                                                :data="transformStringToArray($travelPackage->featured_event, ',')" />
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +78,10 @@
                                     <i class="fas fa-language fa-2x features-image"></i>
                                     <div class="description">
                                         <h3>Language</h3>
-                                        <p>Bahasa Indonesia</p>
+                                        <p>
+                                            <x-travel-packages.list-data
+                                                :data="transformStringToArray($travelPackage->language, ',')" />
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +90,10 @@
                                     <i class="fas fa-utensils fa-2x features-image"></i>
                                     <div class="description">
                                         <h3>Foods</h3>
-                                        <p>Local Foods</p>
+                                        <p>
+                                            <x-travel-packages.list-data
+                                                :data="transformStringToArray($travelPackage->foods, ',')" />
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -113,19 +108,23 @@
                         <table class="trip-information">
                             <tr>
                                 <th width="50%">Tanggal Keberangkatan</th>
-                                <td width="50%" class="text-right">22 Agustus, 2019</td>
+                                <td width="50%" class="text-right">{{ $travelPackage->date_departure_with_day }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Durasi</th>
-                                <td width="50%" class="text-right">4 Hari, 3 Malam</td>
+                                <td width="50%" class="text-right">
+                                    {{ formatTravelPackageDuration($travelPackage->duration, app()->getLocale()) }}
+                                </td>
                             </tr>
                             <tr>
                                 <th width="50%">Tipe</th>
-                                <td width="50%" class="text-right">Open Trip</td>
+                                <td width="50%" class="text-right">{{ $travelPackage->type }}</td>
                             </tr>
                             <tr>
                                 <th width="50%">Harga</th>
-                                <td width="50%" class="text-right">Rp 1.125.000 / Orang</td>
+                                <td width="50%" class="text-right">
+                                    @convertCurrency($travelPackage->price) {{ __(' / Person') }}
+                                </td>
                             </tr>
                         </table>
                     </div>

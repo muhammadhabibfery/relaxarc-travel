@@ -3,6 +3,8 @@
 use App\Models\Transaction;
 use App\Models\TravelPackage;
 use App\Models\User;
+use App\Repositories\Transaction\TransactionRepository;
+use App\Repositories\TravelPackage\TravelPackageRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -34,16 +36,6 @@ function checkRoles(array $availableRoles, array $userRoles)
     $totalRoles = (int) array_pop($availableRoles);
 
     return (count(array_intersect($availableRoles, $userRoles)) >= $totalRoles);
-};
-
-function preventUserWhoHaveCompletedTheProfile()
-{
-    return checkCompletenessTheProfile() ? back() : view('pages.errors.123');
-}
-
-function checkCompletenessTheProfile()
-{
-    return (auth()->user()->phone && auth()->user()->address);
 }
 
 function createdUpdatedDeletedBy($id)
@@ -60,33 +52,19 @@ function formatTravelPackageDuration($value, $locale)
     return "$value $languageFormat";
 }
 
-// function formatTravelPackageDuration($value, $languageFormat = null)
-// {
-//     if (!$languageFormat) $languageFormat = ' Hari';
-
-//     return (Str::contains($value, 'D')) ? str_replace('D', $languageFormat, $value) : $value;
-// }
-
-function numberOFTravelPackages()
+function countOfAllTravelPackages()
 {
-    return TravelPackage::count();
+    return (new TravelPackageRepository(new TravelPackage))->count();
 }
 
-function numberOfTransactions()
+function countOfAllTransactions()
 {
-    return Transaction::count();
+    return (new TransactionRepository(new Transaction))->count();
 }
 
-function numberOfSuccessfulTransactions()
+function countOfTransactionStatus(string $status)
 {
-    return Transaction::where('status', 'SUCCESS')
-        ->count();
-}
-
-function numberOfPendingTransactions()
-{
-    return Transaction::where('status', 'PENDING')
-        ->count();
+    return (new TransactionRepository(new Transaction))->countWithStatus($status);
 }
 
 /**

@@ -1,5 +1,5 @@
 <p class="card-text">
-<ul>
+<ul class="list-unstyled">
     @if(is_array($data))
     @foreach($data as $d)
     <li>{{ trim(ucfirst($d)) }}</li>

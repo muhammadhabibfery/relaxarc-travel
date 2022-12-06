@@ -75,6 +75,20 @@ interface TransactionRepositoryInterface
     public function paginate(int $number);
 
     /**
+     * count all transactions
+     *
+     * @return int
+     */
+    public function count();
+
+    /**
+     * count the transactions with status
+     *
+     * @return int
+     */
+    public function countWithStatus(string $status);
+
+    /**
      *  Updating a transaction selected
      *
      * @param  array $data

@@ -2,15 +2,21 @@
 
 return [
     "update_profile" => "Profil Anda telah diperbarui",
+    "failed_update_profile" => "Profil Anda gagal diperbarui",
     "has_complete_profile" => [
         "title" => "Informasi profil Anda tidak lengkap",
         "paragraph" => "Silahkan lengkapi informasi profil anda terlebih dahulu"
     ],
     "delete_avatar" => "Avatar anda berhasil dihapus",
+    "failed_delete_avatar" => "Avatar anda gagal dihapus",
     "update_password" => "Password Anda telah diperbarui",
+    "failed_update_password" => "Password Anda gagal diperbarui",
     "create_new_admin" => "Admin baru berhasil dibuat",
-    "update_user" => "Pengguna :Name telah diperbarui",
-    "delete_user" => "Pengguna :Name telah dihapus",
+    "failed_create_new_admin" => "Admin baru gagal dibuat",
+    "update_user" => "Pengguna telah diperbarui",
+    "failed_update_user" => "Pengguna gagal diperbarui",
+    "delete_user" => "Pengguna telah dihapus",
+    "failed_delete_user" => "Pengguna gagal dihapus",
     "create_new_travel_package" => "Paket travel baru berhasil dibuat",
     "failed_create_new_travel_package" => "Paket travel baru gagal dibuat",
     "update_travel_package" => "Paket travel telah diperbarui",

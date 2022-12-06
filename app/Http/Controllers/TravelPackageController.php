@@ -31,9 +31,11 @@ class TravelPackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function frontPage()
+    public function frontIndex()
     {
-        return view('pages.frontend.travel-packages-index');
+        $travelPackages = $this->travelPackageService->takeAllTravelPackagesWithRelations(['firstTravelGallery']);
+
+        return view('pages.frontend.travel-packages-index', compact('travelPackages'));
     }
 
     /**
@@ -41,9 +43,12 @@ class TravelPackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function frontShow()
+    public function frontShow(?string $slug)
     {
-        return view('pages.frontend.travel-packages-detail');
+        $travelPackage = $this->travelPackageService
+            ->takeOneTravelPackageWithRelations($slug, ['travelGalleries' => fn ($query) => $query->select('travel_package_id', 'name')]);
+
+        return view('pages.frontend.travel-packages-detail', compact('travelPackage'));
     }
 
     /**

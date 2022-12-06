@@ -23,12 +23,19 @@
         toastr.success("{!!  session('verifiedStatus')  !!}", 'Sukses');
     @endif
 
-    @if(session('status'))
+    @if(session('success'))
         toastr.closeButton = true,
         toastr.options.positionClass = "toast-top-center";
         toastr.options.progressBar = true;
         toastr.options.showDuration = 500;
-        toastr.success("{!! session('status') !!}", 'Sukses');
+        toastr.success("{!! session('success') !!}", "{{ __('Success') }}");
+    @endif
+    @if(session('failed'))
+        toastr.closeButton = true,
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.progressBar = true;
+        toastr.options.showDuration = 500;
+        toastr.error("{!! session('failed') !!}", "{{ __('Failed') }}");
     @endif
 
     const submitted = (form) => {

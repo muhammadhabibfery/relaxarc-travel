@@ -56,7 +56,8 @@
                             <td>
                                 <div class="list-group list-group-flush">
                                     @foreach ($transaction->transactionDetails as $detail)
-                                    <a href="#" class="list-group-item list-group-item-action text-dark">
+                                    <a href="{{ route('detail-profile', [$detail->username, $transaction->invoice_number]) }}"
+                                        class="list-group-item list-group-item-action text-dark">
                                         {{ $detail->username }}
                                     </a>
                                     @endforeach
