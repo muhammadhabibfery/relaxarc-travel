@@ -535,8 +535,13 @@ header {
 }
 
 .btn-cancel-payment {
+    background-color: #e4e6eb;
+    color: #071c4d !important;
+    border-radius: 0;
+
     &:hover {
-        color: #071c4d !important;
+        background-color: #dadde4;
+        color: #04102c !important;
     }
 }
 

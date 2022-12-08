@@ -25,7 +25,7 @@ class TransactionController extends Controller
     private $transactionRepository;
 
     /**
-     * Create a new sevice instance and implement authenticatedRoles middleware.
+     * Create a new repository instance and implement authenticatedRoles middleware.
      *
      * @return void
      */
@@ -59,7 +59,7 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return $this->generateInvoiceNumber();
+        //
     }
 
     /**
@@ -274,10 +274,5 @@ class TransactionController extends Controller
 
         return redirect()->route($redirectRoute)
             ->with('success', trans($successMessage));
-    }
-
-    private function generateInvoiceNumber()
-    {
-        return "RelaxArc-" . date('djy') . Str::random(16);
     }
 }

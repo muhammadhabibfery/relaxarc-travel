@@ -35,6 +35,7 @@ class HomeController extends Controller
         $travelPackages = $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus()
             ->select(['id', 'title', 'slug', 'location'])
             ->withRelations(['firstTravelGallery'])
+            ->hasRelations('travelGalleries')
             ->limit(4)
             ->get();
 

@@ -37,8 +37,19 @@ Route::middleware(['preventBack'])
 
                 Route::middleware(['verified', 'hasFullProfile'])
                     ->group(function () {
-                        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-                        Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+                        Route::get('/checkout/success/', [CheckoutController::class, 'success'])
+                            ->name('checkout.success');
+                        Route::get('/checkout/{transaction:invoice_number}', [CheckoutController::class, 'index'])->name('checkout.index');
+                        Route::post('/checkout/proccess/{travel_package:slug}', [CheckoutController::class, 'proccess'])
+                            ->name('checkout.proccess');
+                        Route::post('/checkout/create/{transaction:invoice_number}', [CheckoutController::class, 'create'])
+                            ->name('checkout.create');
+                        Route::delete('/checkout/remove/{transaction:invoice_number}/{transaction_detail:username}', [CheckoutController::class, 'delete'])
+                            ->name('checkout.remove');
+                        Route::delete('/checkout/cancel/{transaction:invoice_number}', [CheckoutController::class, 'cancel'])
+                            ->name('checkout.cancel');
+                        Route::post('/checkout/send-mail/{transaction:invoice_number}', [CheckoutController::class, 'sendMail'])
+                            ->name('checkout.send-mail');
                         require __DIR__ . '/adminRoutes.php';
                     });
 
@@ -48,9 +59,6 @@ Route::middleware(['preventBack'])
                 Route::get("/profile/change-password", [ProfileController::class, "frontChangePassword"])->name("front-change-password");
                 Route::patch("/profile/update-password", [ProfileController::class, "updatePassword"])->name("update-password");
                 Route::get("/profile/detail/{user:username}/{invoice_number?}", [UserController::class, "show"])->name("detail-profile");
-                // Route::get("/profile/detail/{username?}/{invoice_number?}", function ($username = 'john', $invoice_number = 'doe') {
-                //     return "$username $invoice_number";
-                // })->name("detail-profile");
             });
     });
 

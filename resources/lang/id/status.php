@@ -31,6 +31,8 @@ return [
     "failed_create_new_travel_gallery" => "galeri travel baru gagal dibuat",
     "delete_travel_gallery" => "Galeri travel telah dihapus",
     "failed_delete_travel_gallery" => "Galeri travel gagal dihapus",
+    "create_new_transaction" => "Transaksi telah dibuat",
+    "failed_create_new_transaction" => "Transaksi gagal dibuat",
     "update_transaction" => "Transaksi telah diperbarui",
     "failed_update_transaction" => "Transaksi gagal diperbarui",
     "delete_transaction" => "Transaksi telah dihapus",
@@ -39,5 +41,11 @@ return [
     "failed_restore_transaction" => "transaksi gagal dikembalikan",
     "delete_permanent_transaction" => "Transaksi telah dihapus secara permanen",
     "failed_delete_permanent_transaction" => "transaksi gagal dihapus secara permanen",
+    "create_new_transaction_detail" => "Detail transaksi telah dibuat",
+    "failed_create_new_transaction_detail" => "Detail transaksi gagal dibuat",
+    "failed_add_member" => "Gagal menambahkan member",
+    "failed_delete_member" => "Gagal menghapus member",
+    "failed_cancel_payment" => "Gagal membatalkan pembayaran",
+    "failed_confirm_payment" => "Gagal konfirmasi pembayaran",
 
 ];

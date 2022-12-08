@@ -1,12 +1,13 @@
 <?php
 
-use App\Models\Transaction;
-use App\Models\TravelPackage;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Transaction;
+use Illuminate\Support\Str;
+use App\Models\TravelPackage;
+use Illuminate\Support\Facades\Storage;
 use App\Repositories\Transaction\TransactionRepository;
 use App\Repositories\TravelPackage\TravelPackageRepository;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
 
 function uploadImage($request, $directoryName, $fieldImage = null)
 {
@@ -89,4 +90,25 @@ function transformDateFormat(string $data, string $format)
 function transformStringToArray(string $data, string $separator)
 {
     return Str::contains($data, $separator) ? explode($separator, $data) : $data;
+}
+
+/**
+ * generate invoice number for a transaction
+ *
+ * @return string
+ */
+function generateInvoiceNumber()
+{
+    return "RelaxArc-" . date('djy') . Str::random(16);
+}
+
+/**
+ * get unique total transaction
+ *
+ * @param  int $total
+ * @return int
+ */
+function getUniqueTotalTransaction(int $total)
+{
+    return $total + rand(101, 999);
 }

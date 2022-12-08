@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TransactionDetail extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
-    protected $fillable = [
-        'transaction_id', 'username', 'created_by', 'updated_by', 'deleted_by'
-    ];
+    /**
+     * The attributes that are mass assignable
+     *
+     * @var array
+     */
+    protected $guarded = ['id'];
 
+    /**
+     * Get the transaction that owns the transaction detail.
+     */
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);

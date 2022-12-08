@@ -173,6 +173,21 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
+     * query a travel package's relations existence
+     *
+     * @param  string $relations
+     * @return $this
+     */
+    public function hasRelations(string $relations)
+    {
+        $this->checkDefineModelResultProperty();
+
+        $this->modelResult->has($relations);
+
+        return $this;
+    }
+
+    /**
      * get all travel packages and transform to collection
      *
      * @return \Illuminate\Database\Eloquent\Collection

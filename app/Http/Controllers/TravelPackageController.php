@@ -16,7 +16,7 @@ class TravelPackageController extends Controller
     private $travelPackageService;
 
     /**
-     * Create a new sevice instance and implement authenticatedRoles middleware.
+     * Create a new service instance and implement authenticatedRoles middleware.
      *
      * @return void
      */

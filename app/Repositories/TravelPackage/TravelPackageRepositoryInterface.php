@@ -77,6 +77,14 @@ interface TravelPackageRepositoryInterface
     public function withRelations(array $relations);
 
     /**
+     * query a travel package's relations existence
+     *
+     * @param  string $relations
+     * @return $this
+     */
+    public function hasRelations(string $relations);
+
+    /**
      * counting a travel package's relations
      *
      * @param  array $relations

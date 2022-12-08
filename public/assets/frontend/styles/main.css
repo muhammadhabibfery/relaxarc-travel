@@ -417,8 +417,14 @@ header .bg-text-md .btn-started:hover {
   color: rgb(87, 86, 86);
 }
 
-.btn-cancel-payment:hover {
+.btn-cancel-payment {
+  background-color: #e4e6eb;
   color: #071c4d !important;
+  border-radius: 0;
+}
+.btn-cancel-payment:hover {
+  background-color: #dadde4;
+  color: #04102c !important;
 }
 
 .section-success {

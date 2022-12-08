@@ -129,9 +129,12 @@
                         </table>
                     </div>
                     <div class="join-container">
-                        <a href="{{ route('checkout') }}" class="btn btn-block btn-join-now mt-3 py-2">
-                            Gabung Sekarang
-                        </a>
+                        <form action="{{ route('checkout.proccess', $travelPackage->slug) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-block btn-join-now mt-3 py-2">
+                                {{ __('Join now') }}
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

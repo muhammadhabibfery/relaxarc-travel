@@ -18,7 +18,7 @@ return [
     'after' => 'Kolom :attribute harus setelah :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
     'alpha' => 'The :attribute may only contain letters.',
-    'alpha_dash' => "Kolpm :attribute hanya boleh berisi huruf, angka, dashes '-', dan underscore '_'.",
+    'alpha_dash' => "Kolom :attribute hanya boleh berisi huruf, angka, dashes '-', dan underscore '_'.",
     'alpha_num' => 'The :attribute may only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
     'before' => 'The :attribute must be a date before :date.',
@@ -41,7 +41,7 @@ return [
     'distinct' => 'The :attribute field has a duplicate value.',
     'email' => 'Kolom :attribute harus berformat email yang valid.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
-    'exists' => 'Kolom :attribute yang dipilih tidak valid.',
+    'exists' => 'Kolom :attribute yang dipilih tidak terdaftar.',
     'file' => 'Kolom :attribute harus berformat file.',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
