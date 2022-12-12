@@ -277,6 +277,12 @@
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
+                                                                        <td><strong>Total Harga</strong></td>
+                                                                        <td style="text-align: right;">
+                                                                            @convertCurrency($transaction->total)
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <td><strong>Keberangkatan</strong></td>
                                                                         <td style="text-align: right;">
                                                                             {{

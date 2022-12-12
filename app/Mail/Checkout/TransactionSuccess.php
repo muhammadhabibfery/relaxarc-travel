@@ -37,6 +37,6 @@ class TransactionSuccess extends Mailable
     public function build()
     {
         return $this->view('emails.checkout.transaction-success')
-            ->subject("Notifikasi Pembayaran E-Ticket");
+            ->subject("Notifikasi Transaksi E-Ticket");
     }
 }

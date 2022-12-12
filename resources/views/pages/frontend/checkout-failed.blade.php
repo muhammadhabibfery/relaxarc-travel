@@ -15,7 +15,7 @@
 
     @include('layouts.frontend.partials._styles')
 
-    <title>Checkout Success</title>
+    <title>Checkout Failed</title>
 </head>
 
 <body>
@@ -26,10 +26,10 @@
     <main>
         <div class="section-success d-flex align-items-center pb-5 mt-2">
             <div class="col text-center">
-                <img src="{{ asset('assets/frontend/images/mailbox.jpg') }}" alt="success checkout" class="img-fluid">
-                <h1>Yay! Success</h1>
-                <p>Thank you for completing the payment success</p>
-                <p>we've sent you email for trip instruction <br> please read it as well</p>
+                <img src="{{ asset('assets/frontend/images/checkout-failed.png') }}" alt="success checkout"
+                    class="img-fluid">
+                <h1 class="mt-3">Sorry ...</h1>
+                <p>something went wrong <br> We couldn't process your payment</p>
                 <a href="{{ route('home') }}" class="btn btn-home-page mt-3 px-5">
                     Home Page
                 </a>

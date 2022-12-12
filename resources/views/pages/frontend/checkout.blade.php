@@ -57,7 +57,7 @@
                                         </td>
                                         <td class="align-middle">{{ $transactionDetail->username }}</td>
                                         @if ($transaction->user->username !== $transactionDetail->username &&
-                                        $transaction->status !== 'PENDING')
+                                        $transaction->status === 'IN CART')
                                         <td class="align-middle">
                                             <form
                                                 action="{{ route('checkout.remove', [$transaction->invoice_number, $transactionDetail->username]) }}"
@@ -77,7 +77,7 @@
                         </div>
 
                         <div class="member mt-3">
-                            @if ($transaction->status !== 'PENDING')
+                            @if ($transaction->status === 'IN CART')
                             <h2 class="my-3">Tambah Member</h2>
                             <div class="row">
                                 <div class="col-md-10">
@@ -129,67 +129,23 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th width="50%">Sub Total</th>
-                                <td width="50%" class="text-right">@convertCurrency($transaction->total)</td>
-                            </tr>
-                            <tr>
-                                <th width="50%">Total (+Unique)</th>
+                                <th width="50%">Total</th>
                                 <td width="50%" class="text-right text-total">
                                     <span class="total-unique1">
-                                        @convertCurrency(getUniqueTotalTransaction($transaction->total))
+                                        @convertCurrency($transaction->total)
                                     </span>
                                 </td>
                             </tr>
                         </table>
                         <hr>
-                        <h2>Instruksi Pembayaran</h2>
-                        <p class="payment-instruction">
-                            Selesaikan pembayaran anda sebelum melanjutkan perjalanan yang indah
-                        </p>
-                        <div class="bank">
-                            <div class="bank-item pb-3">
-                                <div class="row">
-                                    <div class="col-2 mr-1">
-                                        <i class="fas fa-credit-card fa-2x"></i>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="description">
-                                            <h3>PT RelaxArc ID</h3>
-                                            <p>
-                                                0812 3456 7890
-                                                <br>
-                                                Bank Central Asia
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bank-item pb-3">
-                                <div class="row">
-                                    <div class="col-2 mr-1">
-                                        <i class="fas fa-credit-card fa-2x"></i>
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="description">
-                                            <h3>PT RelaxArc ID</h3>
-                                            <p>
-                                                0899 8888 7777
-                                                <br>
-                                                Bank Rakyat Indonesia
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    @if ($transaction->status !== 'PENDING')
+                    @if ($transaction->status === 'IN CART')
                     <div class="join-container">
-                        <form action="{{ route('checkout.send-mail', $transaction->invoice_number) }}" method="POST"
+                        <form action="{{ route('checkout.payment', $transaction->invoice_number) }}" method="POST"
                             onsubmit="return submitted(this)" id="myfr">
                             @csrf
                             <button type="submit" class="btn btn-block btn-join-now mt-3 py-2 border-0" id="btnfr">
-                                Checkout
+                                Go to payment
                             </button>
                         </form>
                     </div>

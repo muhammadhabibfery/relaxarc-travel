@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DetaiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\TravelPackageController;
-use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +31,15 @@ Route::middleware(['preventBack'])
 
         Auth::routes(['verify' => true]);
 
+        Route::post('/checkout/payment/notification/{data?}', [CheckoutController::class, 'notificationHandler'])->name('checkout.payment.notification');
+
         Route::middleware(['auth'])
             ->group(function () {
-
                 Route::middleware(['verified', 'hasFullProfile'])
                     ->group(function () {
-                        Route::get('/checkout/success/', [CheckoutController::class, 'success'])
-                            ->name('checkout.success');
+                        Route::get('/checkout/success/', [CheckoutController::class, 'success'])->name('checkout.success');
+                        Route::get('/checkout/pending/', [CheckoutController::class, 'pending'])->name('checkout.pending');
+                        Route::get('/checkout/failed/', [CheckoutController::class, 'failed'])->name('checkout.failed');
                         Route::get('/checkout/{transaction:invoice_number}', [CheckoutController::class, 'index'])->name('checkout.index');
                         Route::post('/checkout/proccess/{travel_package:slug}', [CheckoutController::class, 'proccess'])
                             ->name('checkout.proccess');
@@ -48,8 +49,12 @@ Route::middleware(['preventBack'])
                             ->name('checkout.remove');
                         Route::delete('/checkout/cancel/{transaction:invoice_number}', [CheckoutController::class, 'cancel'])
                             ->name('checkout.cancel');
-                        Route::post('/checkout/send-mail/{transaction:invoice_number}', [CheckoutController::class, 'sendMail'])
-                            ->name('checkout.send-mail');
+                        Route::get("/checkout/payment/finish", [CheckoutController::class, "finish"])->name("checkout.finish");
+                        Route::get("/checkout/payment/unfinish", [CheckoutController::class, "unfinish"])->name("checkout.unfinish");
+                        Route::get("/checkout/payment/error", [CheckoutController::class, "error"])->name("checkout.error");
+                        Route::post('/checkout/payment/{transaction:invoice_number}', [CheckoutController::class, 'sendPaymentCredentials'])->name('checkout.payment');
+                        // Route::post('/checkout/send-mail/{transaction:invoice_number}', [CheckoutController::class, 'sendMail'])
+                        //     ->name('checkout.send-mail');
                         require __DIR__ . '/adminRoutes.php';
                     });
 

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Mail\Checkout\TransactionSuccess;
 use App\Services\TravelPackageService;
 use App\Repositories\Transaction\TransactionRepositoryInterface;
-use Illuminate\Support\Facades\Mail;
+use App\Traits\MidtransPayment;
 
 class CheckoutController extends Controller
 {
+
+    use MidtransPayment;
 
     /**
      * The name of service instance
@@ -155,33 +156,7 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Update the transaction and send payment notification mail
-     *
-     * @param  string $invoiceNumber
-     * @return mixed
-     */
-    public function sendMail(string $invoiceNumber)
-    {
-        $transaction = $this->getOneTransaction($invoiceNumber);
-
-        return $this->checkProccess(
-            function () use ($transaction, $invoiceNumber) {
-                if ($transaction->status !== 'PENDING') {
-                    if (!$transaction->update(['status' => "PENDING"]))
-                        throw new \Exception(trans('status.failed_confirm_payment'));
-
-                    Mail::to($transaction->user)->send(new TransactionSuccess($transaction));
-                }
-
-                return null;
-            },
-            false,
-            'checkout.success'
-        );
-    }
-
-    /**
-     * Show the checkout success and proccess the related data
+     * Show the checkout success view
      *
      * @return \Illuminate\Http\Response
      */
@@ -190,6 +165,27 @@ class CheckoutController extends Controller
         if (request()->session()->has('guest-route')) request()->session()->forget('guest-route');
 
         return view('pages.frontend.checkout-success');
+    }
+
+    /**
+     * Show the checkout pending view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pending()
+    {
+        return view('pages.frontend.checkout-pending');
+    }
+
+
+    /**
+     * Show the checkout failed view
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function failed()
+    {
+        return view('pages.frontend.checkout-failed');
     }
 
     /**

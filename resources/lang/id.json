@@ -154,5 +154,6 @@
     "Success": "Sukses",
     "Failed": "Gagal",
     "Join now": "Gabung Sekarang",
-    "The amount of travel galleries has exceeded capacity (max :items items)": "Jumlah travel galleri sudah melebihi kapasitas (maksimal :items item)"
+    "The amount of travel galleries has exceeded capacity (max :items items)": "Jumlah travel galleri sudah melebihi kapasitas (maksimal :items item)",
+    "The payment failed to process, Please try again": "Pembayaran gagal diproses, Silahkan coba kembali"
 }

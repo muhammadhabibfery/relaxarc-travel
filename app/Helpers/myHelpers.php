@@ -101,14 +101,3 @@ function generateInvoiceNumber()
 {
     return "RelaxArc-" . date('djy') . Str::random(16);
 }
-
-/**
- * get unique total transaction
- *
- * @param  int $total
- * @return int
- */
-function getUniqueTotalTransaction(int $total)
-{
-    return $total + rand(101, 999);
-}
