@@ -69,6 +69,36 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * query specified select columns
+     *
+     * @param  array $columns
+     * @return $this
+     */
+    public function select(array $columns)
+    {
+        if (!$this->modelResult) $this->modelResult = $this->model->query();
+
+        $this->modelResult->select($columns);
+
+        return $this;
+    }
+
+    /**
+     * query a user by roles
+     *
+     * @param  string|null $invoiceNumber
+     * @return $this
+     */
+    public function whereRoles(array|string $roles)
+    {
+        if (!$this->modelResult) $this->modelResult = $this->model->query();
+
+        $this->modelResult->whereJsonContains('roles', $roles);
+
+        return $this;
+    }
+
+    /**
      * query ordering by created_at column descending
      *
      * @return $this
@@ -99,6 +129,18 @@ class UserRepository implements UserRepositoryInterface
     public function paginate(int $number)
     {
         return $this->modelResult->paginate($number);
+    }
+
+    /**
+     * count all travel packages
+     *
+     * @return int
+     */
+    public function count()
+    {
+        if (!$this->modelResult) $this->modelResult = $this->model->query();
+
+        return $this->modelResult->count();
     }
 
     /**

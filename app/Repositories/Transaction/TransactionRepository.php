@@ -45,7 +45,7 @@ class TransactionRepository implements TransactionRepositoryInterface
     {
         $this->modelResult = $this->model->whereHas('travelPackage', fn (Builder $query) => $query->select('id', 'title')->where('title', 'LIKE', "%$keyword%"));
 
-        if (!empty($status) && in_array($status, ['IN CART', 'PENDING', 'SUCCESS', 'CANCEL', 'FAILED'])) $this->modelResult->where('status', $status);
+        if (!empty($status) && in_array($status, ['IN CART', 'PENDING', 'SUCCESS', 'FAILED'])) $this->modelResult->where('status', $status);
 
         return $this;
     }

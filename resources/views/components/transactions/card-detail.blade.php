@@ -23,7 +23,13 @@
                         </tr>
                         <tr>
                             <th>{{ __('Travel packages') }}</th>
-                            <td>{{ $transaction->travelPackage->title }}</td>
+                            <td>
+                                <a href="{{ route('travel-packages.show', [$transaction->travelPackage->slug, $transaction->invoice_number]) }}"
+                                    class="text-bold text-dark-blue text-decoration-none">
+                                    {{ $transaction->travelPackage->title }}
+                                </a>
+                            </td>
+                            {{-- <td>{{ $transaction->travelPackage->title }}</td> --}}
                         </tr>
                         <tr>
                         <tr>

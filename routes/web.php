@@ -28,10 +28,12 @@ Route::middleware(['preventBack'])
             return view('pages.frontend.terms-conditions');
         })->name('terms-conditions');
         Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
+        Route::post("/contact-us", [ContactController::class, "sendMail"])->name("contact.send-mail");
 
         Auth::routes(['verify' => true]);
 
         Route::post('/checkout/payment/notification/{data?}', [CheckoutController::class, 'notificationHandler'])->name('checkout.payment.notification');
+
 
         Route::middleware(['auth'])
             ->group(function () {
@@ -41,6 +43,8 @@ Route::middleware(['preventBack'])
                         Route::get('/checkout/pending/', [CheckoutController::class, 'pending'])->name('checkout.pending');
                         Route::get('/checkout/failed/', [CheckoutController::class, 'failed'])->name('checkout.failed');
                         Route::get('/checkout/{transaction:invoice_number}', [CheckoutController::class, 'index'])->name('checkout.index');
+                        Route::get('/checkout/proccess/{travel_package:slug}', [CheckoutController::class, 'redirectTo'])
+                            ->name('checkout.proccess');
                         Route::post('/checkout/proccess/{travel_package:slug}', [CheckoutController::class, 'proccess'])
                             ->name('checkout.proccess');
                         Route::post('/checkout/create/{transaction:invoice_number}', [CheckoutController::class, 'create'])
@@ -53,8 +57,7 @@ Route::middleware(['preventBack'])
                         Route::get("/checkout/payment/unfinish", [CheckoutController::class, "unfinish"])->name("checkout.unfinish");
                         Route::get("/checkout/payment/error", [CheckoutController::class, "error"])->name("checkout.error");
                         Route::post('/checkout/payment/{transaction:invoice_number}', [CheckoutController::class, 'sendPaymentCredentials'])->name('checkout.payment');
-                        // Route::post('/checkout/send-mail/{transaction:invoice_number}', [CheckoutController::class, 'sendMail'])
-                        //     ->name('checkout.send-mail');
+
                         require __DIR__ . '/adminRoutes.php';
                     });
 
@@ -66,7 +69,3 @@ Route::middleware(['preventBack'])
                 Route::get("/profile/detail/{user:username}/{invoice_number?}", [UserController::class, "show"])->name("detail-profile");
             });
     });
-
-// NOTE:
-// - Integrasi Halaman Utama (Munculkan data2 pada halaman frontend) buat sebaik mungkin. Contoh buat lazy load pada halaman daftar travel package, munculkan 4 data travel package pada halaman home berdasarkan sorting/jumlah pemesanan terbanyak pada travel package, pertimbangkan fitur testimonial, terkahir cek pada halaman checkout apakah ada perlu ditambah/diperbaiki atau tidak.
-// - Ikuti tahap/step selanjutnya pada materi video

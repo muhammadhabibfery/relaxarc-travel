@@ -34,11 +34,14 @@ class HomeController extends Controller
     {
         $travelPackages = $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus()
             ->select(['id', 'title', 'slug', 'location'])
+            ->onlyAvailable()
             ->withRelations(['firstTravelGallery'])
             ->hasRelations('travelGalleries')
             ->limit(4)
             ->get();
 
-        return view('pages.frontend.home', compact('travelPackages'));
+        $memberCount = countOfAllMembers();
+
+        return view('pages.frontend.home', compact('travelPackages', 'memberCount'));
     }
 }

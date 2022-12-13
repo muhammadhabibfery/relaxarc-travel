@@ -8,6 +8,8 @@ use App\Models\TravelPackage;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\Transaction\TransactionRepository;
 use App\Repositories\TravelPackage\TravelPackageRepository;
+use App\Repositories\User\UserRepository;
+
 
 function uploadImage($request, $directoryName, $fieldImage = null)
 {
@@ -17,7 +19,7 @@ function uploadImage($request, $directoryName, $fieldImage = null)
         if ($fieldImage) Storage::disk('public')->delete($fieldImage);
 
         $fileName = explode('.', $request->file('image')->getClientOriginalName());
-        $fileName = head($fileName) . rand(1, 20) . '.' . last($fileName);
+        $fileName = head($fileName) . rand(1, 100) . '.' . last($fileName);
         $file = Storage::disk('public')
             ->putFileAs($directoryName, $request->file('image'), $fileName);
     }
@@ -39,11 +41,24 @@ function checkRoles(array $availableRoles, array $userRoles)
     return (count(array_intersect($availableRoles, $userRoles)) >= $totalRoles);
 }
 
-function createdUpdatedDeletedBy($id)
+/**
+ *  query a user who create or update or delete data
+ *
+ * @param  int $id
+ * @return Illuminate\Database\Eloquent\Model
+ */
+function createdUpdatedDeletedBy(int $id)
 {
-    return User::select('id', 'name')->find($id);
+    return (new UserRepository(new User))->select(['id', 'name'])->firstOrNotFound();
 }
 
+/**
+ * format travel package duration
+ *
+ * @param  string $value
+ * @param  string $locale
+ * @return string
+ */
 function formatTravelPackageDuration($value, $locale)
 {
     $languageFormat = ($locale == 'id')
@@ -53,19 +68,45 @@ function formatTravelPackageDuration($value, $locale)
     return "$value $languageFormat";
 }
 
+/**
+ * count of all travel packages
+ *
+ * @return int
+ */
 function countOfAllTravelPackages()
 {
     return (new TravelPackageRepository(new TravelPackage))->count();
 }
 
+/**
+ * count of all transactions
+ *
+ * @return int
+ */
 function countOfAllTransactions()
 {
     return (new TransactionRepository(new Transaction))->count();
 }
 
+/**
+ * count of all transaction status
+ *
+ * @param  string $status
+ * @return int
+ */
 function countOfTransactionStatus(string $status)
 {
     return (new TransactionRepository(new Transaction))->countWithStatus($status);
+}
+
+/**
+ * count of all user who has member status
+ *
+ * @return int
+ */
+function countOfAllMembers()
+{
+    return (new UserRepository(new User()))->whereRoles('MEMBER')->count();
 }
 
 /**

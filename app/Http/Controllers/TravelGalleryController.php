@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TravelGallery;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\TravelGalleryRequest;
 use App\Repositories\TravelGallery\TravelGalleryRepositoryInterface;
 use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\ImageHandler;
 
 class TravelGalleryController extends Controller
 {
+
+    use ImageHandler;
+
     /**
      * The name of redirect route path
      *
@@ -97,10 +99,10 @@ class TravelGalleryController extends Controller
             function () use ($travelPackageId, $request, $data) {
                 if (!$this->checkAmountOfTravelGalleries($travelPackageId)) throw new \Exception(trans('The amount of travel galleries has exceeded capacity (max :items items)', ['items' => self::MAXIMUM_AMOUNT_TRAVELGALLERIES]));
 
-                $data['name'] = $this->createImage($request);
+                $data['name'] = $this->createImage($request, null, [[1024, 683], [400, 267]], 'app/public/travel-galleries', 'app/public/travel-galleries/thumbnails');
 
                 if (!$this->travelGalleryRepository->create($data)) {
-                    $this->deleteImage($data['name']);
+                    $this->deleteImage($data['name'], 'travel-galleries', 'travel-galleries/thumbnails');
                     throw new \Exception(trans('status.failed_create_new_travel_gallery'));
                 }
             }
@@ -126,29 +128,6 @@ class TravelGalleryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TravelGallery $travelGallery)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TravelGallery  $travelGallery
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TravelGallery $travelGallery)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  string  $slug
@@ -167,7 +146,7 @@ class TravelGalleryController extends Controller
 
                 if (!$travelGallery->delete()) throw new \Exception(trans('status.failed_delete_travel_gallery'));
 
-                $this->deleteImage($name);
+                $this->deleteImage($name, 'travel-galleries', 'travel-galleries/thumbnails');
             }
         );
     }
@@ -209,30 +188,30 @@ class TravelGalleryController extends Controller
         return $totalTravelGalleries < $max;
     }
 
-    /**
-     * create image(s) and thumbnail(s) for each travel gallery
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return string
-     */
-    private function createImage(Request $request)
-    {
-        if ($request->hasFile('image')) {
-            $fileName = $this->getFileName($request->file('image')->getClientOriginalName());
+    // /**
+    //  * create image(s) and thumbnail(s) for each travel gallery
+    //  *
+    //  * @param  \Illuminate\Http\Request $request
+    //  * @return string
+    //  */
+    // private function createImage(Request $request)
+    // {
+    //     if ($request->hasFile('image')) {
+    //         $fileName = $this->getFileName($request->file('image')->getClientOriginalName());
 
-            $path = $this->checkDirectory($fileName);
+    //         $path = $this->checkDirectory($fileName);
 
-            Image::make($request->file('image'))
-                ->resize(1024, 683)
-                ->save($path['pathImage']);
+    //         Image::make($request->file('image'))
+    //             ->resize(1024, 683)
+    //             ->save($path['pathImage']);
 
-            Image::make($request->file('image'))
-                ->resize(400, 267)
-                ->save($path['pathThumbnail']);
+    //         Image::make($request->file('image'))
+    //             ->resize(400, 267)
+    //             ->save($path['pathThumbnail']);
 
-            return $fileName;
-        }
-    }
+    //         return $fileName;
+    //     }
+    // }
 
     /**
      * create file name from request file
@@ -265,19 +244,5 @@ class TravelGalleryController extends Controller
             'pathImage' => $pathImage .= "/$fileName",
             'pathThumbnail' => $pathThumbnail .= "/$fileName"
         ];
-    }
-
-    /**
-     * delete image file(s) from application directory
-     *
-     * @param  string $fileName
-     * @return void
-     */
-    private function deleteImage(string $fileName)
-    {
-        Storage::disk('public')
-            ->delete("travel-galleries/$fileName");
-        Storage::disk('public')
-            ->delete("travel-galleries/thumbnails/$fileName");
     }
 }

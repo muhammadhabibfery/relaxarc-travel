@@ -19,21 +19,17 @@
     <!-- Statistics -->
     <div class="container">
         <section class="section-stats row justify-content-center text-center" id="stats">
-            <div class="col-sm-3 col-md-2 stats-detail">
-                <h2>20K</h2>
+            <div class="col-md-3 stats-detail">
+                <h2>{{ $memberCount }}</h2>
                 <p>Members</p>
             </div>
-            <div class="col-sm-3 col-md-2 stats-detail">
-                <h2>12</h2>
-                <p>Countries</p>
+            <div class="col-md-3 stats-detail">
+                <h2>{{ $travelPackages->count() }}</h2>
+                <p>Destination</p>
             </div>
-            <div class="col-sm-3 col-md-2 stats-detail">
-                <h2>3K</h2>
+            <div class="col-md-3 stats-detail">
+                <h2>{{ $travelPackages->count() * 2}}</h2>
                 <p>Hotel</p>
-            </div>
-            <div class="col-sm-3 col-md-2 stats-detail">
-                <h2>72</h2>
-                <p>Partners</p>
             </div>
         </section>
     </div>
@@ -127,39 +123,6 @@
                         <hr>
                         <p class="trip-to mt-2">
                             Trip to Ubud
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-4">
-                    <div class="card card-testimonial text-center">
-                        <div class="testimonial-content">
-                            <img src="{{ asset('assets/frontend/images/profile.jpg') }}" alt="user"
-                                class="mb-4 rounded-circle img-fluid">
-                            <h3 class="mb-4">Mahmud Alexander</h3>
-                            <p class="testimonial">
-                                " Is simply dummy text of the printing and typesetting industry "
-                            </p>
-                        </div>
-                        <hr>
-                        <p class="trip-to mt-2">
-                            Trip to Bromo
-                        </p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-4">
-                    <div class="card card-testimonial text-center">
-                        <div class="testimonial-content">
-                            <img src="{{ asset('assets/frontend/images/profile.jpg') }}" alt="user"
-                                class="mb-4 rounded-circle img-fluid">
-                            <h3 class="mb-4">Jonathan Juki</h3>
-                            <p class="testimonial">
-                                " It has survived not only five centuries, but also the leap into electronic
-                                typesetting "
-                            </p>
-                        </div>
-                        <hr>
-                        <p class="trip-to mt-2">
-                            Trip to Malioboro
                         </p>
                     </div>
                 </div>

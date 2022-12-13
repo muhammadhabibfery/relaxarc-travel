@@ -33,7 +33,7 @@ class TravelPackageController extends Controller
      */
     public function frontIndex()
     {
-        $travelPackages = $this->travelPackageService->takeAllTravelPackagesWithRelations(['firstTravelGallery']);
+        $travelPackages = $this->travelPackageService->takeAllAvailableTravelPackagesWithRelations(['firstTravelGallery']);
 
         return view('pages.frontend.travel-packages-index', compact('travelPackages'));
     }
@@ -93,11 +93,11 @@ class TravelPackageController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show(?string $slug)
+    public function show(?string $slug, ?string $invoiceNumber = null)
     {
         $travelPackage = $this->travelPackageService->takeOneTravelPackage($slug);
 
-        return view('pages.backend.travel-packages.detail', compact('travelPackage'));
+        return view('pages.backend.travel-packages.detail', compact('travelPackage', 'invoiceNumber'));
     }
 
     /**

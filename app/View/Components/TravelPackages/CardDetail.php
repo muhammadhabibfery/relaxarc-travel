@@ -7,17 +7,17 @@ use Illuminate\View\Component;
 class CardDetail extends Component
 {
 
-    public $travelPackage, $route, $type;
+    public $travelPackage, $invoiceNumber, $type;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($travelPackage, $route, $type)
+    public function __construct($travelPackage, $invoiceNumber, $type)
     {
         $this->travelPackage = $travelPackage;
-        $this->route = $route;
+        $this->invoiceNumber = $invoiceNumber;
         $this->type = $type;
     }
 

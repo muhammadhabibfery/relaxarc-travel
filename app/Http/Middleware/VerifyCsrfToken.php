@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'checkout/payment/notification'
+        'checkout/payment/notification',
+        'admin/users/generate-username'
     ];
 }

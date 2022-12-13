@@ -164,6 +164,19 @@
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
+                                <label class="input-group-text" for="username"><i class="fas fa-user-edit"></i></label>
+                            </div>
+                            <input type="text" name="username"
+                                class="form-control @error('username') is-invalid @enderror" id="username"
+                                value="{{ old('username') }}" placeholder="Username">
+                            @error('username')
+                            <span class="invalid-feedback error-background" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
                                 <label class="input-group-text" for="email"><i class="fas fa-envelope"></i></label>
                             </div>
                             <input type="email" name="email" value="{{ old('email') }}"
@@ -198,8 +211,8 @@
                                 placeholder="{{ __('Password Confimation') }}" id="password_confirmation">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn float-right login_btn"
-                                id="btnfr">{{ __('Register') }}</button>
+                            <button type="submit" class="btn float-right login_btn" id="btnfr">{{ __('Register')
+                                }}</button>
                         </div>
                     </form>
                 </div>
@@ -244,6 +257,34 @@
                     return true;
                 });
             }
+        });
+    </script>
+
+    <script>
+        const inputNameElement = document.querySelector('#name');
+        const inputUsernameElement = document.querySelector('#username');
+
+        inputNameElement.addEventListener('change', function(){
+            const inputNameValue = inputNameElement.value;
+
+            fetch("{{ route('users.generate-username') }}", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    "name": inputNameValue
+                })
+            })
+            .then(response => response.json())
+            .then(data => inputUsernameElement.value = data.username)
+            .catch(error => {
+                alert("500 internal server error, {{ __('Refresh the page') }}");
+                location.reload();
+            });
         });
     </script>
 

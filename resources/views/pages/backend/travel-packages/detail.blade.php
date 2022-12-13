@@ -6,8 +6,7 @@
 <div class="container-fluid">
 
     <!--Page Heading & Content Detail -->
-    <x-travel-packages.card-detail :travelPackage="$travelPackage" :route="route('travel-packages.index')"
-        type="detail" />
+    <x-travel-packages.card-detail :travelPackage="$travelPackage" :invoiceNumber="$invoiceNumber" type="detail" />
 
 </div>
 @endsection

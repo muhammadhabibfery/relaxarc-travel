@@ -64,10 +64,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        TravelPackage::factory(100)->create();
-
-        Transaction::factory(10)->create();
-
-        TransactionDetail::factory(20)->create();
+        // TravelPackage::factory(100)->create();
     }
 }

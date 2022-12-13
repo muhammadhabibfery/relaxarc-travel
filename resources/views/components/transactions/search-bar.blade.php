@@ -12,7 +12,6 @@
                         <option value='IN CART' {{ request()->status == 'IN CART' ? 'selected' : '' }}>IN CART</option>
                         <option value='PENDING' {{ request()->status == 'PENDING' ? 'selected' : '' }}>PENDING</option>
                         <option value='SUCCESS' {{ request()->status == 'SUCCESS' ? 'selected' : '' }}>SUCCESS</option>
-                        <option value='CANCEL' {{ request()->status == 'CANCEL' ? 'selected' : '' }}>CANCEL</option>
                         <option value='FAILED' {{ request()->status == 'FAILED' ? 'selected' : '' }}>FAILED</option>
                     </select>
                 </div>

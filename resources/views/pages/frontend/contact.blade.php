@@ -10,7 +10,7 @@
     <!-- End Header -->
 
     <!-- Detail Content -->
-    <section class="section-detail-content">
+    <section class="section-detail-content mb-5">
         <div class="container">
             <!-- Breadcrumb -->
             <div class="row">
@@ -29,6 +29,15 @@
             </div>
             <!-- End Breadcrumb -->
 
+            @if (session('status'))
+            <div class="alert alert-{{ session('color') }} alert-dismissible fade show text-center" role="alert">
+                {!! session('status') !!}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
+
             <!-- Contact -->
             <div class="row">
                 <div class="col-lg-7 pl-lg-0 mb-3 mb-lg-0">
@@ -38,24 +47,50 @@
                             <h2 class="d-inline-block ml-3">Kontak Kami</h2>
                         </div>
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('contact.send-mail') }}" method="POST" id="myfr"
+                                onsubmit="return submitted(this)">
+                                @csrf
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <input type="text" name="name"
+                                        class="form-control @error('name') is-invalid @enderror" id="name">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" name="email"
+                                        class="form-control @error('email') is-invalid @enderror" id="email">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="hp">No. Handphone</label>
-                                    <input type="number" class="form-control" id="hp">
+                                    <input type="number" name="phone"
+                                        class="form-control @error('phone') is-invalid @enderror" id="hp">
+                                    @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="message">Pesan</label>
-                                    <textarea class="form-control" id="message" rows="3"></textarea>
+                                    <textarea name="message" class="form-control @error('message') is-invalid @enderror"
+                                        id="message" rows="3"></textarea>
+                                    @error('message')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                                <button type="submit" class="btn btn-block btn-orange">Kirim</button>
+                                <button type="submit" class="btn btn-block btn-orange" id="btnfr">Kirim</button>
                             </form>
                         </div>
                     </div>

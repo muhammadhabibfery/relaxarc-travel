@@ -16,7 +16,7 @@ trait MidtransPayment
      *
      * @var array
      */
-    public $availablePayments = ['bri_va', 'bni_va', 'gopay', 'shopeepay', 'indomart'];
+    public $availablePayments = ['bri_va', 'bni_va', 'gopay', 'shopeepay'];
 
     /**
      * set midtrans configuration
@@ -40,7 +40,7 @@ trait MidtransPayment
     private function setParams(object $transaction)
     {
         return [
-            'transaction_details' => ['order_id' => $transaction->invoice_number, 'gross_amount' => $transaction->total],
+            'transaction_details' => ['order_id' => $transaction->invoice_number, 'gross_amount' => (int) $transaction->total],
             'customer_details' => ['first_name' => $transaction->user->name, 'email' => $transaction->user->email],
             'enabled_payments' => $this->availablePayments,
             'vtweb' => []

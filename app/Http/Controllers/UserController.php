@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\ImageHandler;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    use ImageHandler;
+
     /**
      * The name of redirect route path
      *
@@ -164,9 +167,12 @@ class UserController extends Controller
             self::ROUTE_NAME,
             'status.delete_user',
             function () use ($user, $avatarName) {
-                if (!$user->update(['deleted_by' => auth()->id()])) throw new \Exception(trans('status.failed_update_user'));
+                if (!$user->update(['deleted_by' => auth()->id(), 'avatar' => null]))
+                    throw new \Exception(trans('status.failed_update_user'));
+
                 if (!$user->delete()) throw new \Exception(trans('status.failed_delete_user'));
-                $this->deleteAvatar($avatarName);
+
+                if ($avatarName) $this->deleteImage($avatarName, 'avatars');
             },
             true
         );
@@ -229,17 +235,6 @@ class UserController extends Controller
         $data[] = strtoupper($roles);
 
         return $data;
-    }
-
-    /**
-     * delete a user's svatar
-     *
-     * @param  string|null $avatar
-     * @return void
-     */
-    private function deleteAvatar(?string $avatar = null)
-    {
-        if ($avatar) Storage::disk('public')->delete($avatar);
     }
 
     /**

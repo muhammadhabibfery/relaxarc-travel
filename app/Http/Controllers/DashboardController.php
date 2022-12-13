@@ -14,9 +14,8 @@ class DashboardController extends Controller
         $totalInCartTransactions = countOfTransactionStatus('IN CART');
         $totalPendingTransactions = countOfTransactionStatus('PENDING');
         $totalSuccessTransactions = countOfTransactionStatus('SUCCESS');
-        $totalCancelTransactions = countOfTransactionStatus('CANCEL');
         $totalFailedTransactions = countOfTransactionStatus('FAILED');
 
-        return view('pages.backend.dashboard', compact('totalTravelPackages', 'totalTransactions', 'totalInCartTransactions', 'totalPendingTransactions', 'totalSuccessTransactions', 'totalCancelTransactions', 'totalFailedTransactions'));
+        return view('pages.backend.dashboard', compact('totalTravelPackages', 'totalTransactions', 'totalInCartTransactions', 'totalPendingTransactions', 'totalSuccessTransactions',  'totalFailedTransactions'));
     }
 }

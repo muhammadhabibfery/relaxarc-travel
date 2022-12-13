@@ -77,9 +77,6 @@
                     <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} SUCCESS
                         <span class="float-right">{{ $totalSuccessTransactions }}</span>
                     </h4>
-                    <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} CANCEL
-                        <span class="float-right">{{ $totalCancelTransactions }}</span>
-                    </h4>
                     <h4 class="small font-weight-bold mb-4">{{ __('Transactions') }} FAILED
                         <span class="float-right">{{ $totalFailedTransactions }}</span>
                     </h4>

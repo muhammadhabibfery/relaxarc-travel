@@ -50,6 +50,13 @@ class CheckoutController extends Controller
         return view('pages.frontend.checkout', compact('transaction'));
     }
 
+    public function redirectTo(string $slug)
+    {
+        if (!auth()->check()) return redirect()->route('travel-packages.front.detail', $slug);
+
+        return $this->proccess($slug);
+    }
+
     /**
      * proccessing the data before redirect to checkout view
      *
@@ -227,7 +234,7 @@ class CheckoutController extends Controller
 
         if ($username) $transactionDetails->where('username', $username)->firstOrFail();
 
-        return $transactionDetails->forceDelete();
+        return $transactionDetails->delete();
     }
 
     /**

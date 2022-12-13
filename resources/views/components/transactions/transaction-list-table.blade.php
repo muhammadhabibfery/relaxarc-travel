@@ -43,8 +43,6 @@
                                 @if ($file == 'index')
                                 <a href="{{ route('transactions.show', $transaction) }}"
                                     class="btn btn-success btn-sm my-1">Detail</a>
-                                <a href="{{ route('transactions.edit', $transaction) }}"
-                                    class="btn btn-warning btn-sm my-1">Edit</a>
                                 <a href="#" class="btn btn-danger btn-sm my-1" data-toggle="modal"
                                     data-target="#deletetransaction{{ $transaction->invoice_number }}Modal">{{
                                     __('Delete') }}</a>

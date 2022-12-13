@@ -7,7 +7,9 @@
         }}
     </h1>
     @endif
-    <a href="{{ $route }}" class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back')
+
+    <a href="{{ str_contains(url()->previous(), 'transactions') ? route('transactions.show', $invoiceNumber) : route('travel-packages.index') }}"
+        class="btn btn-secondary d-none d-md-block mr-2">{{ __('Back')
         }}</a>
 </div>
 

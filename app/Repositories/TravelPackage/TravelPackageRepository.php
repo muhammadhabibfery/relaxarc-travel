@@ -121,6 +121,20 @@ class TravelPackageRepository implements TravelPackageRepositoryInterface
     }
 
     /**
+     * query only available travel packages
+     *
+     * @return $this
+     */
+    public function onlyAvailable()
+    {
+        $this->checkDefineModelResultProperty();
+
+        $this->modelResult->where('date_departure', '>', now());
+
+        return $this;
+    }
+
+    /**
      * query ordering by created_at column descending
      *
      * @return $this

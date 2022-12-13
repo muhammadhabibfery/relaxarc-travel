@@ -11,27 +11,25 @@
         <div class="collapse navbar-collapse" id="navb">
             <ul class="navbar-nav ml-auto mr-3">
                 <li class="nav-item mx-md-2">
-                    <a href="{{ route('home') }}" class="nav-link active">Home</a>
+                    <a href="{{ route('home') }}" class="nav-link{{ request()->is('/') ? ' active' : '' }}">Home</a>
                 </li>
                 <li class="nav-item mx-md-2">
-                    <a href="#" class="nav-link">Paket Travel</a>
+                    <a href="{{ route('travel-packages.front.index') }}"
+                        class="nav-link{{ request()->is('travel-packages*') ? ' active' : '' }}">
+                        {{ __('Travel Packages') }}
+                    </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbard" data-toggle="dropdown">Service</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Link</a>
-                        <a href="#" class="dropdown-item">Link 2</a>
-                        <a href="#" class="dropdown-item">Link 3</a>
-                    </div>
+                <li class="nav-item mx-md-2">
+                    <a href="{{ route('contact') }}" class="nav-link{{ request()->is('contact-us') ? ' active' : '' }}">
+                        {{ __('Contact') }}
+                    </a>
                 </li>
-                {{-- <li class="nav-item mx-md-2">
-                    <a href="#" class="nav-link">Testimonial</a>
-                </li> --}}
+
                 <!-- Nav Item - User Information -->
                 @auth
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link{{ request()->is('profile*') ? ' active' : '' }}" href="#" id="userDropdown"
+                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ __('Account') }}
                     </a>
                     <!-- Dropdown - User Information -->

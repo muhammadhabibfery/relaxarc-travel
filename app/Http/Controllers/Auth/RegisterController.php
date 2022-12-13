@@ -55,6 +55,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'min:3', 'max:255',],
+            'username' => ['required', 'min:5', 'max:255', 'alpha_dash', 'unique:users,username'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'confirmed'],
         ]);
@@ -72,7 +73,7 @@ class RegisterController extends Controller
             'name' => preg_replace("/[^[:alnum:]\\.\\,\\_\\-\\'\\@\\ ]/", "", $data['name']),
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'username' => preg_replace("/[^[:alnum:]\\-\\_]/", "", Str::lower(Str::of($data['name'])->replace(' ', ''))) . rand(1, 99),
+            'username' => strtolower($data['username']),
             'roles' => json_encode(["MEMBER"]),
         ]);
     }

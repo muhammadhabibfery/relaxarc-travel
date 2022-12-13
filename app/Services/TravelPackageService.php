@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Repositories\TravelPackage\TravelPackageRepositoryInterface;
+use App\Traits\ImageHandler;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TravelPackageService
 {
+
+    use ImageHandler;
 
     /**
      * The name of temporary model instance
@@ -55,10 +58,11 @@ class TravelPackageService
      * @param  Illuminate\Http\Request $request
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function takeAllTravelPackagesWithRelations(array $relations)
+    public function takeAllAvailableTravelPackagesWithRelations(array $relations)
     {
         return $this->travelPackageRepository->getAllTravelPackagesByKeywordOrStatus()
             ->select(['id', 'title', 'slug', 'location'])
+            ->onlyAvailable()
             ->withRelations($relations)
             ->paginate(10);
     }
@@ -214,12 +218,7 @@ class TravelPackageService
         $galleries = $this->temporaryModel->travelGalleries;
 
         if ($galleries->count()) {
-            foreach ($galleries as $gallery) {
-                Storage::disk('public')
-                    ->delete("travel-galleries/{$gallery->name}");
-                Storage::disk('public')
-                    ->delete("travel-galleries/thumbnails/{$gallery->name}");
-            }
+            foreach ($galleries as $gallery) $this->deleteImage($gallery->name, 'travel-galleries', 'travel-galleries/thumbnails');
         }
 
         return $this;

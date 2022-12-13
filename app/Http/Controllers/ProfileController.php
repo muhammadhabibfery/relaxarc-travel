@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
-use Illuminate\Support\Facades\Storage;
+use App\Traits\ImageHandler;
 
 class ProfileController extends Controller
 {
+
+    use ImageHandler;
+
     /**
      * The name of user model instance
      *
@@ -53,7 +56,10 @@ class ProfileController extends Controller
      */
     public function updateProfile(ProfileRequest $request)
     {
-        $data = array_merge($request->validated(), ['avatar' => uploadImage($request, 'avatars', $this->user->avatar)]);
+        $data = array_merge(
+            $request->validated(),
+            ['avatar' => $this->createImage($request, $this->user->avatar, [], 'app/public/avatars')]
+        );
 
         return $this->checkProccess(function () use ($data) {
             if (!$this->user->update($data)) throw new \Exception(trans('status.failed_update_profile'));
@@ -71,7 +77,7 @@ class ProfileController extends Controller
             function () {
                 $avatarname = $this->user->avatar;
                 if ($this->user->update(['avatar' => null])) {
-                    Storage::disk('public')->delete($avatarname);
+                    $this->deleteImage($avatarname, 'avatars');
                 } else {
                     throw new \Exception(trans('status.failed_delete_avatar'));
                 }

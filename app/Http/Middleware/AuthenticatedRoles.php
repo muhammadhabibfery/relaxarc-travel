@@ -16,6 +16,8 @@ class AuthenticatedRoles
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+        if ($request->routeIs('users.generate-username')) return $next($request);
+
         return (checkRoles($roles, $request->user()->roles)) ? $next($request) : abort(403);
     }
 }

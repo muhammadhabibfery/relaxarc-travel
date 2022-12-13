@@ -55,6 +55,13 @@ interface TravelPackageRepositoryInterface
     public function select(array $columns);
 
     /**
+     * query only available travel packages
+     *
+     * @return $this
+     */
+    public function onlyAvailable();
+
+    /**
      * query ordering by created_at column descending
      *
      * @return $this

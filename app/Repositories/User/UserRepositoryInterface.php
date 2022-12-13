@@ -23,6 +23,14 @@ interface UserRepositoryInterface
     public function findOneUserByUsername(?string $username);
 
     /**
+     * query specified select columns
+     *
+     * @param  array $columns
+     * @return $this
+     */
+    public function select(array $columns);
+
+    /**
      * query ordering by created_at column descending
      *
      * @return $this
