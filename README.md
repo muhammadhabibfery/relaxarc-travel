@@ -6,8 +6,7 @@
 
 This is a travel app platform I made mostly using Laravel ^8.12
 
-| [Features][] | [Requirements][] | [Install][] | [How to setting][] | [License][] |
-
+| [Features][] | [Requirements][] | [Install][] | [How to setting][] | [DB Structure][] | [License][] |
 
 ## Features 
 - |<h3>Menu  </h3>       |       Description                                                                  |
@@ -96,8 +95,11 @@ php artisan key:generate
 Create a symbolic link
 
 ```
-php artisan storage:key
+php artisan storage:link
 ```
+
+## Database Structure
+<img src="public/assets/erd.png" alt="Database Structure">
 
 
 ## License
@@ -109,6 +111,7 @@ php artisan storage:key
 [Requirements]:#requirements
 [Install]:#install
 [How to setting]:#how-to-setting
+[DB Structure]:#database-structure
 [License]:#license
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
