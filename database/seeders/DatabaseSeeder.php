@@ -49,21 +49,7 @@ class DatabaseSeeder extends Seeder
                 'status' => 'ACTIVE',
             ]
         );
-        User::create(
-            [
-                'name' => 'Fery leonardo',
-                'email' => 'feryleonardo@gmails.com',
-                'email_verified_at' => now(),
-                'password' => Hash::make('aaaaa'), // password
-                'remember_token' => Str::random(10),
-                'username' => 'feryleonardo',
-                'roles' => '["MEMBER"]',
-                'phone' => '0897654324',
-                'address' => 'jl.in dulu sih',
-                'status' => 'ACTIVE',
-            ]
-        );
 
-        // TravelPackage::factory(100)->create();
+        TravelPackage::factory(100)->create();
     }
 }

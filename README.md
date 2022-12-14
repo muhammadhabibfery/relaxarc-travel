@@ -1,3 +1,116 @@
+<p align="center">
+<img align="center" src="http://ForTheBadge.com/images/badges/built-with-love.svg"> <img align="center" src="http://ForTheBadge.com/images/badges/makes-people-smile.svg"> <img align="center" src="http://ForTheBadge.com/images/badges/built-by-developers.svg">
+</p>
+
+# Laravel Travel App Platform
+
+This is a travel app platform I made mostly using Laravel ^8.12
+
+| [Features][] | [Requirements][] | [Install][] | [How to setting][] | [License][] |
+
+
+## Features 
+- |<h3>Menu  </h3>       |       Description                                                                  |
+  |-----------------------|-----------------------------------------------------------------------------------|
+  |<b>Dashboard           | </b>contains information about all menu.                               |
+  |<b>Travel Package      | </b>Manage all types of travel packages.                                          |
+  |<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
+  |<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
+- Travel Platform Solution
+- Open Source
+
+## Requirements
+
+	PHP = ^7.3|^8.0
+    laravel = ^8.12
+    laravel-ui = ^3.2
+    intervention/image = ^2.5
+    midtrans/midtrans-php = ^2.5
+
+## Install
+
+Clone repo
+
+```
+git clone https://github.com/muhammadhabibfery/relaxarc-travel.git
+```
+
+Install Composer
+
+
+[Download Composer](https://getcomposer.org/download/)
+
+
+composer update/install 
+
+```
+composer install
+```
+
+Install Nodejs
+
+
+[Download Node.js](https://nodejs.org/en/download/)
+
+
+NPM dependencies
+```
+npm install
+```
+
+Using Laravel Mix 
+
+```
+npm run dev
+```
+
+## How to setting 
+
+Go into .env file change Database and Email credentials.
+Then setup the midtrans (Payment Gateway) with your credentials
+```
+MIDTRANS_SERVER_KEY = <Your-Server-Key>
+MIDTRANS_PRODUCTION = false
+MIDTRANS_SANITIZED = true
+MIDTRANS_3DS = true|false
+```
+
+Run the migration
+
+```
+php artisan migrate
+```
+
+Or run the migration with seeder if you want seeding the related data
+
+```
+php artisan migrate --seed
+```
+
+Generate a New Application Key
+
+```
+php artisan key:generate
+```
+
+Create a symbolic link
+
+```
+php artisan storage:key
+```
+
+
+## License
+
+> Copyright (C) 2022 Muhammad Habib Fery.  
+**[⬆ back to top](#laravel-travel-app-platform)**
+
+[Features]:#features
+[Requirements]:#requirements
+[Install]:#install
+[How to setting]:#how-to-setting
+[License]:#license
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
@@ -6,57 +119,3 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
