@@ -11,10 +11,12 @@ This is a travel app platform I made mostly using Laravel ^8.12
 ## Features 
 - |<h3>Menu  </h3>       |       Description                                                                  |
   |-----------------------|-----------------------------------------------------------------------------------|
-  |<b>Dashboard           | </b>contains information about all menu.                               |
+  |<b>Dashboard           | </b>Contains information about all menu.                                          |
+  |<b>Admin               | </b>Manage admin and employee roles.                                              |
   |<b>Travel Package      | </b>Manage all types of travel packages.                                          |
   |<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
   |<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
+  |<b>Profile             | </b>Edit user's profile and password.                                             |
 - Travel Platform Solution
 - Open Source
 
