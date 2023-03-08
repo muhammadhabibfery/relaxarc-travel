@@ -106,7 +106,7 @@ function countOfTransactionStatus(string $status)
  */
 function countOfAllMembers()
 {
-    return (new UserRepository(new User()))->whereRoles('MEMBER')->count();
+    return (new UserRepository(new User()))->whereRoles("MEMBER")->count();
 }
 
 /**
@@ -116,7 +116,7 @@ function countOfAllMembers()
  * @param  string $data
  * @return string
  */
-function transformDateFormat(string $data, string $format)
+function transformDateFormat(string $data, string $format): string
 {
     return Carbon::parse($data)->translatedFormat($format);
 }

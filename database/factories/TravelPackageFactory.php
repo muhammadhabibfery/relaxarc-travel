@@ -16,7 +16,7 @@ class TravelPackageFactory extends Factory
     public function definition()
     {
         $title = "{$this->faker->city()} {$this->faker->numberBetween(1, 100000)}";
-        $date_departure = $this->faker->dateTimeBetween('-1week', '+1 week', 'Asia/Jakarta');
+        $date_departure = $this->faker->dateTimeBetween('-1week', '+1 week', 'Asia/Jakarta')->format('l, j F Y H:i');
         $duration = $this->faker->numberBetween(1, 7);
         return [
             'title' => $title,
@@ -27,7 +27,7 @@ class TravelPackageFactory extends Factory
             'language' => $this->faker->randomElement(['indonesia,', 'english', 'arabic']),
             'foods' => "{$this->faker->randomElement(['Nasi Uduk', 'Nasi Goreng', 'gado-gado', 'lontong sayur'])},{$this->faker->randomElement(['Nasi Uduk', 'Nasi Goreng', 'gado-gado', 'lontong sayur'])}",
             'date_departure' => $date_departure,
-            'date_completion' => Carbon::parse($date_departure)->addDays($duration),
+            'date_completion' => Carbon::parse($date_departure)->addDays($duration)->format('l, j F Y H:i'),
             'duration' => $duration,
             'type' => $this->faker->randomElement(['Open Trip', 'Private Group']),
             'price' => $this->faker->numberBetween(250000, 750000),

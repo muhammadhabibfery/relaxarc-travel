@@ -9,7 +9,6 @@ use App\Traits\MidtransPayment;
 
 class CheckoutController extends Controller
 {
-
     use MidtransPayment;
 
     /**
@@ -169,7 +168,7 @@ class CheckoutController extends Controller
      */
     public function success()
     {
-        if (request()->session()->has('guest-route')) request()->session()->forget('guest-route');
+        if (session()->has('guest-route')) session()->forget('guest-route');
 
         return view('pages.frontend.checkout-success');
     }

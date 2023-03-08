@@ -29,7 +29,7 @@ class ProfileRequest extends FormRequest
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'min:5', 'max:255', 'alpha_dash', Rule::unique('users', 'username')->ignore($this->user())],
                 'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user())],
-                'phone' => ['required', 'digits_between:10,12'],
+                'phone' => ['required', 'digits_between:10,12', Rule::unique('users', 'phone')->ignore($this->user())],
                 'address' => ['required', 'min:10', 'max:300'],
                 'image' => ['file', 'image', 'max:2500', 'nullable'],
             ];

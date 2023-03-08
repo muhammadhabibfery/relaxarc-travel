@@ -28,7 +28,7 @@ Route::middleware(['preventBack'])
             return view('pages.frontend.terms-conditions');
         })->name('terms-conditions');
         Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
-        Route::post("/contact-us", [ContactController::class, "sendMail"])->name("contact.send-mail");
+        Route::post("/contact-us", [ContactController::class, "sendMail"])->name("contact.send-mail")->middleware('throttle:3,1');
 
         Auth::routes(['verify' => true]);
 

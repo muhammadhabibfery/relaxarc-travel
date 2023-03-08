@@ -93,7 +93,8 @@ class UserRepository implements UserRepositoryInterface
     {
         if (!$this->modelResult) $this->modelResult = $this->model->query();
 
-        $this->modelResult->whereJsonContains('roles', $roles);
+        // $this->modelResult->whereJsonContains('roles', $roles);
+        $this->modelResult->where('roles', json_encode([$roles]));
 
         return $this;
     }
