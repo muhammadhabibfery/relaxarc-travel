@@ -10,7 +10,6 @@ use App\Mail\Checkout\TransactionSuccess;
 
 trait MidtransPayment
 {
-
     /**
      * the name of available payments
      *
@@ -53,14 +52,14 @@ trait MidtransPayment
      * @param  string $invoiceNumber
      * @return mixed
      */
-    public function sendPaymentCredentials(string $invoiceNumber)
+    public function sendPaymentCredentials(string $invoiceNumber, Snap $snap)
     {
         $transaction = $this->getOneTransaction($invoiceNumber);
 
         $this->configuration();
 
         try {
-            return redirect(Snap::createTransaction($this->setParams($transaction))->redirect_url);
+            return redirect($snap::createTransaction($this->setParams($transaction))->redirect_url);
         } catch (\Exception $e) {
             if (str_contains(response()->json($e->getMessage())->getData(), '400'))
                 return redirect()->route('travel-packages.front.detail', $transaction->travelPackage->slug)
@@ -82,6 +81,9 @@ trait MidtransPayment
         [$transactionStatus, $transaction] = $this->setDataFromMidtrans($data);
 
         if (!auth()->check()) auth()->login($transaction->user);
+
+        if ($transaction->status === 'FAILED')
+            return redirect()->route('home');
 
         if (in_array($transactionStatus, ['deny', 'expire', 'cancel'])) {
             $transaction->status = 'FAILED';
@@ -157,13 +159,9 @@ trait MidtransPayment
         } else {
             if (request()->payment_type) {
                 try {
-                    $notification = new Notification();
+                    $notification = (new Notification())->getResponse();
                 } catch (\Exception $e) {
-                    return response()->json([
-                        'status' => 500,
-                        'message' => 'Interal Server Error',
-                        'data' => []
-                    ]);
+                    return redirect()->route('checkout.failed');
                 }
             } else {
                 return redirect()->route('travel-packages.front.index');

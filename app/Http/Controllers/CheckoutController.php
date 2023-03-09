@@ -17,6 +17,7 @@ class CheckoutController extends Controller
      * @var App\Services\TravelPackageService
      */
     private $travelPackageService;
+
     /**
      * The name of repository instance
      *
@@ -37,11 +38,6 @@ class CheckoutController extends Controller
         $this->transactionRepository = $transactionRepositoryInterface;
     }
 
-    /**
-     * Show the checkout view
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(string $invoiceNumber)
     {
         $transaction = $this->getOneTransaction($invoiceNumber);
