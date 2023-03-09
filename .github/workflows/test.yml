@@ -24,6 +24,14 @@ jobs:
       run: php artisan key:generate
     - name: Directory Permissions
       run: chmod -R 777 storage bootstrap/cache
+      - name: Create Avatars Directory
+      run: mkdir -p storage/app/public/avatars
+    - name: Avatars Directory Permissions
+      run: chmod -R 777 storage/app/public/avatars
+    - name: Create Travel Galleries Directory
+      run: mkdir -p storage/app/public/travel-galleries
+    - name: Travel Galleries Directory Permissions
+      run: chmod -R 777 storage/app/public/travel-galleries
     - name: Create Database
       run: |
         mkdir -p database
