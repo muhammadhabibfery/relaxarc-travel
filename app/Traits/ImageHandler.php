@@ -5,7 +5,6 @@ namespace App\Traits;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
-
 trait ImageHandler
 {
 
@@ -45,7 +44,7 @@ trait ImageHandler
      * @param  string $fileName
      * @return string
      */
-    private function getFileName(string $fileName)
+    private static function getFileName(string $fileName)
     {
         $result = explode('.', $fileName);
         $result = head($result) . rand(0, 100) . '.' . last($result);
@@ -111,8 +110,8 @@ trait ImageHandler
      * @param  string $path (the path image file)
      * @return void
      */
-    public function deleteImage(?string $image = null,  string ...$path)
+    private static function deleteImage(?string $image = null,  string ...$path)
     {
-        foreach ($path as $p) Storage::disk('public')->delete("$p/$image");
+        foreach ($path as $p) Storage::delete("$p/$image");
     }
 }

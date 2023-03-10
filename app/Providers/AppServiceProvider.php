@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Filament\Resources\ProfileResource;
 use Filament\Facades\Filament;
 use Illuminate\Pagination\Paginator;
 use Filament\Navigation\UserMenuItem;
@@ -35,6 +36,9 @@ class AppServiceProvider extends ServiceProvider
 
         Filament::serving(function () {
             Filament::registerUserMenuItems([
+                'account' => UserMenuItem::make()
+                    ->label(trans('Profile'))
+                    ->url(ProfileResource::getUrl()),
                 'logout' => UserMenuItem::make()
                     ->label(trans('Logout'))
                     ->url(route('logout'))

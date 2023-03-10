@@ -102,7 +102,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
      */
     public function getAvatar()
     {
-        return ($this->avatar) ? asset("/storage/avatars/$this->avatar") : 'https://ui-avatars.com/api/?name=' . Str::of($this->name)->replace(' ', '+') . '&rounded=true' . '&bold=true';
+        return ($this->avatar) ? asset("/storage/$this->avatar") : 'https://ui-avatars.com/api/?name=' . Str::of($this->name)->replace(' ', '+') . '&rounded=true' . '&bold=true';
     }
 
     /**

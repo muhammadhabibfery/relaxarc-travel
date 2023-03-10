@@ -102,7 +102,7 @@ class TravelGalleryController extends Controller
                 $data['name'] = $this->createImage($request, null, [[1024, 683], [400, 267]], 'app/public/travel-galleries', 'app/public/travel-galleries/thumbnails');
 
                 if (!$this->travelGalleryRepository->create($data)) {
-                    $this->deleteImage($data['name'], 'travel-galleries', 'travel-galleries/thumbnails');
+                    self::deleteImage($data['name'], 'travel-galleries', 'travel-galleries/thumbnails');
                     throw new \Exception(trans('status.failed_create_new_travel_gallery'));
                 }
             }
@@ -146,7 +146,7 @@ class TravelGalleryController extends Controller
 
                 if (!$travelGallery->delete()) throw new \Exception(trans('status.failed_delete_travel_gallery'));
 
-                $this->deleteImage($name, 'travel-galleries', 'travel-galleries/thumbnails');
+                self::deleteImage($name, 'travel-galleries', 'travel-galleries/thumbnails');
             }
         );
     }
@@ -186,44 +186,6 @@ class TravelGalleryController extends Controller
             ->count();
 
         return $totalTravelGalleries < $max;
-    }
-
-    // /**
-    //  * create image(s) and thumbnail(s) for each travel gallery
-    //  *
-    //  * @param  \Illuminate\Http\Request $request
-    //  * @return string
-    //  */
-    // private function createImage(Request $request)
-    // {
-    //     if ($request->hasFile('image')) {
-    //         $fileName = $this->getFileName($request->file('image')->getClientOriginalName());
-
-    //         $path = $this->checkDirectory($fileName);
-
-    //         Image::make($request->file('image'))
-    //             ->resize(1024, 683)
-    //             ->save($path['pathImage']);
-
-    //         Image::make($request->file('image'))
-    //             ->resize(400, 267)
-    //             ->save($path['pathThumbnail']);
-
-    //         return $fileName;
-    //     }
-    // }
-
-    /**
-     * create file name from request file
-     *
-     * @param  string $name
-     * @return string
-     */
-    private function getFileName(string $name)
-    {
-        $fileName = explode('.', $name);
-        $fileName = head($fileName) . rand(0, 100) . '.' . last($fileName);
-        return $fileName;
     }
 
     /**

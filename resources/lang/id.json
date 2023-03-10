@@ -46,7 +46,7 @@
     "Travel Galleries": "Galeri Travel",
     "Transactions": "Transaksi",
     "Transaction Status": "Status transaksi",
-    "Change password": "Ubah password",
+    "Change password form": "Form ubah password",
     "Current password": "Password saat ini",
     "New password": "Password baru",
     "Password confirmation": "Konfirmasi password",
@@ -158,5 +158,8 @@
     "Failed": "Gagal",
     "Join now": "Gabung Sekarang",
     "The amount of travel galleries has exceeded capacity (max :items items)": "Jumlah travel galleri sudah melebihi kapasitas (maksimal :items item)",
-    "The payment failed to process, Please try again": "Pembayaran gagal diproses, Silahkan coba kembali"
+    "The payment failed to process, Please try again": "Pembayaran gagal diproses, Silahkan coba kembali",
+    "Your profile updated successfully": "Profil anda berhasil diperbarui",
+    "Your profile and password updated successfully": "Profil dan password anda berhasil diperbarui",
+    "Update profile form": "Form update profile"
 }
