@@ -142,3 +142,8 @@ function generateInvoiceNumber()
 {
     return "RelaxArc-" . date('djy') . Str::random(16);
 }
+
+function currencyFormat(int $value): string
+{
+    return 'Rp. ' . number_format($value, 0, '.', '.');
+}

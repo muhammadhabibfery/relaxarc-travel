@@ -35,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Filament::serving(function () {
+            Filament::registerNavigationGroups([
+                'Admin Management',
+                'Staff Management'
+            ]);
+
             Filament::registerUserMenuItems([
                 'account' => UserMenuItem::make()
                     ->label(trans('Profile'))
