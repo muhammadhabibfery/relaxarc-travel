@@ -79,7 +79,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if (checkRoles(["ADMIN", 1], $user->roles)) return redirect()->intended(route('dashboard'));
+        if (checkRoles(["ADMIN", 1], $user->roles)) return redirect()->intended(route('filament.pages.dashboard'));
 
         if (!auth()->user()->IsCompleteProfile) return redirect()->route('front-profile');
 

@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use App\Notifications\ResetPasswordNotifcation;
 use Illuminate\Support\Str;
 use App\Notifications\VerifyEmails;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPasswordNotifcation;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, HasAvatar
 {
     use HasFactory, Notifiable, SoftDeletes;
 
@@ -122,5 +124,25 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotifcation($token));
+    }
+
+    /**
+     * Get the user's avatar only for admin panel (user who has admin or staff role).
+     *
+     * @return string
+     */
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * Authenticate user to admin panel.
+     *
+     * @return bool
+     */
+    public function canAccessFilament(): bool
+    {
+        return checkRoles(["ADMIN", 1], $this->roles) && $this->status === 'ACTIVE';
     }
 }

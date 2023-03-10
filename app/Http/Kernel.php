@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'preventBack' => \App\Http\Middleware\PreventBackButton::class,
         'hasFullProfile' => \App\Http\Middleware\HasFullProfile::class,
-        'authRoles' => \App\Http\Middleware\AuthenticatedRoles::class
+        'authRoles' => \App\Http\Middleware\AuthenticatedRoles::class,
+        'adminAuth' => \App\Http\Middleware\FilamentAuthenticate::class,
     ];
 }

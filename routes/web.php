@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,7 @@ Route::middleware(['preventBack'])
         Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
         Route::post("/contact-us", [ContactController::class, "sendMail"])->name("contact.send-mail")->middleware('throttle:3,1');
 
+        Route::get('/admin/login', fn () => redirect()->route('login'))->name('filament.auth.login');
         Auth::routes(['verify' => true]);
 
         Route::post('/checkout/payment/notification/{data?}', [CheckoutController::class, 'notificationHandler'])->name('checkout.payment.notification');

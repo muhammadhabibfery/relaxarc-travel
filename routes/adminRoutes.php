@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(["authRoles:ADMIN,1"])
-    ->prefix('admin')
+    ->prefix('admin-panel')
     ->group(function () {
 
         // User who have ADMIN role can be access these routes
