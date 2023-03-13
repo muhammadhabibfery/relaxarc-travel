@@ -5,13 +5,9 @@ namespace App\Filament\Resources\TransactionResource\Pages;
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use App\Filament\Resources\TransactionResource;
-use App\Models\TravelPackage;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Form;
-use Filament\Tables\Columns\BadgeColumn;
-use Filament\Tables\Columns\TextColumn;
 
 class ViewTransaction extends ViewRecord
 {

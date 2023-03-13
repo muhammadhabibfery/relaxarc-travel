@@ -23,16 +23,19 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->name();
+        $username = Str::of($name)->slug('');
+
         return [
-            'name' => 'Super Admin',
-            'email' => 'superAdmin@relaxarc.com',
+            'name' => $name,
+            'email' => $username . '@relaxarc.com',
             'email_verified_at' => now(),
             'password' => Hash::make('aaaaa'), // password
             'remember_token' => Str::random(10),
-            'username' => 'superadmin',
-            'roles' => '["ADMIN", "SUPERADMIN"]',
-            'phone' => '0897654321',
-            'address' => 'jl.in ajaa',
+            'username' => $username,
+            'roles' => ["ADMIN", "SUPERADMIN"],
+            'phone' => rand(1111111111, 9999999999),
+            'address' => $this->faker->address(),
             'status' => 'ACTIVE',
         ];
     }

@@ -41,6 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'roles' => 'array'
     ];
 
     /**
@@ -73,16 +74,6 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Has
     public function setUsernameAttribute($value)
     {
         $this->attributes['username'] = strtolower($value);
-    }
-
-    /**
-     * get the user's roles with custom property
-     *
-     * @return string
-     */
-    public function getRolesAttribute($value)
-    {
-        return json_decode($value);
     }
 
     /**

@@ -18,8 +18,8 @@ class EmailVerificationTest extends TestCase
         $this->withoutExceptionHandling();
         $this->withoutMiddleware(ValidateSignature::class);
 
-        $this->userVerified = $this->createUser(['username' => 'johndoe', 'email' => 'johndoe@gmail.com', 'roles' => '["MEMBER"]']);
-        $this->userNotVerified = $this->createUser(['username' => 'johnlennon', 'email' => 'johnlennon@gmail.com', 'email_verified_at' => null, 'roles' => '["MEMBER"]']);
+        $this->userVerified = $this->createUser(['username' => 'johndoe', 'email' => 'johndoe@gmail.com', 'roles' => ["MEMBER"]]);
+        $this->userNotVerified = $this->createUser(['username' => 'johnlennon', 'email' => 'johnlennon@gmail.com', 'email_verified_at' => null, 'roles' => ["MEMBER"]]);
     }
 
     /** @test */

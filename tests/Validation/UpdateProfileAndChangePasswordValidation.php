@@ -20,7 +20,7 @@ trait UpdateProfileAndChangePasswordValidation
         'email' => 'jl@gmail.com',
         'phone' => null,
         'address' => null,
-        'roles' => '["MEMBER"]',
+        'roles' => ["MEMBER"],
     ];
 
     /** @test */

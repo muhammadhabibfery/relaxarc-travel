@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return true;
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -52,7 +52,8 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return !in_array('SUPERADMIN', $model->roles) && !in_array('MEMBER', $model->roles);
+        // return !in_array('SUPERADMIN', $model->roles) && !in_array('MEMBER', $model->roles);
+        return true;
     }
 
     /**
@@ -64,30 +65,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return !in_array('SUPERADMIN', $model->roles);
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function restore(User $user, User $model)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function forceDelete(User $user, User $model)
-    {
-        //
+        return true;
+        // return !in_array('SUPERADMIN', $model->roles);
     }
 }

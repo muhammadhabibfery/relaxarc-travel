@@ -9,7 +9,7 @@ trait LoginUserValidation
     public array $data = [
         'username' => 'johnlennon',
         'password' => 'secret123',
-        'roles' => '["MEMBER"]'
+        'roles' => ["MEMBER"]
     ];
 
     /** @test */

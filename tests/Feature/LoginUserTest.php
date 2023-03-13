@@ -32,6 +32,7 @@ class LoginUserTest extends TestCase
     /** @test */
     public function user_can_login()
     {
+        $this->withExceptionHandling();
         $res = $this->post(route('login'), array_merge($this->data, ['password' => 'aaaaa']));
 
         $res->assertRedirect(route('home'));
