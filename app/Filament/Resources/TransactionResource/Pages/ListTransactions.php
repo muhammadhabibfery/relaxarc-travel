@@ -9,9 +9,16 @@ class ListTransactions extends ListRecords
 {
     protected static string $resource = TransactionResource::class;
 
-    public function getBreadcrumb(): string
+    protected static ?string $title = 'List of transactions';
+
+    public function getBreadcrumb(): ?string
     {
-        return '';
+        return trans(self::$title);
+    }
+
+    protected function getTitle(): string
+    {
+        return trans(self::$title);
     }
 
     protected function getTableBulkActions(): array

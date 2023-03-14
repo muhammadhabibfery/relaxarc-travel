@@ -19,7 +19,7 @@ class HomeTest extends TestCase
 
         Storage::fake($this->directory);
         $this->createUser();
-        $this->travelPackage = TravelPackage::factory(['created_by' => 1])
+        $this->travelPackage = TravelPackage::factory(['created_by' => 1, 'date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2,])
             ->hasTravelGalleries(1)
             ->create();
         TravelPackage::factory(['created_by' => 1])

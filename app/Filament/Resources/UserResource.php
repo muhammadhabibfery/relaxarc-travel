@@ -33,6 +33,16 @@ class UserResource extends Resource
 
     protected static ?string $recordRouteKeyName = 'username';
 
+    public static function getBreadcrumb(): string
+    {
+        return trans('Manage users');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('Manage users');
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

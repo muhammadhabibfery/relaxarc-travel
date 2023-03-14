@@ -32,7 +32,6 @@ class AdminPanelUserManajemenFeatureTest extends TestCase
     /** @test */
     public function user_menu_list_can_be_rendered()
     {
-        $this->withExceptionHandling();
         $this->get(UserResource::getUrl('index'))
             ->assertSuccessful()
             ->assertSeeText(trans('List of user'));

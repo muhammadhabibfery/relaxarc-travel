@@ -17,7 +17,8 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        if (request()->is('admin-panel*')) return true;
+        return setPermissions(['SUPERADMIN', 1], $user);
     }
 
     /**
@@ -29,7 +30,8 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return true;
+        if (request()->is('admin-panel*')) return true;
+        return setPermissions(['SUPERADMIN', 1], $user);
     }
 
     /**
@@ -40,7 +42,8 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return true;
+        if (request()->is('admin-panel*')) return true;
+        return setPermissions(['SUPERADMIN', 1], $user);
     }
 
     /**
@@ -52,8 +55,8 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        // return !in_array('SUPERADMIN', $model->roles) && !in_array('MEMBER', $model->roles);
-        return true;
+        if (request()->is('admin-panel*')) return !in_array('SUPERADMIN', $model->roles) && !in_array('MEMBER', $model->roles);
+        return setPermissions(['SUPERADMIN', 1], $user);
     }
 
     /**
@@ -65,7 +68,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return true;
-        // return !in_array('SUPERADMIN', $model->roles);
+        if (request()->is('admin-panel*')) return !in_array('SUPERADMIN', $model->roles);
+        return setPermissions(['SUPERADMIN', 1], $user);
     }
 }

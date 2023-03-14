@@ -143,7 +143,28 @@ function generateInvoiceNumber()
     return "RelaxArc-" . date('djy') . Str::random(16);
 }
 
+/**
+ * Set currency format
+ *
+ * @param  int $value
+ * @return string
+ */
 function currencyFormat(int $value): string
 {
     return 'Rp. ' . number_format($value, 0, '.', '.');
+}
+
+/**
+ * set Permissions
+ *
+ * @param  array $availableRoles
+ * @param  User $user
+ * @param  bool|Closure $additionalPermissions
+ * @return bool
+ */
+function setPermissions(array $availableRoles, User $user, bool|Closure $ability = false)
+{
+    return $ability
+        ? $ability() && checkRoles($availableRoles, $user->roles)
+        : checkRoles($availableRoles, $user->roles);
 }

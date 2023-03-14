@@ -19,7 +19,7 @@ class TravelPackagePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return setPermissions(["ADMIN", "SUPERADMIN", 1], $user);
     }
 
     /**
@@ -31,7 +31,7 @@ class TravelPackagePolicy
      */
     public function view(User $user, TravelPackage $travelPackage)
     {
-        //
+        return setPermissions(["ADMIN", "SUPERADMIN", 1], $user);
     }
 
     /**
@@ -42,7 +42,7 @@ class TravelPackagePolicy
      */
     public function create(User $user)
     {
-        //
+        return setPermissions(["ADMIN", "SUPERADMIN", 1], $user);
     }
 
     /**
@@ -54,9 +54,15 @@ class TravelPackagePolicy
      */
     public function update(User $user, TravelPackage $travelPackage)
     {
-        return $travelPackage->date_departure_available
+        if (request()->is('admin-panel*')) return $travelPackage->date_departure_available
             ? Response::allow()
             : Response::deny('errors.403.text', 403);
+
+        return setPermissions(
+            ["ADMIN", "SUPERADMIN", 1],
+            $user,
+            fn (): bool => $user->id == $travelPackage->created_by && $travelPackage->date_departure_available && is_null($travelPackage->deleted_at)
+        );
     }
 
     /**
@@ -68,7 +74,8 @@ class TravelPackagePolicy
      */
     public function delete(User $user, TravelPackage $travelPackage)
     {
-        //
+        if (request()->is('admin-panel*')) return true;
+        return setPermissions(["ADMIN", "SUPERADMIN", 1], $user, fn (): bool => $user->id == $travelPackage->created_by);
     }
 
     /**
@@ -80,7 +87,11 @@ class TravelPackagePolicy
      */
     public function restore(User $user, TravelPackage $travelPackage)
     {
-        return $this->update($user, $travelPackage);
+        if (request()->is('admin-panel*')) return $travelPackage->date_departure_available
+            ? Response::allow()
+            : Response::deny('errors.403.text', 403);
+
+        return setPermissions(["SUPERADMIN", 1], $user, fn (): bool => $travelPackage->date_departure_available);
     }
 
     /**
@@ -92,6 +103,10 @@ class TravelPackagePolicy
      */
     public function forceDelete(User $user, TravelPackage $travelPackage)
     {
-        //
+        if (request()->is('admin-panel*')) return $travelPackage->date_departure_expired
+            ? Response::allow()
+            : Response::deny('errors.403.text', 403);
+
+        return setPermissions(["SUPERADMIN", 1], $user, fn (): bool => $travelPackage->date_departure_expired);
     }
 }

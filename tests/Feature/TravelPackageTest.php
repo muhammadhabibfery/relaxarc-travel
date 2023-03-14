@@ -23,7 +23,7 @@ class TravelPackageTest extends TestCase
     /** @test */
     public function list_of_travel_packages_page_can_be_rendered()
     {
-        $travelPackages = $this->createTravelPackage(['created_by' => $this->user->id], 5);
+        $travelPackages = $this->createTravelPackage(['created_by' => $this->user->id, 'date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2], 5);
 
         $res = $this->get(route('travel-packages.front.index'));
 

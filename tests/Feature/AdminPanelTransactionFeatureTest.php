@@ -49,7 +49,7 @@ class AdminPanelTransactionFeatureTest extends TestCase
     {
         $this->get(TransactionResource::getUrl())
             ->assertSuccessful()
-            ->assertSeeText('Transaction');
+            ->assertSeeText(trans('Transactions'));
     }
 
 

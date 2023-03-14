@@ -25,7 +25,7 @@ Route::middleware(["authRoles:ADMIN,1"])
         Route::get("/travel-packages/edit/{travel_package:slug}", [TravelPackageController::class, "edit"])->name("travel-packages.edit");
         Route::resource("travel-packages", TravelPackageController::class)
             ->parameters(["travel-packages" => "travel_package:slug"])
-            ->except(["edit", "update", "show"]);
+            ->except(["edit", "show"]);
         Route::get("/travel-packages/{travel_package:slug}/{invoice_number?}", [TravelPackageController::class, "show"])
             ->name("travel-packages.show");
 

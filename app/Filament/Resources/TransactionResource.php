@@ -23,6 +23,16 @@ class TransactionResource extends Resource
 
     protected static ?string $recordRouteKeyName = 'invoice_number';
 
+    public static function getBreadcrumb(): string
+    {
+        return trans('Transactions');
+    }
+
+    protected static function getNavigationLabel(): string
+    {
+        return trans('Transactions');
+    }
+
     public static function table(Table $table): Table
     {
         return $table
