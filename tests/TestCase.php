@@ -61,13 +61,20 @@ abstract class TestCase extends BaseTestCase
         return $count < 2 ? $travelPackages->first() : $travelPackages;
     }
 
-    public function deleteDirectory(string $directory, string $fileName, ?bool $delete = false): void
+    public function deleteDirectory(string $directory, string|array $fileName, ?bool $delete = false): void
     {
         if ($delete) {
             Storage::disk($directory)->assertMissing($fileName);
         } else {
-            Storage::disk($directory)->exists($fileName);
-            Storage::delete("$directory/$fileName");
+            if (is_array($fileName)) {
+                foreach ($fileName as $fn) {
+                    Storage::disk($directory)->exists($fn);
+                    Storage::delete("$directory/$fn");
+                }
+            } else {
+                Storage::disk($directory)->exists($fileName);
+                Storage::delete("$directory/$fileName");
+            }
         }
     }
 }

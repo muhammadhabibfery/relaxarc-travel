@@ -34,7 +34,7 @@ class TravelGallery extends Model
      */
     public function setNameAttribute($value)
     {
-        $this->attributes['name'] = Str::ucfirst($value);
+        $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::lower(Str::slug(head(explode('.', preg_replace('/[^A-Za-z0-9\. ]/', '', $value)))));
     }
 
