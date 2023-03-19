@@ -31,13 +31,12 @@ class AdminPanelTravelGalleryFeatureTest extends TestCase
         Storage::fake($this->directory);
         $this->userAdmin = $this->authenticatedUser();
 
-        $this->travelPackagesAvailableDoesNotHaveTravelGallery = $this->createTravelPackage(['date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2, 'price' => 500000, 'created_by' => $this->userAdmin], 2);
-        $this->travelPackageAvailableHasTravelGalleries =
-            TravelPackage::factory(['created_by' => 1, 'date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2,])
-            ->count(2)
-            ->hasTravelGalleries(2)
+        $this->travelPackagesAvailableDoesNotHaveTravelGallery = $this->createTravelPackage(['date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2, 'price' => 500000, 'created_by' => $this->userAdmin->id], 2);
+        TravelPackage::factory(['created_by' => $this->userAdmin->id, 'date_departure' => now(config('app.timezone'))->addDay(), 'date_completion' => now(config('app.timezone'))->addDays(2), 'duration' => 2])
+            ->hasTravelGalleries(1)
             ->create();
         $this->deleteFiles();
+        $this->travelPackageAvailableHasTravelGalleries = $this->getTravelPackagesHasTravelGalleries();
     }
 
     /** @test */
@@ -141,5 +140,12 @@ class AdminPanelTravelGalleryFeatureTest extends TestCase
             ->pluck('name')
             ->toArray();
         $this->deleteDirectory($this->directory, $fileNames);
+    }
+
+    private function getTravelPackagesHasTravelGalleries(): Collection
+    {
+        return TravelPackage::where('date_departure', '>', now(config('app.timezone')))
+            ->has('travelGalleries')
+            ->get();
     }
 }
