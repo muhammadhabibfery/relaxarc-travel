@@ -1,18 +1,40 @@
-<p align="center">
+<!-- <p align="center">
 <img align="center" src="http://ForTheBadge.com/images/badges/built-with-love.svg"> <img align="center" src="http://ForTheBadge.com/images/badges/makes-people-smile.svg"> <img align="center" src="http://ForTheBadge.com/images/badges/built-by-developers.svg">
 </p>
 
 # Laravel Travel App Platform
 
-This is a travel app platform I made mostly using Laravel ^8.12
+This is a travel app platform I made mostly using Laravel ^8.12 -->
+
+<h1 align="center">
+RelaxArc Travel
+</h1>
+
+<h5 align="center">
+Laravel Travel App Platform.
+</h5>
+
+<p align="center">
+    <a href="https://github.com/muhammadhabibfery/relaxarc-travel/actions/workflows/test.yml">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/muhammadhabibfery/relaxarc-travel/test.yml?logo=github">
+    <a href="https://www.php.net">
+        <img src="https://img.shields.io/badge/php-%3E%3D8.1-%23777BB4" />
+    </a>
+    <a href="https://laravel.com">
+        <img src="https://img.shields.io/badge/laravel-8.x-%23EC4E3D" />
+    </a>
+</p>
+
+</br>
 
 | [Features][] | [Requirements][] | [Install][] | [How to setting][] | [DB Structure][] | [License][] |
 
 ## Features 
+- <img src="public/assets/admin-panel.png" alt="Preview" width="75%"/>
 - |<h3>Menu  </h3>       |       Description                                                                  |
   |-----------------------|-----------------------------------------------------------------------------------|
   |<b>Dashboard           | </b>Contains information about all menu.                                          |
-  |<b>Admin               | </b>Manage admin and employee roles.                                              |
+  |<b>User Management     | </b>Manage members and employees.                                                 |
   |<b>Travel Package      | </b>Manage all types of travel packages.                                          |
   |<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
   |<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
@@ -25,8 +47,10 @@ This is a travel app platform I made mostly using Laravel ^8.12
 	PHP = ^7.3|^8.0
     laravel = ^8.12
     laravel-ui = ^3.2
+    filament/filament = ^2.0
     intervention/image = ^2.5
     midtrans/midtrans-php = ^2.5
+    barryvdh/laravel-debugbar: ^3.5
 
 ## Install
 
@@ -115,12 +139,3 @@ php artisan storage:link
 [How to setting]:#how-to-setting
 [DB Structure]:#database-structure
 [License]:#license
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
