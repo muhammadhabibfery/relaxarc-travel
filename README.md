@@ -30,17 +30,19 @@ Laravel Travel App Platform.
 | [Frontend Features][] | [Admin Panel Features][] | [Requirements][] | [Install][] | [How to setting][] | [DB Structure][] | [License][] |
 
 ## Frontend Features 
-<img src="public/assets/front-1.png" alt="Preview" width="49%"/>
-<img src="public/assets/front-2.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-1.png" alt="Preview"/>
+<img src="public/assets/front-2.png" alt="Preview"/>
+<img src="public/assets/front-3.png" alt="Preview"/>
 <hr>
-<img src="public/assets/front-3.png" alt="Preview" width="49%"/>
-<img src="public/assets/front-4.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-4.png" alt="Preview"/>
 <hr>
-<img src="public/assets/front-5.png" alt="Preview" width="49%"/>
-<img src="public/assets/front-6.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-5.png" alt="Preview"/>
 <hr>
-<img src="public/assets/front-7.png" alt="Preview" width="49%"/>
-<img src="public/assets/front-8.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-6.png" alt="Preview"/>
+<hr>
+<img src="public/assets/front-7.png" alt="Preview"/>
+<hr>
+<img src="public/assets/front-8.png" alt="Preview"/>
 
 #### Features
 
@@ -52,17 +54,8 @@ Laravel Travel App Platform.
 - <b> Change Profile and Password
 - <b> Contact
 
-<!-- |<h3>Features  </h3>       |       Description                                                              |
-|-----------------------|-----------------------------------------------------------------------------------|
-|<b>Travel Packages     | </b>Contains list of travel packages.                                             |
-|<b>Travel Package Detail     | </b>Contains detail information of travel package.                                                 |
-|<b>Travel Package      | </b>Manage all types of travel packages.                                          |
-|<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
-|<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
-|<b>Profile             | </b>Edit user's profile and password.                                             | -->
-
 ## Admin Panel Features 
-<img src="public/assets/admin-panel.png" alt="Preview" width="75%"/>
+<img src="public/assets/admin-panel.png" alt="Preview"/>
 
 |<h3>Menu  </h3>       |       Description                                                                  |
 |-----------------------|-----------------------------------------------------------------------------------|
