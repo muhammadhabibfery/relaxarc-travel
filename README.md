@@ -27,20 +27,51 @@ Laravel Travel App Platform.
 
 </br>
 
-| [Features][] | [Requirements][] | [Install][] | [How to setting][] | [DB Structure][] | [License][] |
+| [Frontend Features][] | [Admin Panel Features][] | [Requirements][] | [Install][] | [How to setting][] | [DB Structure][] | [License][] |
 
-## Features 
-- <img src="public/assets/admin-panel.png" alt="Preview" width="75%"/>
-- |<h3>Menu  </h3>       |       Description                                                                  |
-  |-----------------------|-----------------------------------------------------------------------------------|
-  |<b>Dashboard           | </b>Contains information about all menu.                                          |
-  |<b>User Management     | </b>Manage members and employees.                                                 |
-  |<b>Travel Package      | </b>Manage all types of travel packages.                                          |
-  |<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
-  |<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
-  |<b>Profile             | </b>Edit user's profile and password.                                             |
-- Travel Platform Solution
-- Open Source
+## Frontend Features 
+<img src="public/assets/front-1.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-2.png" alt="Preview" width="49%"/>
+<hr>
+<img src="public/assets/front-3.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-4.png" alt="Preview" width="49%"/>
+<hr>
+<img src="public/assets/front-5.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-6.png" alt="Preview" width="49%"/>
+<hr>
+<img src="public/assets/front-7.png" alt="Preview" width="49%"/>
+<img src="public/assets/front-8.png" alt="Preview" width="49%"/>
+
+#### Features
+
+- <b> Home
+- <b> Travel Packages
+- <b> Travel Package Detail
+- <b> Checkout
+- <b> Payment
+- <b> Change Profile and Password
+- <b> Contact
+
+<!-- |<h3>Features  </h3>       |       Description                                                              |
+|-----------------------|-----------------------------------------------------------------------------------|
+|<b>Travel Packages     | </b>Contains list of travel packages.                                             |
+|<b>Travel Package Detail     | </b>Contains detail information of travel package.                                                 |
+|<b>Travel Package      | </b>Manage all types of travel packages.                                          |
+|<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
+|<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
+|<b>Profile             | </b>Edit user's profile and password.                                             | -->
+
+## Admin Panel Features 
+<img src="public/assets/admin-panel.png" alt="Preview" width="75%"/>
+
+|<h3>Menu  </h3>       |       Description                                                                  |
+|-----------------------|-----------------------------------------------------------------------------------|
+|<b>Dashboard           | </b>Contains information about all menu.                                          |
+|<b>User Management     | </b>Manage members and employees.                                                 |
+|<b>Travel Package      | </b>Manage all types of travel packages.                                          |
+|<b>Travel Gallery      | </b>Manage images for each type of travel package.                                |
+|<b>Transaction         | </b>Manage transaction for each type of travel package.                           |
+|<b>Profile             | </b>Edit user's profile and password.                                             |
 
 ## Requirements
 
@@ -133,7 +164,8 @@ php artisan storage:link
 > Copyright (C) 2022 Muhammad Habib Fery.  
 **[⬆ back to top](#laravel-travel-app-platform)**
 
-[Features]:#features
+[Frontend Features]:#frontend-features
+[Admin Panel Features]:#admin-panel-features
 [Requirements]:#requirements
 [Install]:#install
 [How to setting]:#how-to-setting
